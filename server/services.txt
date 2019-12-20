@@ -1,0 +1,34 @@
+POST /login
+posielame v body: {login:"wtffllll",password:"wtf"}
+returnuje:
+{"status":401,"message":"Username with this email and password doesn't exist. Please create a account."}
+{"status":401,"message":"Please check email to confirm your account!"}
+{"status":200,{login:"wtffllll",token:"randomtokenvygenerovany22miestny"}}
+
+
+POST /logout
+posielame v body: {login:"wtffllll",token:"randomtokenvygenerovany22miestny"}
+returnuje: furt 200 (to ešte fixnem ak to bude extremne potrebne)
+
+POST /register
+posielame v body: {
+    "login": "vagoš123",
+    "password": "lul",
+    "fname":"tomaško",
+    "lname":"pavlik",
+    "email":"xxxx@gmail.com"
+}
+returnuje:
+{"status":403,"message":"This user already exists"} //tu preto forbidden lebo je zakazane robit si viacero uctov na jeden mail/username/atd.
+{"status":200,"message":"New user: vagoš123 successfully registered!"}
+
+
+POST /confirmuser
+posielame:{
+    "login":"meno",
+    "code":"704044"
+}
+
+returnuje:
+{"status":200,"message":"User confirmed successfully."}
+{"status":401,"message":"Wrong code or user doesn't exist."}
