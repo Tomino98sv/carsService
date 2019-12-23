@@ -42,6 +42,21 @@ app.post('/confirmuser',(req,res)=>{
     });
 });
 
+app.post('/addcar',(req,res)=>{
+    console.log("Request on /addcar :");
+    db.addcar(req.body,data=>{
+        //console.log("tusom");
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/getcars',(req,res)=>{
+    console.log("Request on /getcars :");
+    db.getAllCars(req.body,data=>{
+        //console.log("tusom");
+        res.status(data.status).send(data.message);
+    });
+});
 
 app.listen(1203,()=>{
     db.initializetokens();

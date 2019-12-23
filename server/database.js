@@ -135,8 +135,58 @@ module.exports={
                 for(i=0;i<res.length;i++){
                     tokens.push(JSON.parse(JSON.stringify(res[i])));
                 }
-                console.log(tokens);
+               // console.log(tokens);
             }
         });
+    },
+
+    addcar(data,callbackR){
+        let userID=data.userID;
+        let brand=data.brand;
+        let model=data.model;
+        let color=data.color;
+        let vintage=data.vintage;
+        let kilometrage=data.kilometrage;
+        let SPZ=data.spz;
+        let token=data.token;
+        console.log(token);
+
+        let sql="INSERT INTO cars(userid,SPZ,brand,model,color,vintage,kilometrage)" +
+        "VALUES("+userID+",'"+SPZ+"','"+brand+"','"+model+"','"+color+"',"+vintage+","+kilometrage+");";
+        if(tokens.some(x=>(x.token===token.token)&&(x.login===token.login))){
+            con.query(sql,(err)=>{
+                if(err){
+                    console.log(err);
+                    callbackR({"status":401,"message":"Car with this motor vehicle registration plate already exists."});
+                }
+                else{
+                    callbackR({"status":200,"message":"New car added successfully."});
+                }
+            });
+        }
+        else{
+            callbackR({"status":401,"message":"Wrong user token , please log in again."});
+        }
+    },
+
+    getAllCars(data,callbackR){
+        let login=data.login;
+        let token=data.token;
+
+        if(tokens.some(x=>(x.token===token)&&(x.login===login))){
+            let sql="SELECT * from cars where userid=(SELECT id from users where login like'"+login+"');"
+            con.query(sql,(err,res)=>{
+                if(err) console.log(err);
+                if(res===undefined){
+                    callbackR({"status":403,"message":"No cars yet."});
+                }
+                else{
+                    callbackR({"status":200,"message":res});
+                }
+            });
+        }
+        else{
+            callbackR({"status":401,"message":"Wrong user token , please log in again."});
+        }
     }
 }
