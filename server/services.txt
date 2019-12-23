@@ -6,9 +6,16 @@ returnuje:
 {"status":200,{login:"wtffllll",token:"randomtokenvygenerovany22miestny"}}
 
 
+
+
+
 POST /logout
 posielame v body: {login:"wtffllll",token:"randomtokenvygenerovany22miestny"}
 returnuje: furt 200 (to ešte fixnem ak to bude extremne potrebne)
+
+
+
+
 
 POST /register
 posielame v body: {
@@ -23,6 +30,9 @@ returnuje:
 {"status":200,"message":"New user: vagoš123 successfully registered!"}
 
 
+
+
+
 POST /confirmuser
 posielame:{
     "login":"meno",
@@ -32,3 +42,43 @@ posielame:{
 returnuje:
 {"status":200,"message":"User confirmed successfully."}
 {"status":401,"message":"Wrong code or user doesn't exist."}
+
+
+
+
+
+
+POST /addcar
+posielame v body:
+{
+	"token": {"login": "wtffllll","token":"4ASYTFkG4Fkl7bzKTHtpiZ"},
+    "userID": "2",
+    "brand": "Mazda",
+    "model": "3",
+    "color": "NULL",
+    "vintage": 2019,
+    "kilometrage": 25041,
+    "spz": "LE939sN"-toto je unique čiže ked daš 2x tu istu spz tak ti pošle 401 že už ma registraciu
+}
+
+returnuje:
+{"status":200,"message":"New car added successfully."}
+{"status":401,"message":"Car with this motor vehicle registration plate already exists."}
+{"status":401,"message":"Wrong user token , please log in again."}
+
+
+
+
+
+POST /getcars
+
+posielame v body:
+{
+    "login": "wtfflll",
+    "token": "2gXv4eIAChaRINqKPezai"
+}
+
+returnuje:
+{"status":403,"message":"No cars yet."}     
+{"status":200,"message":res}
+{"status":401,"message":"Wrong user token , please log in again."}
