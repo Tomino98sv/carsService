@@ -23,16 +23,18 @@ DROP TABLE IF EXISTS `cars`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cars` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `iduser` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL,
+  `SPZ` varchar(7) NOT NULL,
   `brand` varchar(15) NOT NULL,
   `model` varchar(15) NOT NULL,
   `color` varchar(10) DEFAULT NULL,
   `vintage` int(11) NOT NULL,
   `kilometrage` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `iduser` (`iduser`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  UNIQUE KEY `SPZ` (`SPZ`),
+  KEY `userid` (`userid`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +43,7 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
+INSERT INTO `cars` VALUES (1,2,'LE939AN','Mazda','3','NULL',2019,25041),(2,2,'LE939sN','Mazda','3','NULL',2019,25041);
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +60,7 @@ CREATE TABLE `tokens` (
   `token` varchar(22) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +69,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
+INSERT INTO `tokens` VALUES (6,2,'2gXv4eIAChaRINqKPwezai');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-21  0:04:13
+-- Dump completed on 2020-01-03 21:25:17
