@@ -20,9 +20,14 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     ImageView carFa;
     ImageView describtion;
 
+    ImageView carSVG;
+
     TranslateAnimation moveToRightTop;
-    Animation moveToLeft;
     AnimationSet animation;
+
+    Animation moveToLeft;
+    Animation moveSlowlyDown;
+    Animation moveFastForward;
 
     int width;
     int height;
@@ -34,6 +39,7 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
         carFa = findViewById(R.id.carFaIntro);
         describtion = findViewById(R.id.descLogo);
+        carSVG = findViewById(R.id.carSVG);
 
         carFa.setOnClickListener(this);
         describtion.setOnClickListener(this);
@@ -48,6 +54,7 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
         carFa.setAnimation(animation);
         carFa.startAnimation(moveToRightTop);
         describtion.startAnimation(moveToLeft);
+        carSVG.startAnimation(moveSlowlyDown);
     }
 
     public void setAnimation(){
@@ -58,6 +65,26 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
         moveToLeft = AnimationUtils.loadAnimation(this,R.anim.fade_out);
         moveToLeft.setAnimationListener(this);
+
+        moveSlowlyDown = AnimationUtils.loadAnimation(this,R.anim.car_back);
+        moveFastForward = AnimationUtils.loadAnimation(this,R.anim.car_forward);
+
+        moveSlowlyDown.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                carSVG.startAnimation(moveFastForward);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         animation = new AnimationSet(false);
         animation.addAnimation(moveToRightTop);
@@ -80,6 +107,7 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
         if (animation == moveToRightTop) {
             Intent login = new Intent(IntroActivty.this,LoginActivity.class);
             startActivity(login);
+            overridePendingTransition(0, 0);
             finish();
         }
     }
