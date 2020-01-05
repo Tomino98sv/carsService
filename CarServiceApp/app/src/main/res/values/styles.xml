@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="carBg">#DDDDDD</item>
+        <item name="carBg">#B9B9B9</item>
         <item name="logInButtonColor">#BD6A6A6A</item>
     </style>
 
