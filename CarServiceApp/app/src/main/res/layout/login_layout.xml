@@ -9,38 +9,94 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/white"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/white"
-        android:hint="Email"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/white"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPersonName"
         android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/logInButton"
         app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        android:background="@android:color/white"
-        android:hint="Password"/>
+        app:layout_constraintStart_toStartOf="@+id/editText" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/carFaLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_carfa" />
+
+    <ImageView
+        android:id="@+id/carSVGLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="-40"
+        app:layout_constraintStart_toEndOf="@+id/carFaLogin"
+        app:layout_constraintTop_toBottomOf="@+id/carFaLogin"
+        app:srcCompat="@drawable/ic_car" />
+
+    <Button
+        android:id="@+id/logInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Log In"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editText2"
+        android:textColor="?attr/logInButtonColor"
+        android:background="?attr/logInButtonColor"/>
+
+    <TextView
+        android:id="@+id/forgetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgetPass"
+        android:textAppearance="@style/forgotPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/logInButton"
+        app:layout_constraintEnd_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toEndOf="@+id/logInButton"
+        app:layout_constraintTop_toTopOf="@+id/logInButton" />
+
+    <TextView
+        android:id="@+id/notRegistred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notRegistred"
+        android:textAppearance="@style/forgotPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/carFaLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/carFaLogin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcomeBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/welcomeBack"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/welcomeBack"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="@+id/editText2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

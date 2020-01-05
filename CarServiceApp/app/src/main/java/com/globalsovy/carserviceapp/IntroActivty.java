@@ -25,7 +25,6 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     TranslateAnimation moveToRightTop;
     AnimationSet animation;
 
-    Animation moveToLeft;
     Animation moveSlowlyDown;
     Animation moveFastForward;
 
@@ -53,18 +52,16 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         carFa.setAnimation(animation);
         carFa.startAnimation(moveToRightTop);
-        describtion.startAnimation(moveToLeft);
+        describtion.setVisibility(View.GONE);
         carSVG.startAnimation(moveSlowlyDown);
     }
 
     public void setAnimation(){
         moveToRightTop = new TranslateAnimation(0,(((0-width)/2)+200),0,(((0-height)/2)+100));//(xFrom,xTo, yFrom,yTo)
-        moveToRightTop.setDuration(1100);
+        moveToRightTop.setDuration(1300);
         moveToRightTop.setFillAfter(true);
         moveToRightTop.setAnimationListener(this);
-
-        moveToLeft = AnimationUtils.loadAnimation(this,R.anim.fade_out);
-        moveToLeft.setAnimationListener(this);
+        
 
         moveSlowlyDown = AnimationUtils.loadAnimation(this,R.anim.car_back);
         moveFastForward = AnimationUtils.loadAnimation(this,R.anim.car_forward);
