@@ -14,11 +14,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class IntroActivty extends AppCompatActivity implements View.OnClickListener, Animation.AnimationListener {
 
     ImageView carFa;
     ImageView describtion;
+    ConstraintLayout parent;
 
     ImageView carSVG;
 
@@ -39,9 +41,9 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
         carFa = findViewById(R.id.carFaIntro);
         describtion = findViewById(R.id.descLogo);
         carSVG = findViewById(R.id.carSVG);
+        parent = findViewById(R.id.parentIntro);
 
-        carFa.setOnClickListener(this);
-        describtion.setOnClickListener(this);
+        parent.setOnClickListener(this);
 
         getScreenDimension();
         setAnimation();

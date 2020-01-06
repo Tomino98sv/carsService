@@ -22,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
 
     TextView welcomeBack;
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     String email="";
     String password="";
     int onlyModifing=0;
+    boolean emailValidate = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,6 +119,37 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        emailInp.addTextChangedListener(new TextWatcher() {
+            private final Pattern sPattern
+                    = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{1,6}$",Pattern.CASE_INSENSITIVE);
+
+            private boolean isValid(CharSequence s) {
+                return sPattern.matcher(s).matches();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after){
+                emailValidate = isValid(s) ? true : false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                if (!emailValidate)
+                {
+                    showToast("Wrong email form");
+                }
+                if (emailValidate)
+                {
+                    showToast("Correct email form");
+                }
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +170,12 @@ public class LoginActivity extends AppCompatActivity {
     public void enable_disableLoginBTN(){
         email = emailInp.getText().toString();
         password = passwordInp.getText().toString();
-        if (password.length() >0 && email.length()>0) {
+        //TO DO
+
+        //add here some real validation
+
+        //TO DO
+        if (password.length() >5 && emailValidate) {
             loginBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             loginBtn.setTextColor(getResources().getColor(R.color.white));
             loginBtn.setEnabled(true);
