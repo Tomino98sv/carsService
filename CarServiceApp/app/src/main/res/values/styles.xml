@@ -6,8 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="carBg">#B9B9B9</item>
-        <item name="logInButtonColor">#BD6A6A6A</item>
+        <item name="carBg">@color/vector_carColor</item>
+        <item name="logInButtonColor">@color/buttonLoginColor</item>
     </style>
 
     <style name="forgotPassword">
