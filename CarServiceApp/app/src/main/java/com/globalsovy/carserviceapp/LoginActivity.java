@@ -17,7 +17,9 @@ public class LoginActivity extends AppCompatActivity {
     TextView welcomeBack;
 
     EditText emailInp;
+    TextView emailLabel;
     EditText passwordInp;
+    TextView passwordLabel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,23 +29,45 @@ public class LoginActivity extends AppCompatActivity {
         welcomeBack = findViewById(R.id.welcomeBack);
         setLogIn_toWhite();
 
-        emailInp = findViewById(R.id.emailInp);
-        passwordInp = findViewById(R.id.passwordInt);
+        emailInp = findViewById(R.id.emailEditTextInp);
+        emailLabel = findViewById(R.id.labelEmail);
+        passwordInp = findViewById(R.id.passwordEditTextInt);
+        passwordLabel = findViewById(R.id.labelPassword);
 
+        emailInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    emailInp.setBackgroundColor(getResources().getColor(R.color.white));
+                    emailInp.setTextColor(getResources().getColor(R.color.black));
+                    emailLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    emailLabel.setTextColor(getResources().getColor(R.color.white));
+                }else{
+                    emailInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                    emailInp.setTextColor(getResources().getColor(R.color.white));
+                    emailLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                    emailLabel.setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+        });
 
-//        emailInp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                emailInp.setBackgroundColor(Color.argb(120,0,0,0));
-//            }
-//        });
-//
-//        passwordInp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                emailInp.setBackgroundColor(Color.argb(120,0,0,0));
-//            }
-//        });
+        passwordInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    passwordInp.setBackgroundColor(getResources().getColor(R.color.white));
+                    passwordInp.setTextColor(getResources().getColor(R.color.black));
+                    passwordLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    passwordLabel.setTextColor(getResources().getColor(R.color.white));
+                }else{
+                    passwordInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                    passwordInp.setTextColor(getResources().getColor(R.color.white));
+                    passwordLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                    passwordLabel.setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+        });
+
     }
 
     public void setLogIn_toWhite(){
