@@ -117,24 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     public void animationFadeIn() {
         fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
         rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
-
-        fadeIn.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                carSVG.startAnimation(rotate);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        carSVG.startAnimation(fadeIn);
+        carSVG.startAnimation(rotate);
     }
     public void enterKeyListenerOnEmail() {
         emailInp.setOnKeyListener(new View.OnKeyListener() {
