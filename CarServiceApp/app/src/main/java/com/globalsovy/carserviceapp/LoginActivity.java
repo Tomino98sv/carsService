@@ -1,5 +1,7 @@
 package com.globalsovy.carserviceapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String email="";
     String password="";
+    int onlyModifing=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +87,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        passwordInp.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    passwordInp.clearFocus();
+                    hideKeyboardFrom(LoginActivity.this,v);
+                }
+                return false;
+            }
+        });
+
+        emailInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifing>1){
+
+                        hideKeyboardFrom(LoginActivity.this,view);
+                        emailInp.clearFocus();
+                    }
+                    onlyModifing++;
+                }
+                return false;
+            }
+        });
+
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,22 +151,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
 }
 
-
-//passwordInp.addTextChangedListener(new TextWatcher() {
-//@Override
-//public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//@Override
-//public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//        }
-//
-//@Override
-//public void afterTextChanged(Editable editable) {
-//
-//        }
-//        });
