@@ -12,9 +12,12 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView passwordLabel;
     TextView validPassword;
 
-
+    ImageView carSVG;
     Button loginBtn;
 
     String email="";
@@ -44,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     int onlyModifing=0;
     boolean emailValidate = false;
     boolean passwordValidate = false;
+
+    Animation fadeIn;
+    Animation rotate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordLabel = findViewById(R.id.labelPassword);
         validPassword = findViewById(R.id.validationPassword);
         loginBtn = findViewById(R.id.logInButton);
+        carSVG = findViewById(R.id.carSVGLogin);
 
         loginBtn.setEnabled(false);
 
@@ -98,6 +105,55 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        animationFadeIn();
+
+        enterKeyListenerOnEmail();
+        enterKeyListenerOnPassword();
+        setPasswordValidate();
+        setEmailValidate();
+        setLoginButton();
+    }
+
+    public void animationFadeIn() {
+        fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+        rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
+
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                carSVG.startAnimation(rotate);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        carSVG.startAnimation(fadeIn);
+    }
+    public void enterKeyListenerOnEmail() {
+        emailInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifing>1){
+                        hideKeyboardFrom(LoginActivity.this,view);
+                        emailInp.clearFocus();
+                    }
+                    onlyModifing++;
+                }
+                return false;
+            }
+        });
+    }
+    public void enterKeyListenerOnPassword() {
         passwordInp.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -109,57 +165,8 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        emailInp.setOnKeyListener(new View.OnKeyListener() {
-
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    enable_disableLoginBTN();
-                    if (onlyModifing>1){
-
-                        hideKeyboardFrom(LoginActivity.this,view);
-                        emailInp.clearFocus();
-                    }
-                    onlyModifing++;
-                }
-                return false;
-            }
-        });
-
-        emailInp.addTextChangedListener(new TextWatcher() {
-            private final Pattern sPattern
-                    = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{1,6}$",Pattern.CASE_INSENSITIVE);
-
-            private boolean isValid(CharSequence s) {
-                return sPattern.matcher(s).matches();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count){
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after){
-                emailValidate = isValid(s);
-                if (!emailValidate){
-                    validMail.setTextColor(getResources().getColor(R.color.red));
-                    validMail.setText("InValid mail form");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                if (emailValidate)
-                {
-                    validMail.setTextColor(getResources().getColor(R.color.green));
-                    validMail.setText("Valid mail form");
-                }
-            }
-        });
-
+    }
+    public void setPasswordValidate() {
         passwordInp.addTextChangedListener(new TextWatcher() {
             private boolean isValid(CharSequence pass) {
                 if (pass.length() > 5){
@@ -191,9 +198,42 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void setEmailValidate() {
+        emailInp.addTextChangedListener(new TextWatcher() {
+            private final Pattern sPattern
+                    = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.{1}[A-Z]{1,6}$",Pattern.CASE_INSENSITIVE);
 
+            private boolean isValid(CharSequence s) {
+                return sPattern.matcher(s).matches();
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after){
+                emailValidate = isValid(s);
+                if (!emailValidate){
+                    validMail.setTextColor(getResources().getColor(R.color.red));
+                    validMail.setText("InValid mail form");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                if (emailValidate)
+                {
+                    validMail.setTextColor(getResources().getColor(R.color.green));
+                    validMail.setText("Valid mail form");
+                }
+            }
+        });
+    }
+    public void setLoginButton() {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,7 +241,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     public void setLogIn_toWhite(){
         String text = getString(R.string.welcomeBack);
         SpannableString spannable = new SpannableString(text);
@@ -209,15 +248,7 @@ public class LoginActivity extends AppCompatActivity {
         spannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), text.length()-6, text.length(), 0);
         welcomeBack.setText(spannable);
     }
-
     public void enable_disableLoginBTN(){
-        email = emailInp.getText().toString();
-        password = passwordInp.getText().toString();
-        //TO DO
-
-        //add here some real validation
-
-        //TO DO
         if (passwordValidate && emailValidate) {
             loginBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             loginBtn.setTextColor(getResources().getColor(R.color.white));
@@ -232,7 +263,6 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this,text,Toast.LENGTH_SHORT).show();
 
     }
-
     public void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
