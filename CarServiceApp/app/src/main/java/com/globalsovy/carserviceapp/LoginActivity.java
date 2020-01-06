@@ -30,14 +30,20 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText emailInp;
     TextView emailLabel;
+    TextView validMail;
+
     EditText passwordInp;
     TextView passwordLabel;
+    TextView validPassword;
+
+
     Button loginBtn;
 
     String email="";
     String password="";
     int onlyModifing=0;
     boolean emailValidate = false;
+    boolean passwordValidate = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
 
         emailInp = findViewById(R.id.emailEditTextInp);
         emailLabel = findViewById(R.id.labelEmail);
+        validMail = findViewById(R.id.validationEmail);
         passwordInp = findViewById(R.id.passwordEditTextInt);
         passwordLabel = findViewById(R.id.labelPassword);
+        validPassword = findViewById(R.id.validationPassword);
         loginBtn = findViewById(R.id.logInButton);
 
         loginBtn.setEnabled(false);
@@ -134,22 +142,57 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after){
-                emailValidate = isValid(s) ? true : false;
+                emailValidate = isValid(s);
+                if (!emailValidate){
+                    validMail.setTextColor(getResources().getColor(R.color.red));
+                    validMail.setText("InValid mail form");
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s)
             {
-                if (!emailValidate)
-                {
-                    showToast("Wrong email form");
-                }
                 if (emailValidate)
                 {
-                    showToast("Correct email form");
+                    validMail.setTextColor(getResources().getColor(R.color.green));
+                    validMail.setText("Valid mail form");
                 }
             }
         });
+
+        passwordInp.addTextChangedListener(new TextWatcher() {
+            private boolean isValid(CharSequence pass) {
+                if (pass.length() > 5){
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordValidate = isValid(charSequence);
+                if (!passwordValidate){
+                    validPassword.setTextColor(getResources().getColor(R.color.red));
+                    validPassword.setText("InValid password form");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (passwordValidate){
+                    validPassword.setTextColor(getResources().getColor(R.color.green));
+                    validPassword.setText("Valid password form");
+                }
+            }
+        });
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
         //add here some real validation
 
         //TO DO
-        if (password.length() >5 && emailValidate) {
+        if (passwordValidate && emailValidate) {
             loginBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             loginBtn.setTextColor(getResources().getColor(R.color.white));
             loginBtn.setEnabled(true);
