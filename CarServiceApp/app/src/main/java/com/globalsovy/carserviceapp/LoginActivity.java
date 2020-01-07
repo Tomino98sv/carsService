@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean emailValidate = false;
     boolean passwordValidate = false;
 
-    Animation fadeIn;
+    Animation smooth_rotate;
     Animation rotate;
 
     @Override
@@ -115,8 +115,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void animationFadeIn() {
-        fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+        smooth_rotate = AnimationUtils.loadAnimation(this,R.anim.smooth_rotate);
         rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        rotate.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                carSVG.startAnimation(smooth_rotate);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         carSVG.startAnimation(rotate);
     }
     public void enterKeyListenerOnEmail() {
