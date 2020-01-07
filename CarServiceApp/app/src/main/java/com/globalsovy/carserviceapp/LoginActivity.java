@@ -2,6 +2,7 @@ package com.globalsovy.carserviceapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     ImageView carSVG;
     Button loginBtn;
+    TextView notRegistred;
 
     String email="";
     String password="";
@@ -57,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
 
         welcomeBack = findViewById(R.id.welcomeBack);
+        notRegistred = findViewById(R.id.notRegistred);
         setLogIn_toWhite();
 
         emailInp = findViewById(R.id.emailEditTextInp);
@@ -102,6 +105,16 @@ public class LoginActivity extends AppCompatActivity {
                     passwordLabel.setBackgroundColor(getResources().getColor(R.color.white));
                     passwordLabel.setTextColor(getResources().getColor(R.color.black));
                 }
+            }
+        });
+
+        notRegistred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registration = new Intent(LoginActivity.this,RegistrationActivity.class);
+                startActivity(registration);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
 

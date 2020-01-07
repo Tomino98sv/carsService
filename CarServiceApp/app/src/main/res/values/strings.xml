@@ -2,5 +2,7 @@
     <string name="app_name">CarServiceApp</string>
     <string name="forgetPass">Forgot password?</string>
     <string name="notRegistred">Not registered?</string>
+    <string name="backToLogin">Back to Login</string>
     <string name="welcomeBack">Welcome back,\nplease Log In</string>
+    <string name="quickRegistration">Nice to meet you,\nplease begin with\nquick registration.</string>
 </resources>
