@@ -8,15 +8,121 @@
     android:background="@android:color/black">
 
 
+    <ScrollView
+        android:id="@+id/scrollViewRegistration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+
+
+    </ScrollView>
+
     <RelativeLayout
-        android:id="@+id/emailInp"
+        android:id="@+id/nameInp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordInt"
+        app:layout_constraintBottom_toTopOf="@+id/surnameInp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/nameEditTextInp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/fill_hard"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/nameEditTextInp"
+            android:layout_alignTop="@+id/nameEditTextInp"
+            android:background="#fff"
+            android:padding="2dp"
+            android:text="Name"
+            android:textAppearance="@style/inputLabelText" />
+
+        <TextView
+            android:id="@+id/validationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelName"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/labelName"
+            android:padding="2dp"
+            android:textAppearance="@style/inputLabelText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/surnameInp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailInp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nameInp">
+
+        <EditText
+            android:id="@+id/surnameEditTextInp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/fill_hard"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/labelSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/surnameEditTextInp"
+            android:layout_alignTop="@+id/surnameEditTextInp"
+            android:background="#fff"
+            android:padding="2dp"
+            android:text="Surname"
+            android:textAppearance="@style/inputLabelText" />
+
+        <TextView
+            android:id="@+id/validationSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelSurname"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/labelSurname"
+            android:padding="2dp"
+            android:textAppearance="@style/inputLabelText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emailInp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInt"
+        app:layout_constraintStart_toStartOf="@+id/surnameInp"
+        app:layout_constraintEnd_toEndOf="@+id/surnameInp"
+        >
 
         <EditText
             android:id="@+id/emailEditTextInp"
@@ -25,11 +131,11 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/fill_hard"
             android:ems="10"
-            android:singleLine="true"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
             android:paddingTop="20dp"
             android:paddingBottom="5dp"
+            android:singleLine="true"
             android:textSize="16sp" />
 
         <TextView
@@ -39,10 +145,9 @@
             android:layout_alignStart="@+id/emailEditTextInp"
             android:layout_alignTop="@+id/emailEditTextInp"
             android:background="#fff"
-            android:text="Email"
-            android:textAppearance="@style/inputLabelText"
             android:padding="2dp"
-            />
+            android:text="Email"
+            android:textAppearance="@style/inputLabelText" />
 
         <TextView
             android:id="@+id/validationEmail"
@@ -51,9 +156,8 @@
             android:layout_alignTop="@+id/labelEmail"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/labelEmail"
-            android:textAppearance="@style/inputLabelText"
             android:padding="2dp"
-            />
+            android:textAppearance="@style/inputLabelText" />
 
     </RelativeLayout>
 
@@ -61,8 +165,9 @@
         android:id="@+id/passwordInt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintBottom_toTopOf="@+id/passworRepeaddInt"
         app:layout_constraintEnd_toEndOf="@+id/emailInp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emailInp">
 
 
@@ -73,11 +178,11 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/fill_hard"
             android:ems="10"
-            android:singleLine="true"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:paddingTop="20dp"
             android:paddingBottom="5dp"
+            android:singleLine="true"
             android:textSize="16sp" />
 
         <TextView
@@ -87,10 +192,9 @@
             android:layout_alignStart="@+id/passwordEditTextInt"
             android:layout_alignTop="@+id/passwordEditTextInt"
             android:background="#fff"
-            android:textAppearance="@style/inputLabelText"
             android:padding="2dp"
             android:text="Password"
-            />
+            android:textAppearance="@style/inputLabelText" />
 
         <TextView
             android:id="@+id/validationPassword"
@@ -99,8 +203,54 @@
             android:layout_alignTop="@+id/labelPassword"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/labelPassword"
-            android:textAppearance="@style/inputLabelText"
-            android:padding="2dp" />
+            android:padding="2dp"
+            android:textAppearance="@style/inputLabelText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/passworRepeaddInt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="@+id/passwordInt"
+        app:layout_constraintStart_toStartOf="@+id/passwordInt">
+
+
+        <EditText
+            android:id="@+id/passwordRepeadEditTextInt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/fill_hard"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/labelRepeadPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/passwordRepeadEditTextInt"
+            android:layout_alignTop="@+id/passwordRepeadEditTextInt"
+            android:background="#fff"
+            android:padding="2dp"
+            android:text="Repead Password"
+            android:textAppearance="@style/inputLabelText" />
+
+        <TextView
+            android:id="@+id/validationRepeadPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelRepeadPassword"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/labelRepeadPassword"
+            android:padding="2dp"
+            android:textAppearance="@style/inputLabelText" />
 
     </RelativeLayout>
 
@@ -152,8 +302,9 @@
         android:text="@string/quickRegistration"
         android:textAlignment="textStart"
         android:textAppearance="@style/welcomeBack"
-        app:layout_constraintBottom_toTopOf="@+id/emailInp"
+        app:layout_constraintBottom_toTopOf="@+id/nameInp"
         app:layout_constraintEnd_toEndOf="@+id/passwordInt"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/passwordInt" />
 
 
