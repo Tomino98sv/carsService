@@ -1,4 +1,4 @@
-#Sat Jan 04 23:17:29 CET 2020
+#Wed Jan 08 21:28:00 CET 2020
 base.0=C\:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

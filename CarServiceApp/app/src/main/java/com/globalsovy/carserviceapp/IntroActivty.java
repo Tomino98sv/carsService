@@ -121,20 +121,7 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         // Here you want to show the user a dialog box
-        new AlertDialog.Builder(IntroActivty.this)
-                .setTitle("Exiting the App")
-                .setMessage("Are you sure?")
-                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // The user wants to leave - so dismiss the dialog and exit
-                        finish();
-                        dialog.dismiss();
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // The user is not sure, so you can exit or just stay
-                dialog.dismiss();
-            }
-        }).show();
+        ExitAlertDialog dialog = new ExitAlertDialog();
+        dialog.showDialog(IntroActivty.this,"Exit application","Are you sure?");
     }
 }

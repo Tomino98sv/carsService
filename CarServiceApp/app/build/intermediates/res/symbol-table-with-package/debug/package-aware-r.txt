@@ -27,6 +27,13 @@ anim car_back
 anim car_forward
 anim fade_in
 anim fade_out
+anim rotate
+anim smooth_forward
+anim smooth_rotate
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -252,6 +259,7 @@ attr listPreferredItemPaddingEnd
 attr listPreferredItemPaddingLeft
 attr listPreferredItemPaddingRight
 attr listPreferredItemPaddingStart
+attr logInButtonColor
 attr logo
 attr logoDescription
 attr maxButtonHeight
@@ -396,12 +404,14 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
 color bright_foreground_inverse_material_light
 color bright_foreground_material_dark
 color bright_foreground_material_light
+color buttonLoginColor
 color button_material_dark
 color button_material_light
 color colorAccent
@@ -415,6 +425,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color green
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color material_blue_grey_800
@@ -439,12 +450,14 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color red
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color shadow
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -453,6 +466,8 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color vector_carColor
+color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -664,6 +679,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable fill_hard
 drawable ic_authorized_autoservis_app
 drawable ic_car
 drawable ic_carfa
@@ -681,8 +697,15 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable rounded_dialog
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable underline
+font raleway_bold
+font raleway_thin
+font roboto_light
+font roboto_medium
+font roboto_mono_bold
 id ALT
 id CTRL
 id FUNCTION
@@ -745,13 +768,17 @@ id add
 id alertTitle
 id always
 id async
+id backToLogin
 id barrier
 id beginning
 id blocking
 id bottom
 id buttonPanel
+id cancelExitDialog
 id carFaIntro
+id carFaLogin
 id carSVG
+id carSVGLogin
 id center_vertical
 id chains
 id checkbox
@@ -769,13 +796,14 @@ id dialog_button
 id dimensions
 id direct
 id disableHome
-id editText
-id editText2
 id edit_query
+id emailEditTextInp
+id emailInp
 id end
 id expand_activities_button
 id expanded_menu
 id forever
+id forgetPass
 id gone
 id group_divider
 id groups
@@ -786,21 +814,31 @@ id icon_group
 id ifRoom
 id image
 id imageView
-id imageView2
 id info
 id invisible
 id italic
+id labelEmail
+id labelName
+id labelPassword
+id labelRepeadPassword
+id labelSurname
+id leaveExitDialog
 id left
 id line1
 id line3
 id listMode
 id list_item
+id logInButton
 id message
 id middle
+id msgExitAlert
 id multiply
+id nameEditTextInp
+id nameInp
 id never
 id none
 id normal
+id notRegistred
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -808,11 +846,18 @@ id off
 id on
 id packed
 id parent
+id parentIntro
 id parentPanel
+id passworRepeaddInt
+id passwordEditTextInt
+id passwordInt
+id passwordRepeadEditTextInt
 id percent
 id progress_circular
 id progress_horizontal
+id quickRegistration
 id radio
+id registerButton
 id right
 id right_icon
 id right_side
@@ -820,6 +865,7 @@ id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scrollViewRegistration
 id search_badge
 id search_bar
 id search_button
@@ -846,6 +892,8 @@ id standard
 id start
 id submenuarrow
 id submit_area
+id surnameEditTextInp
+id surnameInp
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -859,9 +907,11 @@ id text
 id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
+id textView
 id time
 id title
 id titleDividerNoCustom
+id titleExitAlert
 id title_template
 id top
 id topPanel
@@ -869,6 +919,12 @@ id unchecked
 id uniform
 id up
 id useLogo
+id validationEmail
+id validationName
+id validationPassword
+id validationRepeadPassword
+id validationSurname
+id welcomeBack
 id withText
 id wrap
 id wrap_content
@@ -912,7 +968,10 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_my_cars
+layout activity_registration
 layout custom_dialog
+layout exit_dialog
 layout intro_layout
 layout login_layout
 layout main_layout
@@ -956,8 +1015,13 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
+string backToLogin
+string forgetPass
+string notRegistred
+string quickRegistration
 string search_menu_title
 string status_bar_notification_info_overflow
+string welcomeBack
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -1308,6 +1372,9 @@ style Widget_AppCompat_Toolbar
 style Widget_AppCompat_Toolbar_Button_Navigation
 style Widget_Compat_NotificationActionContainer
 style Widget_Compat_NotificationActionText
+style forgotPassword
+style inputLabelText
+style welcomeBack
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
@@ -1323,7 +1390,7 @@ styleable AppCompatSeekBar android_thumb tickMark tickMarkTint tickMarkTintMode
 styleable AppCompatTextHelper android_textAppearance android_drawableTop android_drawableBottom android_drawableLeft android_drawableRight android_drawableStart android_drawableEnd
 styleable AppCompatTextView android_textAppearance autoSizeMaxTextSize autoSizeMinTextSize autoSizePresetSizes autoSizeStepGranularity autoSizeTextType drawableBottomCompat drawableEndCompat drawableLeftCompat drawableRightCompat drawableStartCompat drawableTint drawableTintMode drawableTopCompat firstBaselineToTopHeight fontFamily fontVariationSettings lastBaselineToBottomHeight lineHeight textAllCaps textLocale
 styleable AppCompatTheme android_windowIsFloating android_windowAnimationStyle actionBarDivider actionBarItemBackground actionBarPopupTheme actionBarSize actionBarSplitStyle actionBarStyle actionBarTabBarStyle actionBarTabStyle actionBarTabTextStyle actionBarTheme actionBarWidgetTheme actionButtonStyle actionDropDownStyle actionMenuTextAppearance actionMenuTextColor actionModeBackground actionModeCloseButtonStyle actionModeCloseDrawable actionModeCopyDrawable actionModeCutDrawable actionModeFindDrawable actionModePasteDrawable actionModePopupWindowStyle actionModeSelectAllDrawable actionModeShareDrawable actionModeSplitBackground actionModeStyle actionModeWebSearchDrawable actionOverflowButtonStyle actionOverflowMenuStyle activityChooserViewStyle alertDialogButtonGroupStyle alertDialogCenterButtons alertDialogStyle alertDialogTheme autoCompleteTextViewStyle borderlessButtonStyle buttonBarButtonStyle buttonBarNegativeButtonStyle buttonBarNeutralButtonStyle buttonBarPositiveButtonStyle buttonBarStyle buttonStyle buttonStyleSmall checkboxStyle checkedTextViewStyle colorAccent colorBackgroundFloating colorButtonNormal colorControlActivated colorControlHighlight colorControlNormal colorError colorPrimary colorPrimaryDark colorSwitchThumbNormal controlBackground dialogCornerRadius dialogPreferredPadding dialogTheme dividerHorizontal dividerVertical dropDownListViewStyle dropdownListPreferredItemHeight editTextBackground editTextColor editTextStyle homeAsUpIndicator imageButtonStyle listChoiceBackgroundIndicator listChoiceIndicatorMultipleAnimated listChoiceIndicatorSingleAnimated listDividerAlertDialog listMenuViewStyle listPopupWindowStyle listPreferredItemHeight listPreferredItemHeightLarge listPreferredItemHeightSmall listPreferredItemPaddingEnd listPreferredItemPaddingLeft listPreferredItemPaddingRight listPreferredItemPaddingStart panelBackground panelMenuListTheme panelMenuListWidth popupMenuStyle popupWindowStyle radioButtonStyle ratingBarStyle ratingBarStyleIndicator ratingBarStyleSmall searchViewStyle seekBarStyle selectableItemBackground selectableItemBackgroundBorderless spinnerDropDownItemStyle spinnerStyle switchStyle textAppearanceLargePopupMenu textAppearanceListItem textAppearanceListItemSecondary textAppearanceListItemSmall textAppearancePopupMenuHeader textAppearanceSearchResultSubtitle textAppearanceSearchResultTitle textAppearanceSmallPopupMenu textColorAlertDialogListItem textColorSearchUrl toolbarNavigationButtonStyle toolbarStyle tooltipForegroundColor tooltipFrameBackground viewInflaterClass windowActionBar windowActionBarOverlay windowActionModeOverlay windowFixedHeightMajor windowFixedHeightMinor windowFixedWidthMajor windowFixedWidthMinor windowMinWidthMajor windowMinWidthMinor windowNoTitle
-styleable AppTheme carBg
+styleable AppTheme carBg logInButtonColor
 styleable ButtonBarLayout allowStacking
 styleable ColorStateListItem android_color android_alpha alpha
 styleable CompoundButton android_button buttonCompat buttonTint buttonTintMode
