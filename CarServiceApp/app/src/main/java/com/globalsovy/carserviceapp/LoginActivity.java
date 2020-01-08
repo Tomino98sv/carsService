@@ -1,7 +1,9 @@
 package com.globalsovy.carserviceapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -261,6 +263,26 @@ public class LoginActivity extends AppCompatActivity {
     public void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        new AlertDialog.Builder(LoginActivity.this)
+                .setTitle("Exiting the App")
+                .setMessage("Are you sure?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // The user wants to leave - so dismiss the dialog and exit
+                        finish();
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // The user is not sure, so you can exit or just stay
+                dialog.dismiss();
+            }
+        }).show();
     }
 
 

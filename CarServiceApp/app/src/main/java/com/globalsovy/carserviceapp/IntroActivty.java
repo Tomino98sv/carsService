@@ -1,6 +1,8 @@
 package com.globalsovy.carserviceapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
@@ -114,5 +116,25 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onAnimationRepeat(Animation animation) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        new AlertDialog.Builder(IntroActivty.this)
+                .setTitle("Exiting the App")
+                .setMessage("Are you sure?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // The user wants to leave - so dismiss the dialog and exit
+                        finish();
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // The user is not sure, so you can exit or just stay
+                dialog.dismiss();
+            }
+        }).show();
     }
 }
