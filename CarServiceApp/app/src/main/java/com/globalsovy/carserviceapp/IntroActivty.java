@@ -1,6 +1,8 @@
 package com.globalsovy.carserviceapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
@@ -14,18 +16,19 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class IntroActivty extends AppCompatActivity implements View.OnClickListener, Animation.AnimationListener {
 
     ImageView carFa;
     ImageView describtion;
+    ConstraintLayout parent;
 
     ImageView carSVG;
 
     TranslateAnimation moveToRightTop;
     AnimationSet animation;
 
-    Animation moveToLeft;
     Animation moveSlowlyDown;
     Animation moveFastForward;
 
@@ -40,9 +43,9 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
         carFa = findViewById(R.id.carFaIntro);
         describtion = findViewById(R.id.descLogo);
         carSVG = findViewById(R.id.carSVG);
+        parent = findViewById(R.id.parentIntro);
 
-        carFa.setOnClickListener(this);
-        describtion.setOnClickListener(this);
+        parent.setOnClickListener(this);
 
         getScreenDimension();
         setAnimation();
@@ -53,18 +56,16 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         carFa.setAnimation(animation);
         carFa.startAnimation(moveToRightTop);
-        describtion.startAnimation(moveToLeft);
+        describtion.setVisibility(View.GONE);
         carSVG.startAnimation(moveSlowlyDown);
     }
 
     public void setAnimation(){
-        moveToRightTop = new TranslateAnimation(0,(((0-width)/2)+200),0,(((0-height)/2)+100));//(xFrom,xTo, yFrom,yTo)
-        moveToRightTop.setDuration(1100);
+        moveToRightTop = new TranslateAnimation(0,(((0-width)/2)+150),0,(((0-height)/2)+80));//(xFrom,xTo, yFrom,yTo)
+        moveToRightTop.setDuration(1300);
         moveToRightTop.setFillAfter(true);
         moveToRightTop.setAnimationListener(this);
 
-        moveToLeft = AnimationUtils.loadAnimation(this,R.anim.fade_out);
-        moveToLeft.setAnimationListener(this);
 
         moveSlowlyDown = AnimationUtils.loadAnimation(this,R.anim.car_back);
         moveFastForward = AnimationUtils.loadAnimation(this,R.anim.car_forward);
@@ -115,5 +116,25 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onAnimationRepeat(Animation animation) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        new AlertDialog.Builder(IntroActivty.this)
+                .setTitle("Exiting the App")
+                .setMessage("Are you sure?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // The user wants to leave - so dismiss the dialog and exit
+                        finish();
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // The user is not sure, so you can exit or just stay
+                dialog.dismiss();
+            }
+        }).show();
     }
 }

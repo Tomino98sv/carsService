@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="AppTheme">
         <attr name="carBg" format="color" />
+        <attr name="logInButtonColor" format="color"/>
     </declare-styleable>
 </resources>
