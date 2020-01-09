@@ -4,13 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class RegistrationActivity extends AppCompatActivity {
+import java.util.regex.Pattern;
+
+public class RegistrationActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
 
     EditText nameInp;
@@ -36,12 +43,20 @@ public class RegistrationActivity extends AppCompatActivity {
 
     TextView backToLogin;
     TextView registrationText;
+    Button registerButton;
+
+    boolean nameValidation = false;
+    boolean surnameValidation = false;
+    boolean emailValidation = false;
+    boolean passwordValidation = false;
+    boolean repeadPasswordValidation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        registerButton = findViewById(R.id.registerButton);
         registrationText = findViewById(R.id.quickRegistration);
         backToLogin = findViewById(R.id.backToLogin);
 
@@ -65,6 +80,8 @@ public class RegistrationActivity extends AppCompatActivity {
         repeadPasswordLabel = findViewById(R.id.labelRepeadPassword);
         validRepeadPassword = findViewById(R.id.validationRepeadPassword);
 
+        registerButton.setEnabled(false);
+
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +93,14 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
         setRegistration_toWhite();
+        setOnChangeListeners();
+        setRegistrationButton();
+
+        setAddTextChangeListener(nameInp);
+        setAddTextChangeListener(surnameInp);
+        setAddTextChangeListener(emailInp);
+        setAddTextChangeListener(passwordInp);
+        setAddTextChangeListener(repeadPasswordInp);
     }
 
     public void setRegistration_toWhite(){
@@ -85,4 +110,242 @@ public class RegistrationActivity extends AppCompatActivity {
         spannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), text.length()-13, text.length(), 0);
         registrationText.setText(spannable);
     }
+    public void setRegistrationButton(){
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToast("Registration Reqeust sent");
+            }
+        });
+    }
+    public void setOnChangeListeners() {
+        nameInp.setOnFocusChangeListener(this);
+        surnameInp.setOnFocusChangeListener(this);
+        emailInp.setOnFocusChangeListener(this);
+        passwordInp.setOnFocusChangeListener(this);
+        repeadPasswordInp.setOnFocusChangeListener(this);
+    }
+    public void showToast(String text){
+        Toast.makeText(RegistrationActivity.this,text,Toast.LENGTH_SHORT).show();
+    }
+    public void enable_disableLoginBTN(){
+        if (nameValidation && emailValidation && passwordValidation && repeadPasswordValidation && surnameValidation) {
+            registerButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            registerButton.setTextColor(getResources().getColor(R.color.white));
+            registerButton.setEnabled(true);
+        }else {
+            registerButton.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+            registerButton.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+            registerButton.setEnabled(false);
+        }
+    }
+    public void setAddTextChangeListener(final EditText current){
+        current.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (current.getId() == nameInp.getId()){
+                    if (!nameValidation) {
+                        validName.setTextColor(getResources().getColor(R.color.red));
+                        if (charSequence.length() <3){
+                            validName.setText("surname must at least 3 length short");
+                        }else {
+                            validName.setText("surname can't be longer then 9 chars");
+                        }
+                    }
+                    return;
+                }
+                if (current.getId() == surnameInp.getId()){
+                    if (!surnameValidation){
+                        validSurName.setTextColor(getResources().getColor(R.color.red));
+                        if (charSequence.length() <3){
+                            validSurName.setText("surname must at least 3 length short");
+                        }else {
+                            validSurName.setText("surname can't be longer then 9 chars");
+                        }
+                    }
+                    return;
+                }
+                if (current.getId() == emailInp.getId()){
+                    if (!emailValidation){
+                        validMail.setTextColor(getResources().getColor(R.color.red));
+                        validMail.setText("InValid email form");
+                    }
+                    return;
+                }
+                if (current.getId() == passwordInp.getId()){
+                    if (!passwordValidation){
+                        validPassword.setTextColor(getResources().getColor(R.color.red));
+                        validPassword.setText("name must at least 6 length short");
+                    }
+                    return;
+                }
+                if (current.getId() == repeadPasswordInp.getId()){
+                    if (!repeadPasswordValidation){
+                        validRepeadPassword.setTextColor(getResources().getColor(R.color.red));
+                        validRepeadPassword.setText("Repeadet password and password must be same");
+                    }
+                    return;
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            if (current.getId() == nameInp.getId()){
+                nameValidation = (editable.length() >= 3 && editable.length() < 10);
+                if (nameValidation) {
+                    validName.setTextColor(getResources().getColor(R.color.green));
+                    validName.setText("Correct");
+                }
+                return;
+            }
+            if (current.getId() == surnameInp.getId()){
+                surnameValidation = (editable.length() >= 3 && editable.length() < 10);
+                if (surnameValidation){
+                    validSurName.setTextColor(getResources().getColor(R.color.green));
+                    validSurName.setText("Correct");
+                }
+                return;
+            }
+            if (current.getId() == emailInp.getId()){
+                emailValidation = isEmailValid(editable);
+                if (emailValidation){
+                    validMail.setTextColor(getResources().getColor(R.color.green));
+                    validMail.setText("Correct");
+                }
+                return;
+            }
+            if (current.getId() == passwordInp.getId()){
+                passwordValidation = editable.length() >= 6;
+                if (passwordValidation){
+                    validPassword.setTextColor(getResources().getColor(R.color.green));
+                    validPassword.setText("Correct");
+                }
+                return;
+            }
+            if (current.getId() == repeadPasswordInp.getId()){
+                repeadPasswordValidation = editable.toString().equals(passwordInp.getText().toString());
+                if (repeadPasswordValidation){
+                    validRepeadPassword.setTextColor(getResources().getColor(R.color.green));
+                    validRepeadPassword.setText("Correct");
+                }
+                return;
+            }
+                enable_disableLoginBTN();
+            }
+        });
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+
+        if (view.getId() == nameInp.getId()){
+            if (hasFocus){
+                nameInp.setBackgroundColor(getResources().getColor(R.color.white));
+                nameInp.setTextColor(getResources().getColor(R.color.black));
+                nameLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                nameLabel.setTextColor(getResources().getColor(R.color.white));
+            }else{
+                nameInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                nameInp.setTextColor(getResources().getColor(R.color.white));
+                nameLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                nameLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
+        if (view.getId() == surnameInp.getId()){
+            if (hasFocus){
+                surnameInp.setBackgroundColor(getResources().getColor(R.color.white));
+                surnameInp.setTextColor(getResources().getColor(R.color.black));
+                surnameLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                surnameLabel.setTextColor(getResources().getColor(R.color.white));
+            }else{
+                surnameInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                surnameInp.setTextColor(getResources().getColor(R.color.white));
+                surnameLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                surnameLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
+        if (view.getId() == emailInp.getId()){
+            if (hasFocus){
+                emailInp.setBackgroundColor(getResources().getColor(R.color.white));
+                emailInp.setTextColor(getResources().getColor(R.color.black));
+                emailLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                emailLabel.setTextColor(getResources().getColor(R.color.white));
+            }else{
+                emailInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                emailInp.setTextColor(getResources().getColor(R.color.white));
+                emailLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                emailLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
+        if (view.getId() == passwordInp.getId()){
+            if (hasFocus){
+                passwordInp.setBackgroundColor(getResources().getColor(R.color.white));
+                passwordInp.setTextColor(getResources().getColor(R.color.black));
+                passwordLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                passwordLabel.setTextColor(getResources().getColor(R.color.white));
+            }
+            else{
+                passwordInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                passwordInp.setTextColor(getResources().getColor(R.color.white));
+                passwordLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                passwordLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
+        if (view.getId() == repeadPasswordInp.getId()){
+            if (hasFocus){
+                repeadPasswordInp.setBackgroundColor(getResources().getColor(R.color.white));
+                repeadPasswordInp.setTextColor(getResources().getColor(R.color.black));
+                repeadPasswordLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                repeadPasswordLabel.setTextColor(getResources().getColor(R.color.white));
+            }
+            else{
+                repeadPasswordInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                repeadPasswordInp.setTextColor(getResources().getColor(R.color.white));
+                repeadPasswordLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                repeadPasswordLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
+
+    }
+
+    private boolean isEmailValid(CharSequence s) {
+        Pattern sPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]{3,10}\\.{1}[A-Z]{2,6}$",Pattern.CASE_INSENSITIVE);
+        return sPattern.matcher(s).matches();
+    }
+
+    public void enterKeyListenerOnEmail() {
+        emailInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifing>1){
+                        hideKeyboardFrom(LoginActivity.this,view);
+                        emailInp.clearFocus();
+                    }
+                    onlyModifing++;
+                }
+                return false;
+            }
+        });
+    }
+    public void enterKeyListenerOnPassword() {
+        passwordInp.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    passwordInp.clearFocus();
+                    hideKeyboardFrom(LoginActivity.this,v);
+                }
+                return false;
+            }
+        });
+    }
+
 }
