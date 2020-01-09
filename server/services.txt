@@ -64,7 +64,7 @@ posielame v body:
 returnuje:
 {"status":200,"message":"New car added successfully."}
 {"status":401,"message":"Car with this motor vehicle registration plate already exists."}
-{"status":401,"message":"Wrong user token , please log in again."}
+{"status":401,"message":"Wrong user token, please log in again."}
 
 
 
@@ -80,5 +80,5 @@ posielame v body:
 
 returnuje:
 {"status":403,"message":"No cars yet."}     
-{"status":200,"message":res}
-{"status":401,"message":"Wrong user token , please log in again."}
+{"status":200,"message":autyčka}
+{"status":401,"message":"Wrong user token, please log in again."}
