@@ -5,6 +5,8 @@ const express = require('express');
 const db=require('./database');
 const fs = require('fs');
 const path=require('path');
+const router=express.Router();
+const multer=require('multer');
 
 //Definuje token generaciu(pomocou knižnice na tokeny)
 const tokgen = new TokenGenerator(128, TokenGenerator.BASE62);
@@ -96,6 +98,21 @@ app.post('/getcarprofileimage',(req,res)=>{
             res.status(data.status).send(data.message);
         });
     
+    });
+});
+
+var multipartUpload = multer({storage: multer.diskStorage({
+    destination: function (req, file, callback) { callback(null, './public');},
+    filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now()+".jpg");}})
+}).single('imgUploader');
+
+
+app.post('/sendimage',multipartUpload,(req,res)=>{
+    console.log("Request on /sendimages");
+    //console.log(req.body.carid);
+    //console.log(req.file.filename);
+    db.saveImages(req.body.carid,"./public/"+req.file.filename,data=>{
+        res.status(data.status).send(data.message);
     });
 });
 

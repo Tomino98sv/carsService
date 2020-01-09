@@ -285,5 +285,16 @@ module.exports={
                 callbackR({"status":404,"message":"Car not found."});
             }
         });
+    },
+
+    saveImages(id,imagePath,callbackR){
+        con.query("INSERT INTO imagepaths VALUES(id,'"+imagePath+"',"+id+");",(err)=>{
+            if(err) {
+                console.log(err);
+                callbackR({"status":500,"message":"Could not upload photo."});
+            }else{
+                callbackR({"status":200,"message":"Successfully added new photo!"});
+            }
+        });
     }
 }
