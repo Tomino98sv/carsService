@@ -101,19 +101,32 @@ app.post('/getcarprofileimage',(req,res)=>{
     });
 });
 
+app.post('/getcarimages',(req,res)=>{
+    console.log("Request on /getcarimages");
+    db.getcarimages(req.body,data=>{
+        let files=data.message;
+        //TODO
+    });
+});
+
 var multipartUpload = multer({storage: multer.diskStorage({
     destination: function (req, file, callback) { callback(null, './public');},
-    filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now()+".jpg");}})
-}).single('imgUploader');
+    filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname));}})
+}).array('image');
 
 
 app.post('/sendimage',multipartUpload,(req,res)=>{
     console.log("Request on /sendimages");
     //console.log(req.body.carid);
     //console.log(req.file.filename);
-    db.saveImages(req.body.carid,"./public/"+req.file.filename,data=>{
-        res.status(data.status).send(data.message);
-    });
+    for(let i=0;i<req.files.length;i++){
+        db.saveImages(req.body.carid,"./public/"+req.files[i].filename,data=>{
+            console.log("Inserted "+i+" image");
+            if(i==req.files.length-1){
+                res.status(data.status).send(data.message);
+            }
+        });
+    }
 });
 
 app.listen(1203,()=>{
