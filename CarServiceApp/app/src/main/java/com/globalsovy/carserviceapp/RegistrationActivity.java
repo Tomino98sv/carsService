@@ -7,9 +7,32 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class RegistrationActivity extends AppCompatActivity {
+
+
+    EditText nameInp;
+    TextView nameLabel;
+    TextView validName;
+
+    EditText surnameInp;
+    TextView surnameLabel;
+    TextView validSurName;
+
+    EditText emailInp;
+    TextView emailLabel;
+    TextView validMail;
+
+    EditText passwordInp;
+    TextView passwordLabel;
+    TextView validPassword;
+
+    EditText repeadPasswordInp;
+    TextView repeadPasswordLabel;
+    TextView validRepeadPassword;
+
 
     TextView backToLogin;
     TextView registrationText;
@@ -21,6 +44,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
         registrationText = findViewById(R.id.quickRegistration);
         backToLogin = findViewById(R.id.backToLogin);
+
+        nameInp = findViewById(R.id.nameEditTextInp);
+        nameLabel = findViewById(R.id.labelName);
+        validName = findViewById(R.id.validationName);
+
+        surnameInp = findViewById(R.id.surnameEditTextInp);
+        surnameLabel = findViewById(R.id.labelSurname);
+        validSurName = findViewById(R.id.validationSurname);
+
+        emailInp = findViewById(R.id.emailEditTextInp);
+        emailLabel = findViewById(R.id.labelEmail);
+        validMail = findViewById(R.id.validationEmail);
+
+        passwordInp = findViewById(R.id.passwordEditTextInt);
+        passwordLabel = findViewById(R.id.labelPassword);
+        validPassword = findViewById(R.id.validationPassword);
+
+        repeadPasswordInp = findViewById(R.id.passwordRepeadEditTextInt);
+        repeadPasswordLabel = findViewById(R.id.labelRepeadPassword);
+        validRepeadPassword = findViewById(R.id.validationRepeadPassword);
 
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
