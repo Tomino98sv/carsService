@@ -82,3 +82,55 @@ returnuje:
 {"status":403,"message":"No cars yet."}     
 {"status":200,"message":autyčka}
 {"status":401,"message":"Wrong user token, please log in again."}
+
+
+
+POST /sendcodeforchangepassword
+posielame body:
+
+{"email":"chillingplay@gmail.com"}
+
+returnuje:
+200-ak poslal mail
+404-ak nenašiel mail v databaze existujucich učtov
+
+
+
+POST /abletochangepassword
+posielame body:
+{"email":"chillingplay@gmail.com","code":"423992"}
+
+returnuje:
+401 wrong code
+200 OK code
+
+
+POST /changepassword
+posielame v body:
+{
+    "email": "chillingplay@gmail.com",
+    "password": "13456"
+}
+
+returnuje:
+{
+    500 - chyba db or w/e
+    200- ak prebehla zmena hesla uspešne
+}
+
+
+POST /getcarprofileimage
+posielame v body:{"idcar":"3"}
+returnuje:
+200 + v body obrazok
+404 ak nebolo najdene auto
+
+
+POST /sendimage
+posielame vo form-data: 
+carid=3
+image=tvojobrazok
+
+returnuje:
+500-nepodarilo sa pridat
+200-pridany obrazok

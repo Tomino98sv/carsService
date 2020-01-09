@@ -247,7 +247,7 @@ module.exports={
         con.query("SELECT * from forgotpasswordcodes WHERE iduser=(SELECT id from users where email like '"+email+"') AND code like '"+code+"';",(err,res)=>{
             if(err) console.log(err);
             if(res.length===0){
-                callbackR({"status":401,"message":"Wrong "});
+                callbackR({"status":401,"message":"Wrong code."});
             }
             else{
                 con.query("update forgotpasswordcodes set code='' where iduser=(SELECT id from users where email like '"+email+"')",(err)=>{
@@ -280,6 +280,26 @@ module.exports={
             if(err) console.log(err);
             if(res.length!==0){
                 callbackR({"status":200,"message":res[0].path});
+            }
+            else{
+                callbackR({"status":404,"message":"Car not found."});
+            }
+        });
+    },
+
+    getcarimages(data,callbackR){
+        let carID=data.idcar;
+    
+        con.query("select path from imagepaths where idcar="+carID+";",(err,res)=>{
+            if(err) console.log(err);
+            res=/*JSON.parse(JSON.stringify(res))*/res;
+            console.log(res);
+            const result=res.reduce((acc,value)=>
+                [...acc,value.path]   
+            ,[]);
+            //console.log(result);
+            if(res.length!==0){
+                callbackR({"status":200,"message":result});
             }
             else{
                 callbackR({"status":404,"message":"Car not found."});
