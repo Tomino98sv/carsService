@@ -834,7 +834,6 @@ id middle
 id msgExitAlert
 id multiply
 id nameEditTextInp
-id nameInp
 id never
 id none
 id normal
@@ -848,7 +847,6 @@ id packed
 id parent
 id parentIntro
 id parentPanel
-id passworRepeaddInt
 id passwordEditTextInt
 id passwordInt
 id passwordRepeadEditTextInt
@@ -865,7 +863,6 @@ id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
-id scrollViewRegistration
 id search_badge
 id search_bar
 id search_button
@@ -893,7 +890,6 @@ id start
 id submenuarrow
 id submit_area
 id surnameEditTextInp
-id surnameInp
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
