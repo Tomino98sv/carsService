@@ -3,6 +3,8 @@ const TokenGenerator = require('uuid-token-generator');
 const cors=require('cors');
 const express = require('express');
 const db=require('./database');
+const fs = require('fs');
+const path=require('path');
 
 //Definuje token generaciu(pomocou knižnice na tokeny)
 const tokgen = new TokenGenerator(128, TokenGenerator.BASE62);
@@ -55,6 +57,45 @@ app.post('/getcars',(req,res)=>{
     db.getAllCars(req.body,data=>{
         //console.log("tusom");
         res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/sendcodeforchangepassword',(req,res)=>{
+    console.log("Request on /sendCodeForChangePassword");
+    db.sendCodeForChangePassword(req.body,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/abletochangepassword',(req,res)=>{
+    console.log("Request on /ableToChangePassword");
+    db.ableToChangePassword(req.body,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/changepassword',(req,res)=>{
+    console.log("Request on /changepassword");
+    db.changePassword(req.body,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/getcarprofileimage',(req,res)=>{
+    console.log("Request on /getcarprofileimage");
+    db.getCarProfileImage(req.body,data=>{
+        let file=data.message;
+        var type = 'image/jpeg' || 'image/png' || 'text/plain';
+        var s = fs.createReadStream(file);
+        s.on('open', function () {
+            res.set('Content-Type', type);
+            s.pipe(res);
+        });
+        s.on('error', function () {
+            res.set('Content-Type', 'text/plain');
+            res.status(data.status).send(data.message);
+        });
+    
     });
 });
 

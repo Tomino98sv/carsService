@@ -31,10 +31,11 @@ CREATE TABLE `cars` (
   `color` varchar(10) DEFAULT NULL,
   `vintage` int(11) NOT NULL,
   `kilometrage` int(11) NOT NULL,
+  `profileImgID` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `SPZ` (`SPZ`),
   KEY `userid` (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,8 +44,61 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (1,2,'LE939AN','Mazda','3','NULL',2019,25041),(2,2,'LE939sN','Mazda','3','NULL',2019,25041);
+INSERT INTO `cars` VALUES (3,2,'KE05647','Mazda','3',NULL,2019,158888,1),(4,2,'KE056DS','BMW','M3',NULL,2017,1545,1);
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `forgotpasswordcodes`
+--
+
+DROP TABLE IF EXISTS `forgotpasswordcodes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forgotpasswordcodes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idUser` int(11) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idUser` (`idUser`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `forgotpasswordcodes`
+--
+
+LOCK TABLES `forgotpasswordcodes` WRITE;
+/*!40000 ALTER TABLE `forgotpasswordcodes` DISABLE KEYS */;
+INSERT INTO `forgotpasswordcodes` VALUES (1,2,'');
+/*!40000 ALTER TABLE `forgotpasswordcodes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imagepaths`
+--
+
+DROP TABLE IF EXISTS `imagepaths`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imagepaths` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` varchar(100) NOT NULL,
+  `idCar` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `path` (`path`),
+  KEY `idCar` (`idCar`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imagepaths`
+--
+
+LOCK TABLES `imagepaths` WRITE;
+/*!40000 ALTER TABLE `imagepaths` DISABLE KEYS */;
+INSERT INTO `imagepaths` VALUES (1,'D:\\SOVY\\GlobalProjekt\\public\\car.png',4);
+/*!40000 ALTER TABLE `imagepaths` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -60,7 +114,7 @@ CREATE TABLE `tokens` (
   `token` varchar(22) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +123,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (6,2,'2gXv4eIAChaRINqKPwezai');
+INSERT INTO `tokens` VALUES (17,2,'2E2jVooSaDYgmJsefxAZkk');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +155,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'martin','krendzelak','wtffllll','35146bf52ad95f7318d6a516f2d00d577a82d2cb87864fbc2fdb6893','chillingplay@gmail.com',1,'704044');
+INSERT INTO `users` VALUES (2,'martin','krendzelak','wtffllll','6fae9cb222702086df86be80347289ec0cc354c728c81551ddf47e55','chillingplay@gmail.com',1,'704044');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-03 21:25:17
+-- Dump completed on 2020-01-09  7:40:45
