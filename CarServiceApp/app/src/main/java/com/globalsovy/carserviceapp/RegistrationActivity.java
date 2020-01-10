@@ -2,6 +2,8 @@ package com.globalsovy.carserviceapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,6 +53,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     boolean emailValidation = false;
     boolean passwordValidation = false;
     boolean repeadPasswordValidation = false;
+
+    int onlyModifingName = 0;
+    int onlyModifingSurname = 0;
+    int onlyModifindEmail = 0;
+    int onlyModifindPassword = 0;
+    int onlyModifindRepeadPassword = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +112,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         setAddTextChangeListener(emailInp);
         setAddTextChangeListener(passwordInp);
         setAddTextChangeListener(repeadPasswordInp);
+
+        enterKeyListenerOnSurname();
+        enterKeyListenerOnEmail();
+        enterKeyListenerOnName();
+        enterKeyListenerOnPassword();
+        enterKeyListenerOnRepeadPassword();
     }
 
     public void setRegistration_toWhite(){
@@ -317,6 +334,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         return sPattern.matcher(s).matches();
     }
 
+    public void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
     public void enterKeyListenerOnEmail() {
         emailInp.setOnKeyListener(new View.OnKeyListener() {
 
@@ -324,11 +346,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
             public boolean onKey(View view, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     enable_disableLoginBTN();
-                    if (onlyModifing>1){
-                        hideKeyboardFrom(LoginActivity.this,view);
+                    if (onlyModifindEmail>1){
+                        hideKeyboardFrom(RegistrationActivity.this,view);
                         emailInp.clearFocus();
                     }
-                    onlyModifing++;
+                    onlyModifindEmail++;
                 }
                 return false;
             }
@@ -340,8 +362,63 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     enable_disableLoginBTN();
-                    passwordInp.clearFocus();
-                    hideKeyboardFrom(LoginActivity.this,v);
+                    if (onlyModifindPassword>1){
+                        hideKeyboardFrom(RegistrationActivity.this,v);
+                        passwordInp.clearFocus();
+                    }
+                    onlyModifindPassword++;
+
+                }
+                return false;
+            }
+        });
+    }
+    public void enterKeyListenerOnName() {
+        nameInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifingName>1){
+                        hideKeyboardFrom(RegistrationActivity.this,view);
+                        nameInp.clearFocus();
+                    }
+                    onlyModifingName++;
+                }
+                return false;
+            }
+        });
+    }
+    public void enterKeyListenerOnSurname() {
+        surnameInp.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifingSurname>1){
+                        hideKeyboardFrom(RegistrationActivity.this,v);
+                        surnameInp.clearFocus();
+                    }
+                    onlyModifingSurname++;
+
+                }
+                return false;
+            }
+        });
+    }
+    public void enterKeyListenerOnRepeadPassword() {
+        repeadPasswordInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifindRepeadPassword>1){
+                        hideKeyboardFrom(RegistrationActivity.this,view);
+                        repeadPasswordInp.clearFocus();
+                    }
+                    onlyModifindRepeadPassword++;
                 }
                 return false;
             }
