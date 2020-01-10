@@ -23,6 +23,10 @@ import java.util.regex.Pattern;
 public class RegistrationActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
 
+    EditText loginInp;
+    TextView loginLabel;
+    TextView validLogin;
+
     EditText nameInp;
     TextView nameLabel;
     TextView validName;
@@ -53,13 +57,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     boolean emailValidation = false;
     boolean passwordValidation = false;
     boolean repeadPasswordValidation = false;
+    boolean loginValidation = false;
 
     int onlyModifingName = 0;
     int onlyModifingSurname = 0;
     int onlyModifindEmail = 0;
     int onlyModifindPassword = 0;
     int onlyModifindRepeadPassword = 0;
-
+    int onlyModifingLogin = 0;
 
 
     @Override
@@ -70,6 +75,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         registerButton = findViewById(R.id.registerButton);
         registrationText = findViewById(R.id.quickRegistration);
         backToLogin = findViewById(R.id.backToLogin);
+
+        loginInp = findViewById(R.id.loginEditTextInp);
+        loginLabel = findViewById(R.id.labelLogin);
+        validLogin = findViewById(R.id.validationLogin);
 
         nameInp = findViewById(R.id.nameEditTextInp);
         nameLabel = findViewById(R.id.labelName);
@@ -107,6 +116,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         setOnChangeListeners();
         setRegistrationButton();
 
+        setAddTextChangeListener(loginInp);
         setAddTextChangeListener(nameInp);
         setAddTextChangeListener(surnameInp);
         setAddTextChangeListener(emailInp);
@@ -118,6 +128,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         enterKeyListenerOnName();
         enterKeyListenerOnPassword();
         enterKeyListenerOnRepeadPassword();
+        enterKeyListenerOnLogin();
     }
 
     public void setRegistration_toWhite(){
@@ -141,12 +152,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         emailInp.setOnFocusChangeListener(this);
         passwordInp.setOnFocusChangeListener(this);
         repeadPasswordInp.setOnFocusChangeListener(this);
+        loginInp.setOnFocusChangeListener(this);
     }
     public void showToast(String text){
         Toast.makeText(RegistrationActivity.this,text,Toast.LENGTH_SHORT).show();
     }
     public void enable_disableLoginBTN(){
-        if (nameValidation && emailValidation && passwordValidation && repeadPasswordValidation && surnameValidation) {
+        if (nameValidation && emailValidation && passwordValidation && repeadPasswordValidation && surnameValidation && loginValidation) {
             registerButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             registerButton.setTextColor(getResources().getColor(R.color.white));
             registerButton.setEnabled(true);
@@ -160,49 +172,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         current.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (current.getId() == nameInp.getId()){
-                    if (!nameValidation) {
-                        validName.setTextColor(getResources().getColor(R.color.red));
-                        if (charSequence.length() <3){
-                            validName.setText("surname must at least 3 length short");
-                        }else {
-                            validName.setText("surname can't be longer then 9 chars");
-                        }
-                    }
-                    return;
-                }
-                if (current.getId() == surnameInp.getId()){
-                    if (!surnameValidation){
-                        validSurName.setTextColor(getResources().getColor(R.color.red));
-                        if (charSequence.length() <3){
-                            validSurName.setText("surname must at least 3 length short");
-                        }else {
-                            validSurName.setText("surname can't be longer then 9 chars");
-                        }
-                    }
-                    return;
-                }
-                if (current.getId() == emailInp.getId()){
-                    if (!emailValidation){
-                        validMail.setTextColor(getResources().getColor(R.color.red));
-                        validMail.setText("InValid email form");
-                    }
-                    return;
-                }
-                if (current.getId() == passwordInp.getId()){
-                    if (!passwordValidation){
-                        validPassword.setTextColor(getResources().getColor(R.color.red));
-                        validPassword.setText("name must at least 6 length short");
-                    }
-                    return;
-                }
-                if (current.getId() == repeadPasswordInp.getId()){
-                    if (!repeadPasswordValidation){
-                        validRepeadPassword.setTextColor(getResources().getColor(R.color.red));
-                        validRepeadPassword.setText("Repeadet password and password must be same");
-                    }
-                    return;
-                }
             }
 
             @Override
@@ -211,11 +180,36 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+
+                if (current.getId() == loginInp.getId()){
+                    loginValidation = (editable.length() >= 3);
+                    if (loginValidation) {
+                        validLogin.setTextColor(getResources().getColor(R.color.green));
+                        validLogin.setText("Correct");
+                    }
+                    if (!loginValidation) {
+                        validLogin.setTextColor(getResources().getColor(R.color.red));
+                        if (editable.length() <3){
+                            validLogin.setText("surname must at least 3 length short");
+                        }
+                    }
+                    return;
+                }
+
             if (current.getId() == nameInp.getId()){
                 nameValidation = (editable.length() >= 3 && editable.length() < 10);
                 if (nameValidation) {
                     validName.setTextColor(getResources().getColor(R.color.green));
                     validName.setText("Correct");
+                }
+                if (!nameValidation) {
+                    validName.setTextColor(getResources().getColor(R.color.red));
+                    if (editable.length() <3){
+                        validName.setText("surname must at least 3 length short");
+                    }else {
+                        validName.setText("surname can't be longer then 9 chars");
+                    }
                 }
                 return;
             }
@@ -225,6 +219,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                     validSurName.setTextColor(getResources().getColor(R.color.green));
                     validSurName.setText("Correct");
                 }
+                if (!surnameValidation){
+                    validSurName.setTextColor(getResources().getColor(R.color.red));
+                    if (editable.length() <3){
+                        validSurName.setText("surname must at least 3 length short");
+                    }else {
+                        validSurName.setText("surname can't be longer then 9 chars");
+                    }
+                }
                 return;
             }
             if (current.getId() == emailInp.getId()){
@@ -232,6 +234,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                 if (emailValidation){
                     validMail.setTextColor(getResources().getColor(R.color.green));
                     validMail.setText("Correct");
+                }
+                if (!emailValidation){
+                    validMail.setTextColor(getResources().getColor(R.color.red));
+                    validMail.setText("InValid email form");
                 }
                 return;
             }
@@ -241,6 +247,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                     validPassword.setTextColor(getResources().getColor(R.color.green));
                     validPassword.setText("Correct");
                 }
+                if (!passwordValidation){
+                    validPassword.setTextColor(getResources().getColor(R.color.red));
+                    validPassword.setText("name must at least 6 length short");
+                }
                 return;
             }
             if (current.getId() == repeadPasswordInp.getId()){
@@ -248,6 +258,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                 if (repeadPasswordValidation){
                     validRepeadPassword.setTextColor(getResources().getColor(R.color.green));
                     validRepeadPassword.setText("Correct");
+                }
+                if (!repeadPasswordValidation){
+                    validRepeadPassword.setTextColor(getResources().getColor(R.color.red));
+                    validRepeadPassword.setText("Repeadet password and password must be same");
                 }
                 return;
             }
@@ -259,6 +273,19 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     @Override
     public void onFocusChange(View view, boolean hasFocus) {
 
+        if (view.getId() == loginInp.getId()){
+            if (hasFocus){
+                loginInp.setBackgroundColor(getResources().getColor(R.color.white));
+                loginInp.setTextColor(getResources().getColor(R.color.black));
+                loginLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                loginLabel.setTextColor(getResources().getColor(R.color.white));
+            }else{
+                loginInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                loginInp.setTextColor(getResources().getColor(R.color.white));
+                loginLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                loginLabel.setTextColor(getResources().getColor(R.color.black));
+            }
+        }
         if (view.getId() == nameInp.getId()){
             if (hasFocus){
                 nameInp.setBackgroundColor(getResources().getColor(R.color.white));
@@ -339,6 +366,23 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public void enterKeyListenerOnLogin() {
+        loginInp.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    enable_disableLoginBTN();
+                    if (onlyModifingLogin>1){
+                        hideKeyboardFrom(RegistrationActivity.this,view);
+                        loginInp.clearFocus();
+                    }
+                    onlyModifingLogin++;
+                }
+                return false;
+            }
+        });
+    }
     public void enterKeyListenerOnEmail() {
         emailInp.setOnKeyListener(new View.OnKeyListener() {
 
@@ -361,7 +405,17 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    enable_disableLoginBTN();
+                    if (passwordInp.getText().toString().equals(repeadPasswordInp.getText().toString())){
+                        repeadPasswordValidation = true;
+                        validRepeadPassword.setTextColor(getResources().getColor(R.color.green));
+                        validRepeadPassword.setText("Correct");
+                        enable_disableLoginBTN();
+                    }else {
+                        repeadPasswordValidation = false;
+                        validRepeadPassword.setTextColor(getResources().getColor(R.color.red));
+                        validRepeadPassword.setText("Repeadet password and password must be same");
+                        enable_disableLoginBTN();
+                    }
                     if (onlyModifindPassword>1){
                         hideKeyboardFrom(RegistrationActivity.this,v);
                         passwordInp.clearFocus();
