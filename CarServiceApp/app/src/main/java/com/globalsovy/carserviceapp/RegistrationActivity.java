@@ -94,9 +94,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         surnameLabel = findViewById(R.id.labelSurname);
         validSurName = findViewById(R.id.validationSurname);
 
-        emailInp = findViewById(R.id.emailEditTextInp);
-        emailLabel = findViewById(R.id.labelEmail);
-        validMail = findViewById(R.id.validationEmail);
+        emailInp = findViewById(R.id.loginEditTextInp);
+        emailLabel = findViewById(R.id.labelLogin);
+        validMail = findViewById(R.id.validationLogin);
 
         passwordInp = findViewById(R.id.passwordEditTextInt);
         passwordLabel = findViewById(R.id.labelPassword);
@@ -257,7 +257,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                 }
                 if (!passwordValidation){
                     validPassword.setTextColor(getResources().getColor(R.color.red));
-                    validPassword.setText("name must at least 6 length short");
+                    validPassword.setText("password must at least 6 length short");
                 }
                 return;
             }

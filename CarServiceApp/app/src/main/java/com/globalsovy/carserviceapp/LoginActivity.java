@@ -1,13 +1,8 @@
 package com.globalsovy.carserviceapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -21,23 +16,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
     TextView welcomeBack;
 
-    EditText emailInp;
-    TextView emailLabel;
-    TextView validMail;
+    EditText loginInp;
+    TextView loginLabel;
+    TextView validLogin;
 
     EditText passwordInp;
     TextView passwordLabel;
@@ -47,10 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     Button loginBtn;
     TextView notRegistred;
 
-    String email="";
+    String login="";
     String password="";
     int onlyModifing=0;
-    boolean emailValidate = false;
+    boolean loginValidate = false;
     boolean passwordValidate = false;
 
     Animation rotate;
@@ -64,9 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         notRegistred = findViewById(R.id.notRegistred);
         setLogIn_toWhite();
 
-        emailInp = findViewById(R.id.emailEditTextInp);
-        emailLabel = findViewById(R.id.labelEmail);
-        validMail = findViewById(R.id.validationEmail);
+        loginInp = findViewById(R.id.loginEditTextInp);
+        loginLabel = findViewById(R.id.labelLogin);
+        validLogin = findViewById(R.id.validationLogin);
         passwordInp = findViewById(R.id.passwordEditTextInt);
         passwordLabel = findViewById(R.id.labelPassword);
         validPassword = findViewById(R.id.validationPassword);
@@ -75,19 +66,19 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn.setEnabled(false);
 
-        emailInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        loginInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus){
-                    emailInp.setBackgroundColor(getResources().getColor(R.color.white));
-                    emailInp.setTextColor(getResources().getColor(R.color.black));
-                    emailLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    emailLabel.setTextColor(getResources().getColor(R.color.white));
+                    loginInp.setBackgroundColor(getResources().getColor(R.color.white));
+                    loginInp.setTextColor(getResources().getColor(R.color.black));
+                    loginLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    loginLabel.setTextColor(getResources().getColor(R.color.white));
                 }else{
-                    emailInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
-                    emailInp.setTextColor(getResources().getColor(R.color.white));
-                    emailLabel.setBackgroundColor(getResources().getColor(R.color.white));
-                    emailLabel.setTextColor(getResources().getColor(R.color.black));
+                    loginInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
+                    loginInp.setTextColor(getResources().getColor(R.color.white));
+                    loginLabel.setBackgroundColor(getResources().getColor(R.color.white));
+                    loginLabel.setTextColor(getResources().getColor(R.color.black));
                 }
             }
         });
@@ -122,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
         animationFadeIn();
 
-        enterKeyListenerOnEmail();
+        enterKeyListenerOnLogin();
         enterKeyListenerOnPassword();
         setPasswordValidate();
         setEmailValidate();
@@ -133,8 +124,8 @@ public class LoginActivity extends AppCompatActivity {
         rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
         carSVG.startAnimation(rotate);
     }
-    public void enterKeyListenerOnEmail() {
-        emailInp.setOnKeyListener(new View.OnKeyListener() {
+    public void enterKeyListenerOnLogin() {
+        loginInp.setOnKeyListener(new View.OnKeyListener() {
 
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -142,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     enable_disableLoginBTN();
                     if (onlyModifing>1){
                         hideKeyboardFrom(LoginActivity.this,view);
-                        emailInp.clearFocus();
+                        loginInp.clearFocus();
                     }
                     onlyModifing++;
                 }
@@ -165,21 +156,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void setPasswordValidate() {
         passwordInp.addTextChangedListener(new TextWatcher() {
-            private boolean isValid(CharSequence pass) {
-                if (pass.length() > 5){
-                    return true;
-                }else {
-                    return false;
-                }
-            }
-
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                passwordValidate = isValid(charSequence);
-                if (!passwordValidate){
-                    validPassword.setTextColor(getResources().getColor(R.color.red));
-                    validPassword.setText("InValid password form");
-                }
             }
 
             @Override
@@ -189,6 +167,11 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                passwordValidate = editable.length() >= 6;
+                if (!passwordValidate){
+                    validPassword.setTextColor(getResources().getColor(R.color.red));
+                    validPassword.setText("password must be at least 6 length short");
+                }
                 if (passwordValidate){
                     validPassword.setTextColor(getResources().getColor(R.color.green));
                     validPassword.setText("Valid password form");
@@ -197,35 +180,28 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void setEmailValidate() {
-        emailInp.addTextChangedListener(new TextWatcher() {
-            private final Pattern sPattern
-                    = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.{1}[A-Z]{1,6}$",Pattern.CASE_INSENSITIVE);
-
-            private boolean isValid(CharSequence s) {
-                return sPattern.matcher(s).matches();
-            }
+        loginInp.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count){
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after){
-                emailValidate = isValid(s);
-                if (!emailValidate){
-                    validMail.setTextColor(getResources().getColor(R.color.red));
-                    validMail.setText("InValid mail form");
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
             }
 
             @Override
             public void afterTextChanged(Editable s)
             {
-                if (emailValidate)
+                loginValidate = s.length() >= 3;
+                if (!loginValidate){
+                    validLogin.setTextColor(getResources().getColor(R.color.red));
+                    validLogin.setText("login must be at least 3 length short");
+                }
+                if (loginValidate)
                 {
-                    validMail.setTextColor(getResources().getColor(R.color.green));
-                    validMail.setText("Valid mail form");
+                    validLogin.setTextColor(getResources().getColor(R.color.green));
+                    validLogin.setText("Correct");
                 }
             }
         });
@@ -246,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
         welcomeBack.setText(spannable);
     }
     public void enable_disableLoginBTN(){
-        if (passwordValidate && emailValidate) {
+        if (passwordValidate && loginValidate) {
             loginBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             loginBtn.setTextColor(getResources().getColor(R.color.white));
             loginBtn.setEnabled(true);

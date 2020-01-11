@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/emailEditTextInp"
+            android:id="@+id/loginEditTextInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -33,22 +33,21 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/labelEmail"
+            android:id="@+id/labelLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/emailEditTextInp"
-            android:layout_alignTop="@+id/emailEditTextInp"
+            android:layout_alignStart="@+id/loginEditTextInp"
+            android:layout_alignTop="@+id/loginEditTextInp"
+            android:text="Login"
             android:background="#fff"
-            android:text="Email"
-            android:textAppearance="@style/inputLabelText"
             android:padding="2dp"
-            />
+            android:textAppearance="@style/inputLabelText" />
 
         <TextView
-            android:id="@+id/validationEmail"
+            android:id="@+id/validationLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/emailEditTextInp"
+            android:layout_below="@+id/loginEditTextInp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
