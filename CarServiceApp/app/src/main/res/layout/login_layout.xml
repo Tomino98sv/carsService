@@ -9,7 +9,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/emailInp"
+        android:id="@+id/loginInp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/loginEditTextInp"
+            android:id="@+id/signInLoginTextInp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -33,21 +33,21 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/labelLogin"
+            android:id="@+id/labelSignInLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/loginEditTextInp"
-            android:layout_alignTop="@+id/loginEditTextInp"
+            android:layout_alignStart="@+id/signInLoginTextInp"
+            android:layout_alignTop="@+id/signInLoginTextInp"
             android:text="Login"
             android:background="#fff"
             android:padding="2dp"
             android:textAppearance="@style/inputLabelText" />
 
         <TextView
-            android:id="@+id/validationLogin"
+            android:id="@+id/validationSignInLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/loginEditTextInp"
+            android:layout_below="@+id/signInLoginTextInp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
@@ -63,8 +63,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/logInButton"
-        app:layout_constraintEnd_toEndOf="@+id/emailInp"
-        app:layout_constraintStart_toStartOf="@+id/emailInp">
+        app:layout_constraintEnd_toEndOf="@+id/loginInp"
+        app:layout_constraintStart_toStartOf="@+id/loginInp">
 
 
         <EditText
@@ -112,7 +112,8 @@
         android:id="@+id/carFaLogin"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_carfa" />
@@ -167,7 +168,7 @@
         android:text="@string/welcomeBack"
         android:textAlignment="textStart"
         android:textAppearance="@style/welcomeBack"
-        app:layout_constraintBottom_toTopOf="@+id/emailInp"
+        app:layout_constraintBottom_toTopOf="@+id/loginInp"
         app:layout_constraintEnd_toEndOf="@+id/passwordInt"
         app:layout_constraintStart_toStartOf="@+id/passwordInt" />
 

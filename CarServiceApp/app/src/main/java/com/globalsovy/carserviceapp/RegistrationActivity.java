@@ -82,9 +82,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
 
         scrollViewReg = findViewById(R.id.scrollViewReg);
 
-        loginInp = findViewById(R.id.loginEditTextInp);
-        loginLabel = findViewById(R.id.labelLogin);
-        validLogin = findViewById(R.id.validationLogin);
+        loginInp = findViewById(R.id.loginEditTextInpReg);
+        loginLabel = findViewById(R.id.labelLoginReg);
+        validLogin = findViewById(R.id.validationLoginReg);
 
         nameInp = findViewById(R.id.nameEditTextInp);
         nameLabel = findViewById(R.id.labelName);
@@ -94,9 +94,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         surnameLabel = findViewById(R.id.labelSurname);
         validSurName = findViewById(R.id.validationSurname);
 
-        emailInp = findViewById(R.id.loginEditTextInp);
-        emailLabel = findViewById(R.id.labelLogin);
-        validMail = findViewById(R.id.validationLogin);
+        emailInp = findViewById(R.id.emailEditTextInp);
+        emailLabel = findViewById(R.id.labelEmail);
+        validMail = findViewById(R.id.validationEmail);
 
         passwordInp = findViewById(R.id.passwordEditTextInt);
         passwordLabel = findViewById(R.id.labelPassword);
@@ -488,7 +488,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     }
 
     public void setAnimationOnFields() {
-        Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.scrol_view_reg_fade_in);
+        Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
         scrollViewReg.startAnimation(fadeIn);
     }
 

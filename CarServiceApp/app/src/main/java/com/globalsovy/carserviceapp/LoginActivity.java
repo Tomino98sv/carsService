@@ -8,28 +8,35 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Animation.AnimationListener {
 
     TextView welcomeBack;
 
+    RelativeLayout loginContainer;
     EditText loginInp;
     TextView loginLabel;
     TextView validLogin;
 
+    RelativeLayout passwordContainer;
     EditText passwordInp;
     TextView passwordLabel;
     TextView validPassword;
@@ -37,14 +44,21 @@ public class LoginActivity extends AppCompatActivity {
     ImageView carSVG;
     Button loginBtn;
     TextView notRegistred;
+    TextView forgotPassword;
 
     String login="";
     String password="";
     int onlyModifing=0;
     boolean loginValidate = false;
     boolean passwordValidate = false;
+    ImageView carFaLogin;
+
+    int width = 0;
+    int height = 0;
 
     Animation rotate;
+    TranslateAnimation moveToRightTop;
+    Animation fadeIn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,14 +69,18 @@ public class LoginActivity extends AppCompatActivity {
         notRegistred = findViewById(R.id.notRegistred);
         setLogIn_toWhite();
 
-        loginInp = findViewById(R.id.loginEditTextInp);
-        loginLabel = findViewById(R.id.labelLogin);
-        validLogin = findViewById(R.id.validationLogin);
+        loginContainer = findViewById(R.id.loginInp);
+        loginInp = findViewById(R.id.signInLoginTextInp);
+        loginLabel = findViewById(R.id.labelSignInLogin);
+        validLogin = findViewById(R.id.validationSignInLogin);
+        passwordContainer = findViewById(R.id.passwordInt);
         passwordInp = findViewById(R.id.passwordEditTextInt);
         passwordLabel = findViewById(R.id.labelPassword);
         validPassword = findViewById(R.id.validationPassword);
         loginBtn = findViewById(R.id.logInButton);
         carSVG = findViewById(R.id.carSVGLogin);
+        carFaLogin = findViewById(R.id.carFaLogin);
+        forgotPassword = findViewById(R.id.forgetPass);
 
         loginBtn.setEnabled(false);
 
@@ -111,8 +129,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        animationFadeIn();
-
+        getScreenDimension();
+        introAnimation();
         enterKeyListenerOnLogin();
         enterKeyListenerOnPassword();
         setPasswordValidate();
@@ -120,10 +138,6 @@ public class LoginActivity extends AppCompatActivity {
         setLoginButton();
     }
 
-    public void animationFadeIn() {
-        rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
-        carSVG.startAnimation(rotate);
-    }
     public void enterKeyListenerOnLogin() {
         loginInp.setOnKeyListener(new View.OnKeyListener() {
 
@@ -240,6 +254,31 @@ public class LoginActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    public void getScreenDimension(){
+        WindowManager wm = (WindowManager) getApplicationContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        width = display.getWidth();
+        height = display.getHeight();
+        showToast("width "+width+" height "+height);
+    }
+    public void introAnimation(){
+        width = (width/2)- (width/100*30);
+        height = (height/2)- (height/100*10);
+        moveToRightTop = new TranslateAnimation(width,0,height,0);//(xFrom,xTo, yFrom,yTo)
+        moveToRightTop.setDuration(1300);
+        moveToRightTop.setFillAfter(true);
+
+        moveToRightTop.setAnimationListener(this);
+
+        rotate = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+
+        carFaLogin.setAnimation(moveToRightTop);
+        carFaLogin.startAnimation(moveToRightTop);
+        carSVG.startAnimation(rotate);
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -249,5 +288,41 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onAnimationStart(Animation animation) {
+        if (animation.equals(moveToRightTop)){
+            loginContainer.setVisibility(View.INVISIBLE);
+            passwordContainer.setVisibility(View.INVISIBLE);
+            welcomeBack.setVisibility(View.INVISIBLE);
+            loginBtn.setVisibility(View.INVISIBLE);
+            notRegistred.setVisibility(View.INVISIBLE);
+            forgotPassword.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        if (animation.equals(moveToRightTop)){
+            loginContainer.setVisibility(View.INVISIBLE);
+            passwordContainer.setVisibility(View.INVISIBLE);
+            welcomeBack.setVisibility(View.INVISIBLE);
+            loginBtn.setVisibility(View.INVISIBLE);
+            notRegistred.setVisibility(View.INVISIBLE);
+            forgotPassword.setVisibility(View.INVISIBLE);
+
+
+            loginContainer.startAnimation(fadeIn);
+            passwordContainer.startAnimation(fadeIn);
+            welcomeBack.startAnimation(fadeIn);
+            loginBtn.startAnimation(fadeIn);
+            notRegistred.startAnimation(fadeIn);
+            forgotPassword.startAnimation(fadeIn);
+        }
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
 }
 
