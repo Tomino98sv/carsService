@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ForgetPassword.ConfirmDigitCode"
+    android:background="@android:color/black">
+
+
+    <ImageView
+        android:id="@+id/carFaLogin"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_carfa" />
+
+
+    <ImageView
+        android:id="@+id/carSVGLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="-40"
+        app:layout_constraintStart_toEndOf="@+id/carFaLogin"
+        app:layout_constraintTop_toBottomOf="@+id/carFaLogin"
+        app:srcCompat="@drawable/ic_car" />
+
+    <Button
+        android:id="@+id/verifyCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="?attr/logInButtonColor"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Continue"
+        android:textColor="?attr/logInButtonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/backToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/backToLogin"
+        android:textAppearance="@style/forgotPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/carFaLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/carFaLogin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carFaLogin"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/sentCodeToMailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="gravity"
+            android:gravity="bottom"
+            android:text="@string/codeSent"
+            android:textAppearance="@style/welcomeBack" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:weightSum="1.2"
+        app:layout_constraintBottom_toTopOf="@+id/verifyCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/firstDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/secondDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/thirdDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/fourthDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/fifthDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/sixthDigit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight=".2"
+            android:background="@drawable/fill_hard"
+            android:inputType="textPersonName"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

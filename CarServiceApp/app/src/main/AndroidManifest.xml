@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".ForgetPassword.NotRegisterEmail"></activity>
+        <activity android:name=".ForgetPassword.CreateNewPassword" />
+        <activity android:name=".ForgetPassword.ConfirmDigitCode" />
+        <activity android:name=".ForgetPassword.EmailForResetPassword" />
+        <activity android:name=".RegistrationActivity" />
         <activity android:name=".MyCarsActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />

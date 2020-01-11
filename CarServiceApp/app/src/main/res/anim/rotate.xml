@@ -6,13 +6,13 @@
     android:toDegrees="0"
     android:pivotX="0%"
     android:pivotY="0%"
-    android:duration="1300"
+    android:duration="900"
     android:interpolator="@android:anim/decelerate_interpolator"/>
 
     <alpha
         android:fromAlpha="0.2"
         android:toAlpha="1.0"
-        android:duration="1300"
+        android:duration="900"
         android:interpolator="@android:anim/accelerate_interpolator"/>
 
     <scale
@@ -22,7 +22,7 @@
         android:fromYScale="0.6"
         android:toXScale="1.0"
         android:toYScale="1.0"
-        android:duration="1300"
+        android:duration="900"
         />
 
 </set>

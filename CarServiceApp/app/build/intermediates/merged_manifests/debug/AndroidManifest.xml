@@ -16,8 +16,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.NotRegisterEmail" />
+        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword" />
+        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode" />
+        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword" />
         <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
         <activity android:name="com.globalsovy.carserviceapp.MyCarsActivity" />
         <activity android:name="com.globalsovy.carserviceapp.MainActivity" />

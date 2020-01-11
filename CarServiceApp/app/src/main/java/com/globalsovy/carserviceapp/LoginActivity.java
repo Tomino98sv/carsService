@@ -27,6 +27,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword;
+
 public class LoginActivity extends AppCompatActivity implements Animation.AnimationListener {
 
     TextView welcomeBack;
@@ -82,6 +84,13 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         carFaLogin = findViewById(R.id.carFaLogin);
         forgotPassword = findViewById(R.id.forgetPass);
 
+        loginContainer.setVisibility(View.INVISIBLE);
+        passwordContainer.setVisibility(View.INVISIBLE);
+        welcomeBack.setVisibility(View.INVISIBLE);
+        loginBtn.setVisibility(View.INVISIBLE);
+        notRegistred.setVisibility(View.INVISIBLE);
+        forgotPassword.setVisibility(View.INVISIBLE);
+
         loginBtn.setEnabled(false);
 
         loginInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -125,7 +134,14 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                 Intent registration = new Intent(LoginActivity.this,RegistrationActivity.class);
                 startActivity(registration);
                 overridePendingTransition(0, 0);
-                finish();
+            }
+        });
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forgotPassword = new Intent(LoginActivity.this, EmailForResetPassword.class);
+                startActivity(forgotPassword);
+                overridePendingTransition(0,0);
             }
         });
 
@@ -260,13 +276,12 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         Display display = wm.getDefaultDisplay();
         width = display.getWidth();
         height = display.getHeight();
-        showToast("width "+width+" height "+height);
     }
     public void introAnimation(){
         width = (width/2)- (width/100*30);
         height = (height/2)- (height/100*10);
         moveToRightTop = new TranslateAnimation(width,0,height,0);//(xFrom,xTo, yFrom,yTo)
-        moveToRightTop.setDuration(1300);
+        moveToRightTop.setDuration(900);
         moveToRightTop.setFillAfter(true);
 
         moveToRightTop.setAnimationListener(this);
@@ -287,17 +302,8 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         dialog.showDialog(LoginActivity.this,"Exit application","Are you sure?");
     }
 
-
     @Override
     public void onAnimationStart(Animation animation) {
-        if (animation.equals(moveToRightTop)){
-            loginContainer.setVisibility(View.INVISIBLE);
-            passwordContainer.setVisibility(View.INVISIBLE);
-            welcomeBack.setVisibility(View.INVISIBLE);
-            loginBtn.setVisibility(View.INVISIBLE);
-            notRegistred.setVisibility(View.INVISIBLE);
-            forgotPassword.setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override

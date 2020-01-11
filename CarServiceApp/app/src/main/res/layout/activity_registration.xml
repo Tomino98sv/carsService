@@ -8,12 +8,12 @@
     android:background="@android:color/black">
 
 
-
     <ImageView
         android:id="@+id/carFaLogin"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_carfa" />
@@ -78,7 +78,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/quickRegistration"
-                android:textAlignment="textStart"
+                android:textAlignment="viewStart"
                 android:textAppearance="@style/welcomeBack" />
 
 
