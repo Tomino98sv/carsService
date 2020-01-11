@@ -48,12 +48,14 @@
             android:id="@+id/validationEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/labelEmail"
+            android:layout_below="@+id/emailEditTextInp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/labelEmail"
-            android:textAppearance="@style/inputLabelText"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="10dp"
             android:padding="2dp"
-             />
+            android:textAppearance="@style/inputLabelText" />
 
     </RelativeLayout>
 
@@ -96,11 +98,14 @@
             android:id="@+id/validationPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/labelPassword"
+            android:layout_below="@+id/passwordEditTextInt"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/labelPassword"
-            android:textAppearance="@style/inputLabelText"
-            android:padding="2dp" />
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="10dp"
+            android:padding="2dp"
+            android:textAppearance="@style/inputLabelText" />
 
     </RelativeLayout>
 

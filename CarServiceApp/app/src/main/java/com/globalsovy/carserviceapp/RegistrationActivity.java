@@ -12,9 +12,12 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     TextView backToLogin;
     TextView registrationText;
     Button registerButton;
+    ScrollView scrollViewReg;
 
     boolean nameValidation = false;
     boolean surnameValidation = false;
@@ -75,6 +79,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         registerButton = findViewById(R.id.registerButton);
         registrationText = findViewById(R.id.quickRegistration);
         backToLogin = findViewById(R.id.backToLogin);
+
+        scrollViewReg = findViewById(R.id.scrollViewReg);
 
         loginInp = findViewById(R.id.loginEditTextInp);
         loginLabel = findViewById(R.id.labelLogin);
@@ -115,6 +121,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         setRegistration_toWhite();
         setOnChangeListeners();
         setRegistrationButton();
+
+        setAnimationOnFields();
 
         setAddTextChangeListener(loginInp);
         setAddTextChangeListener(nameInp);
@@ -477,6 +485,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                 return false;
             }
         });
+    }
+
+    public void setAnimationOnFields() {
+        Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.scrol_view_reg_fade_in);
+        scrollViewReg.startAnimation(fadeIn);
     }
 
 }
