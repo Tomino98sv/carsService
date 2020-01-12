@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.globalsovy.carserviceapp.R;
+
 public class NotRegisterEmail extends AppCompatActivity {
 
     @Override
