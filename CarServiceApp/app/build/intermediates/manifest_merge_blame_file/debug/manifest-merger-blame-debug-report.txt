@@ -25,53 +25,54 @@
 17-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:9:9-54
 18        android:supportsRtl="true"
 18-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:9-35
-19        android:theme="@style/AppTheme" >
-19-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:11:9-40
-20        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.NotRegisterEmail" />
-20-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:9-78
-20-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:19-66
-21        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword" />
-21-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:9-70
-21-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:19-67
-22        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode" />
-22-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:9-69
-22-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:19-66
-23        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword" />
-23-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:9-74
-23-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:19-71
-24        <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
-24-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:9-58
-24-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:19-55
-25        <activity android:name="com.globalsovy.carserviceapp.MyCarsActivity" />
-25-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:9-52
-25-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:19-49
-26        <activity android:name="com.globalsovy.carserviceapp.MainActivity" />
-26-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:9-50
-26-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:19-47
-27        <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
-27-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:9-51
-27-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:19-48
-28        <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >
-28-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:9-26:20
-28-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:19-47
-29            <intent-filter>
-29-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:13-25:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:17-69
-30-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:17-77
-32-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:27-74
-33            </intent-filter>
-34        </activity>
-35
-36        <meta-data
-36-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:9-30:57
-37            android:name="preloaded_fonts"
-37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:13-43
-38            android:resource="@array/preloaded_fonts" />
-38-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:13-54
-39    </application>
-40
-41</manifest>
+19        android:testOnly="true"
+20        android:theme="@style/AppTheme" >
+20-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:11:9-40
+21        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.NotRegisterEmail" />
+21-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:9-78
+21-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:19-66
+22        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword" />
+22-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:9-70
+22-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:19-67
+23        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode" />
+23-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:9-69
+23-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:19-66
+24        <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword" />
+24-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:9-74
+24-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:19-71
+25        <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
+25-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:9-58
+25-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:19-55
+26        <activity android:name="com.globalsovy.carserviceapp.MyCarsActivity" />
+26-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:9-52
+26-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:19-49
+27        <activity android:name="com.globalsovy.carserviceapp.MainActivity" />
+27-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:9-50
+27-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:19-47
+28        <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
+28-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:9-51
+28-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:19-48
+29        <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >
+29-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:9-26:20
+29-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:19-47
+30            <intent-filter>
+30-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:13-25:29
+31                <action android:name="android.intent.action.MAIN" />
+31-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:17-69
+31-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:25-66
+32
+33                <category android:name="android.intent.category.LAUNCHER" />
+33-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:17-77
+33-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:27-74
+34            </intent-filter>
+35        </activity>
+36
+37        <meta-data
+37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:9-30:57
+38            android:name="preloaded_fonts"
+38-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:13-43
+39            android:resource="@array/preloaded_fonts" />
+39-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:13-54
+40    </application>
+41
+42</manifest>

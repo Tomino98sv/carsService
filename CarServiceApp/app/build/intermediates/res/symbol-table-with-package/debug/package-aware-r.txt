@@ -25,8 +25,11 @@ anim btn_radio_to_on_mtrl_ring_outer_animation
 anim btn_radio_to_on_mtrl_ring_outer_path_animation
 anim car_back
 anim car_forward
+anim disapear
+anim down_and_dispear
 anim fade_in
 anim fade_out
+anim move_right_disapear
 anim rotate
 anim smooth_forward
 anim smooth_rotate
@@ -937,6 +940,7 @@ id titleExitAlert
 id title_template
 id top
 id topPanel
+id tryAnotherMail
 id unchecked
 id uniform
 id up
@@ -955,6 +959,7 @@ id welcomeBack
 id withText
 id wrap
 id wrap_content
+id wrongEmailAddress
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
@@ -999,6 +1004,7 @@ layout activity_confirm_digit_code
 layout activity_create_new_password
 layout activity_email_for_reset_password
 layout activity_my_cars
+layout activity_not_register_email
 layout activity_registration
 layout custom_dialog
 layout exit_dialog
