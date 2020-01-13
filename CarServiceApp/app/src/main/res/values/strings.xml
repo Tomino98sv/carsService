@@ -5,4 +5,8 @@
     <string name="backToLogin">Back to Login</string>
     <string name="welcomeBack">Welcome back,\nplease Log In</string>
     <string name="quickRegistration">Nice to meet you,\nplease begin with\nquick registration.</string>
+    <string name="resetPassword">Forgot password?\nInsert your email and we send you 6 digit code to your email for reseting the password.</string>
+    <string name="codeSent">We sent you email\nwith 6-digit code.\nInsert code to reset password</string>
+    <string name="createNewPassword">Create your\nnew password</string>
+    <string name="emailNotRegister">Email address does not appear to be registered.</string>
 </resources>

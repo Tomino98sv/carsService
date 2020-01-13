@@ -26,9 +26,6 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
     ImageView carSVG;
 
-    TranslateAnimation moveToRightTop;
-    AnimationSet animation;
-
     Animation moveSlowlyDown;
     Animation moveFastForward;
 
@@ -54,21 +51,14 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        carFa.setAnimation(animation);
-        carFa.startAnimation(moveToRightTop);
         describtion.setVisibility(View.GONE);
         carSVG.startAnimation(moveSlowlyDown);
     }
 
     public void setAnimation(){
-        moveToRightTop = new TranslateAnimation(0,(((0-width)/2)+150),0,(((0-height)/2)+80));//(xFrom,xTo, yFrom,yTo)
-        moveToRightTop.setDuration(1300);
-        moveToRightTop.setFillAfter(true);
-        moveToRightTop.setAnimationListener(this);
-
-
         moveSlowlyDown = AnimationUtils.loadAnimation(this,R.anim.car_back);
         moveFastForward = AnimationUtils.loadAnimation(this,R.anim.car_forward);
+        moveFastForward.setAnimationListener(this);
 
         moveSlowlyDown.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -86,9 +76,6 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-        animation = new AnimationSet(false);
-        animation.addAnimation(moveToRightTop);
     }
 
     public void getScreenDimension(){
@@ -105,7 +92,7 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        if (animation == moveToRightTop) {
+        if (animation == moveFastForward) {
             Intent login = new Intent(IntroActivty.this,LoginActivity.class);
             startActivity(login);
             overridePendingTransition(0, 0);
