@@ -80,7 +80,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
@@ -94,7 +94,7 @@
         <EditText
             android:id="@+id/firstDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"
@@ -107,7 +107,7 @@
         <EditText
             android:id="@+id/secondDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"
@@ -120,7 +120,7 @@
         <EditText
             android:id="@+id/thirdDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"
@@ -133,7 +133,7 @@
         <EditText
             android:id="@+id/fourthDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"
@@ -146,7 +146,7 @@
         <EditText
             android:id="@+id/fifthDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"
@@ -159,7 +159,7 @@
         <EditText
             android:id="@+id/sixthDigit"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight=".2"
             android:background="@drawable/fill_hard"

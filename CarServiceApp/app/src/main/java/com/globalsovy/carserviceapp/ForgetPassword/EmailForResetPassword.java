@@ -57,10 +57,14 @@ public class EmailForResetPassword extends AppCompatActivity {
         sendRequestForCode = findViewById(R.id.sendResetCode);
         backToLogin = findViewById(R.id.backToLogin);
 
+        sendRequestForCode.setEnabled(false);
         sendRequestForCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startIntentAnimation();
+                Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
+                startActivity(registration);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
         backToLogin.setOnClickListener(new View.OnClickListener() {
@@ -164,26 +168,26 @@ public class EmailForResetPassword extends AppCompatActivity {
         moveRightDisapear.setDuration(10000);
         moveRightDisapear.setFillAfter(true);
 
-//        moveDownDisapear.setAnimationListener(new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//                emailContainer.startAnimation(disapear);
-//                sendRequestForCode.startAnimation(moveRightDisapear);
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
-//                startActivity(registration);
-//                overridePendingTransition(0, 0);
-//                finish();
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//
-//            }
-//        });
+        moveDownDisapear.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                emailContainer.startAnimation(disapear);
+                sendRequestForCode.startAnimation(moveRightDisapear);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
+                startActivity(registration);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         sendRequestForCode.startAnimation(moveRightDisapear);
     }
