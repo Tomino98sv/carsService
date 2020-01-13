@@ -1,6 +1,4 @@
-package com.globalsovy.carserviceapp.ForgetPassword;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.globalsovy.carserviceapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +11,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.globalsovy.carserviceapp.LoginActivity;
-import com.globalsovy.carserviceapp.R;
-import com.globalsovy.carserviceapp.UnconfirmedEmail;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ConfirmDigitCode extends AppCompatActivity {
+import com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode;
+import com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword;
 
-    Button verifyCode;
+public class UnconfirmedEmail extends AppCompatActivity {
+
+    Button confirmMail;
     TextView text;
     TextView backToLogin;
+
     String email="Example@gmail.com";
 
     EditText firstD;
@@ -32,11 +33,11 @@ public class ConfirmDigitCode extends AppCompatActivity {
     EditText sixthD;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_digit_code);
 
-        verifyCode = findViewById(R.id.verifyCode);
+        confirmMail = findViewById(R.id.verifyCode);
         text = findViewById(R.id.sentCodeToMailText);
 
         firstD = findViewById(R.id.firstDigit);
@@ -47,28 +48,27 @@ public class ConfirmDigitCode extends AppCompatActivity {
         sixthD = findViewById(R.id.sixthDigit);
         backToLogin = findViewById(R.id.backToLogin);
 
-
         email = getIntent().getStringExtra("email");
 
+        confirmMail.setEnabled(false);
+        confirmMail.setText("Confirm Email Adress");
+        confirmMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createNewPassword = new Intent(UnconfirmedEmail.this, MainActivity.class);
+                createNewPassword.putExtra("email",email);
+                startActivity(createNewPassword);
+                overridePendingTransition(0, 0);
+            }
+        });
 
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent login = new Intent(ConfirmDigitCode.this, LoginActivity.class);
+                Intent login = new Intent(UnconfirmedEmail.this, LoginActivity.class);
                 startActivity(login);
                 overridePendingTransition(0, 0);
                 finish();
-            }
-        });
-
-        verifyCode.setEnabled(false);
-        verifyCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createNewPassword = new Intent(ConfirmDigitCode.this,CreateNewPassword.class);
-                createNewPassword.putExtra("email",email);
-                startActivity(createNewPassword);
-                overridePendingTransition(0, 0);
             }
         });
 
@@ -86,14 +86,13 @@ public class ConfirmDigitCode extends AppCompatActivity {
         setTextChangeListener(fourthD);
         setTextChangeListener(fifthD);
         setTextChangeListener(sixthD);
-
     }
 
     public void setPassword_toWhite() {
-        String text = email+"\n"+getString(R.string.codeSent);
+        String text = email+"\n"+getString(R.string.uncomfirmMail);
         SpannableString spannableString = new SpannableString(text);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)),0,email.length(),0);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)),email.length()+23,email.length()+35,0);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)),email.length()+13,email.length()+22,0);
         this.text.setText(spannableString);
     }
 
@@ -128,13 +127,13 @@ public class ConfirmDigitCode extends AppCompatActivity {
                         +fifthD.getText().toString()
                         +sixthD.getText().toString();
                 if (result.length()<6){
-                    verifyCode.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
-                    verifyCode.setTextColor(getResources().getColor(R.color.buttonLoginColor));
-                    verifyCode.setEnabled(false);
+                    confirmMail.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                    confirmMail.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+                    confirmMail.setEnabled(false);
                 }else {
-                    verifyCode.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    verifyCode.setTextColor(getResources().getColor(R.color.white));
-                    verifyCode.setEnabled(true);
+                    confirmMail.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    confirmMail.setTextColor(getResources().getColor(R.color.white));
+                    confirmMail.setEnabled(true);
                 }
             }
 
@@ -148,5 +147,4 @@ public class ConfirmDigitCode extends AppCompatActivity {
             }
         });
     }
-
 }

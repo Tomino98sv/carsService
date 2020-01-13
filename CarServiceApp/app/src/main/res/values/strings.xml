@@ -9,4 +9,5 @@
     <string name="codeSent">We sent you email\nwith 6-digit code.\nInsert code to reset password</string>
     <string name="createNewPassword">Create your\nnew password</string>
     <string name="emailNotRegister">Email address does not appear to be registered.</string>
+    <string name="uncomfirmMail">You haven\'t confirmed email yet.</string>
 </resources>

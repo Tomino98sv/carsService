@@ -240,7 +240,11 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("Login Reqeust sent");
+                Intent registration = new Intent(LoginActivity.this,UnconfirmedEmail.class);
+                registration.putExtra("email","sakra musim este ziskat mail");
+                startActivity(registration);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
     }
