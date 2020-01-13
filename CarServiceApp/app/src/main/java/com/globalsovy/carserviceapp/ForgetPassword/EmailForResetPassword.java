@@ -62,6 +62,7 @@ public class EmailForResetPassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
+                registration.putExtra("email",emailInp.getText().toString());
                 startActivity(registration);
                 overridePendingTransition(0, 0);
                 finish();

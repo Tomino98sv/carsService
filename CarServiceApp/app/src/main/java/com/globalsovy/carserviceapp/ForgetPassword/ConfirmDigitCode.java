@@ -43,11 +43,14 @@ public class ConfirmDigitCode extends AppCompatActivity {
         fifthD = findViewById(R.id.fifthDigit);
         sixthD = findViewById(R.id.sixthDigit);
 
+        email = getIntent().getStringExtra("email");
+
         verifyCode.setEnabled(false);
         verifyCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent createNewPassword = new Intent(ConfirmDigitCode.this,CreateNewPassword.class);
+                createNewPassword.putExtra("email",email);
                 startActivity(createNewPassword);
                 overridePendingTransition(0, 0);
             }

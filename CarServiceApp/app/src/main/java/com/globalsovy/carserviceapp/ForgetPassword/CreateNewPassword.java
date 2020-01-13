@@ -51,6 +51,8 @@ public class CreateNewPassword extends AppCompatActivity {
         createPassword = findViewById(R.id.createPassword);
         backToLogin = findViewById(R.id.backToLogin);
 
+        email = getIntent().getStringExtra("email");
+
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +67,8 @@ public class CreateNewPassword extends AppCompatActivity {
         createPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent login = new Intent(CreateNewPassword.this,LoginActivity.class);
-                startActivity(login);
+                Intent createPass = new Intent(CreateNewPassword.this,LoginActivity.class);
+                startActivity(createPass);
                 overridePendingTransition(0, 0);
                 finish();
             }
