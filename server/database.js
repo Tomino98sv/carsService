@@ -22,8 +22,9 @@ let con=mysql.createConnection({
     database: "carfa",
     port: "3306"
 });
-con.connect(()=>{
-    console.log("failed to connect to database")
+con.connect((err)=>{
+    if(err) console.log("failed to connect to database");
+    else console.log("connected to DB");
 });
 
 let generateCode=()=>{
@@ -75,12 +76,13 @@ module.exports={
         "where login like '"+login+"' and password like SHA2('"+password+"',224);";
         con.query(sql,(err,res)=>{
             if (err) console.log(err);
-            if(res===undefined){
+            if(res===undefined|| res.length===0){
                 callbackR({"status":401,"message":"Username with this email and password doesn't exist. Please create a account."});
             }
             else{
+                console.log(res);
                 if(res[0].confirmed===0){
-                    callbackR({"status":401,"message":res.email});
+                    callbackR({"status":401,"message":res[0].email});
                 }
                 else{
                     token=tokgen.generate();
