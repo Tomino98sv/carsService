@@ -160,37 +160,6 @@ public class EmailForResetPassword extends AppCompatActivity {
             }
         });
     }
-    public void startIntentAnimation() {
-        Animation moveDownDisapear = AnimationUtils.loadAnimation(this,R.anim.down_and_dispear);
-        final Animation disapear = AnimationUtils.loadAnimation(this,R.anim.disapear);
-//        final Animation moveRightDisapear = AnimationUtils.loadAnimation(this,R.anim.move_right_disapear);
-        final Animation moveRightDisapear = new TranslateAnimation(0,width-(sendRequestForCode.getScaleX()),0,0);//(xFrom,xTo, yFrom,yTo)
-        moveRightDisapear.setDuration(10000);
-        moveRightDisapear.setFillAfter(true);
-
-        moveDownDisapear.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                emailContainer.startAnimation(disapear);
-                sendRequestForCode.startAnimation(moveRightDisapear);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
-                startActivity(registration);
-                overridePendingTransition(0, 0);
-                finish();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        sendRequestForCode.startAnimation(moveRightDisapear);
-    }
     public void getScreenDimension(){
         WindowManager wm = (WindowManager) getApplicationContext()
                 .getSystemService(Context.WINDOW_SERVICE);
