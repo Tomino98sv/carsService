@@ -8,12 +8,12 @@
     android:background="@android:color/black">
 
 
-
     <ImageView
         android:id="@+id/carFaLogin"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_carfa" />
@@ -50,44 +50,92 @@
         app:layout_constraintStart_toEndOf="@+id/carFaLogin"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/quickRegistration"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/quickRegistration"
-        android:textAlignment="textStart"
-        android:textAppearance="@style/welcomeBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carFaLogin" />
-
     <ScrollView
+        android:id="@+id/scrollViewReg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quickRegistration">
+        app:layout_constraintTop_toBottomOf="@+id/carFaLogin">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-            <EditText
-                android:id="@+id/nameEditTextInp"
+            <TextView
+                android:id="@+id/quickRegistration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/quickRegistration"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/welcomeBack" />
+
+
+            <EditText
+                android:id="@+id/loginEditTextInpReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/quickRegistration"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/fill_hard"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/labelLoginReg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/loginEditTextInpReg"
+                android:layout_alignTop="@+id/loginEditTextInpReg"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Login"
+                android:textAppearance="@style/inputLabelText" />
+
+            <TextView
+                android:id="@+id/validationLoginReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loginEditTextInpReg"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="10dp"
+                android:padding="2dp"
+                android:textAppearance="@style/inputLabelText" />
+
+
+            <EditText
+                android:id="@+id/nameEditTextInp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/validationLoginReg"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/fill_hard"
@@ -107,18 +155,19 @@
                 android:layout_alignTop="@+id/nameEditTextInp"
                 android:background="#fff"
                 android:padding="2dp"
-                android:text="Name"
+                android:text="Firstname"
                 android:textAppearance="@style/inputLabelText" />
 
             <TextView
                 android:id="@+id/validationName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelName"
+                android:layout_below="@+id/nameEditTextInp"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginEnd="10dp"
-                android:layout_toEndOf="@+id/labelName"
                 android:padding="2dp"
                 android:textAppearance="@style/inputLabelText" />
 
@@ -126,11 +175,11 @@
                 android:id="@+id/surnameEditTextInp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nameEditTextInp"
+                android:layout_below="@+id/validationName"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/fill_hard"
@@ -157,11 +206,12 @@
                 android:id="@+id/validationSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelSurname"
+                android:layout_below="@+id/surnameEditTextInp"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="0dp"
-                android:layout_toEndOf="@+id/labelSurname"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="10dp"
                 android:padding="2dp"
                 android:textAppearance="@style/inputLabelText" />
 
@@ -169,11 +219,11 @@
                 android:id="@+id/emailEditTextInp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/surnameEditTextInp"
+                android:layout_below="@+id/validationSurname"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/fill_hard"
@@ -200,9 +250,12 @@
                 android:id="@+id/validationEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelEmail"
+                android:layout_below="@+id/emailEditTextInp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/labelEmail"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="10dp"
                 android:padding="2dp"
                 android:textAppearance="@style/inputLabelText" />
 
@@ -210,11 +263,11 @@
                 android:id="@+id/passwordEditTextInt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/emailEditTextInp"
+                android:layout_below="@+id/validationEmail"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/fill_hard"
@@ -241,9 +294,12 @@
                 android:id="@+id/validationPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelPassword"
+                android:layout_below="@+id/passwordEditTextInt"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/labelPassword"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="10dp"
                 android:padding="2dp"
                 android:textAppearance="@style/inputLabelText" />
 
@@ -252,11 +308,11 @@
                 android:id="@+id/passwordRepeadEditTextInt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passwordEditTextInt"
+                android:layout_below="@+id/validationPassword"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/fill_hard"
@@ -283,9 +339,12 @@
                 android:id="@+id/validationRepeadPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelRepeadPassword"
+                android:layout_below="@+id/passwordRepeadEditTextInt"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/labelRepeadPassword"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="10dp"
                 android:padding="2dp"
                 android:textAppearance="@style/inputLabelText" />
 
