@@ -7,10 +7,8 @@ const fs = require('fs');
 const path=require('path');
 const router=express.Router();
 const multer=require('multer');
+const resize = require('./resize');
 
-//Definuje token generaciu(pomocou knižnice na tokeny)
-const tokgen = new TokenGenerator(128, TokenGenerator.BASE62);
-//console.log(tokgen);
 var app=express();
 app.use(express.json());
 app.use(cors());
@@ -98,6 +96,19 @@ app.post('/getcarprofileimage',(req,res)=>{
             res.status(data.status).send(data.message);
         });
     
+    });
+});
+
+app.post('/getcarprofileimagethumb',(req,res)=>{
+    console.log("Request on /getcarprofileimage");
+    db.getCarProfileImage(req.body,data=>{
+        const width =200;
+        const height = 200;
+        const format = 'png';
+
+        console.log(format);
+        res.type(`image/${format || 'png'}`)
+        resize(data, format, width, height).pipe(res);
     });
 });
 

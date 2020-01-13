@@ -44,7 +44,7 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (3,2,'KE05647','Mazda','3',NULL,2019,158888,8),(4,2,'KE056DS','BMW','M3',NULL,2017,1545,1);
+INSERT INTO `cars` VALUES (3,2,'KE05647','Mazda','3',NULL,2019,158888,2),(4,2,'KE056DS','BMW','M3',NULL,2017,1545,1);
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `imagepaths` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `path` (`path`),
   KEY `idCar` (`idCar`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `imagepaths` (
 
 LOCK TABLES `imagepaths` WRITE;
 /*!40000 ALTER TABLE `imagepaths` DISABLE KEYS */;
-INSERT INTO `imagepaths` VALUES (1,'D:\\SOVY\\GlobalProjekt\\public\\car.png',4),(8,'./public/imgUploader-1578581058866.jpg',3),(7,'./public/imgUploader-1578572343431.jpg',3),(6,'./public/imgUploader-1578571756080.jpg',3);
+INSERT INTO `imagepaths` VALUES (1,'D:\\SOVY\\GlobalProjekt\\public\\car.png',0),(2,'./public/image-1578926897571.jpg',3);
 /*!40000 ALTER TABLE `imagepaths` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-09 15:56:25
+-- Dump completed on 2020-01-13 16:07:54

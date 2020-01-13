@@ -22,7 +22,9 @@ let con=mysql.createConnection({
     database: "carfa",
     port: "3306"
 });
-con.connect();
+con.connect(()=>{
+    console.log("failed to connect to database")
+});
 
 let generateCode=()=>{
     return Math.floor(100000 + Math.random() * 900000);
@@ -78,7 +80,7 @@ module.exports={
             }
             else{
                 if(res[0].confirmed===0){
-                    callbackR({"status":401,"message":"Please check email to confirm your account"});
+                    callbackR({"status":401,"message":res.email});
                 }
                 else{
                     token=tokgen.generate();
@@ -117,7 +119,7 @@ module.exports={
     },
     
     confirmAccount(data,callbackR){
-        con.query("UPDATE users set confirmed=1 where login like '"+data.login+"' and code='"+data.code+"'; ",(err)=>{
+        con.query("UPDATE users set confirmed=1 where email like '"+data.email+"' and code='"+data.code+"'; ",(err)=>{
             console.log(err);
             con.query("SELECT ROW_COUNT() as rows;",(err,res)=>{
                 if(err) console.log(err);
@@ -133,12 +135,14 @@ module.exports={
     },
     initializetokens(){
         con.query("SELECT users.login as login,token from tokens inner join users on tokens.iduser=users.id;",(err,res)=>{
-            if (err)console.log(err);
-            if(res.length!==0){
-                for(i=0;i<res.length;i++){
-                    tokens.push(JSON.parse(JSON.stringify(res[i])));
+            if (err) console.log(err);
+            else{
+                if(res.length!==0){
+                    for(i=0;i<res.length;i++){
+                        tokens.push(JSON.parse(JSON.stringify(res[i])));
+                    }
+                    console.log(tokens);
                 }
-                console.log(tokens);
             }
         });
     },
