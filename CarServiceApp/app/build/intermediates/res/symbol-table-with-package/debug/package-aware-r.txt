@@ -805,12 +805,14 @@ id direct
 id disableHome
 id edit_query
 id emailEditTextInp
+id emailTest
 id email_resertPass_EditTextInp
 id end
 id expand_activities_button
 id expanded_menu
 id fifthDigit
 id firstDigit
+id firstNameTest
 id forever
 id forgetPass
 id forgotPasswordText
@@ -837,6 +839,7 @@ id labelRepeadPassword
 id labelRepead_newPassword
 id labelSignInLogin
 id labelSurname
+id lastNameTest
 id leaveExitDialog
 id left
 id line1
@@ -1061,6 +1064,7 @@ string quickRegistration
 string resetPassword
 string search_menu_title
 string status_bar_notification_info_overflow
+string uncomfirmMail
 string welcomeBack
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
@@ -1462,3 +1466,4 @@ styleable Toolbar android_gravity android_minHeight buttonGravity collapseConten
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
+xml network_security_config

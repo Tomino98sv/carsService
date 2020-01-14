@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,7 +28,28 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword;
+import com.globalsovy.carserviceapp.POJO.Credencials;
+import com.globalsovy.carserviceapp.POJO.UserInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements Animation.AnimationListener {
 
@@ -55,6 +77,8 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     boolean passwordValidate = false;
     ImageView carFaLogin;
 
+    RequestQueue myQueue;
+
     int width = 0;
     int height = 0;
 
@@ -62,10 +86,14 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     TranslateAnimation moveToRightTop;
     Animation fadeIn;
 
+    MySharedPreferencies mySharedPreferencies;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        mySharedPreferencies = new MySharedPreferencies(this);
 
         welcomeBack = findViewById(R.id.welcomeBack);
         notRegistred = findViewById(R.id.notRegistred);
@@ -90,6 +118,8 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         loginBtn.setVisibility(View.INVISIBLE);
         notRegistred.setVisibility(View.INVISIBLE);
         forgotPassword.setVisibility(View.INVISIBLE);
+
+        myQueue = Volley.newRequestQueue(this);
 
         loginBtn.setEnabled(false);
 
@@ -240,14 +270,100 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registration = new Intent(LoginActivity.this,UnconfirmedEmail.class);
-                registration.putExtra("email","sakra musim este ziskat mail");
-                startActivity(registration);
-                overridePendingTransition(0, 0);
-                finish();
+                loginRequest();
             }
         });
     }
+
+    public void loginRequest() {
+        String URL = mySharedPreferencies.getIp()+"/login";
+
+        System.out.println("LoginRequest called");
+
+        final String login = loginInp.getText().toString();
+        final String password = passwordInp.getText().toString();
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                Intent main = new Intent(LoginActivity.this,MainActivity.class);
+
+                try {
+                    JSONObject token = response.getJSONObject("token");
+                    Credencials credencials = new Credencials(token.getString("login"),token.getString("token"));
+                    JSONObject userinfo = response.getJSONObject("userinfo");
+                    UserInfo userInfo = new UserInfo(
+                            userinfo.getInt("id"),
+                            userinfo.getString("first_name"),
+                            userinfo.getString("last_name"),
+                            userinfo.getString("email"),
+                            userinfo.getInt("confirmed")==1
+                    );
+                    mySharedPreferencies.fillLoginData(credencials,userInfo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                startActivity(main);
+                overridePendingTransition(0, 0);
+                finish();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("VOLLEY","Error "+error.networkResponse.statusCode);
+                if(error.networkResponse.statusCode==404) {
+                    Log.i("VOLLEY","404");
+                }
+                if(error.networkResponse.statusCode==401) {
+                    String email = "Ecample";
+                    try {
+                        email = new String(error.networkResponse.data,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Intent unconfirmedEmail = new Intent(LoginActivity.this,UnconfirmedEmail.class);
+                    unconfirmedEmail.putExtra("email",email);
+                    startActivity(unconfirmedEmail);
+                    overridePendingTransition(0, 0);
+                    finish();
+                }
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("login",login);
+                    body.put("password",password);
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+
+
     public void setLogIn_toWhite(){
         String text = getString(R.string.welcomeBack);
         SpannableString spannable = new SpannableString(text);
