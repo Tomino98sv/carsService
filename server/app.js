@@ -99,7 +99,7 @@ app.post('/getcarprofileimage',(req,res)=>{
     });
 });
 
-app.post('/getcarprofileimagethumb',(req,res)=>{
+/*app.post('/getcarprofileimagethumb',(req,res)=>{
     console.log("Request on /getcarprofileimage");
     db.getCarProfileImage(req.body,data=>{
         const width =200;
@@ -110,13 +110,12 @@ app.post('/getcarprofileimagethumb',(req,res)=>{
         res.type(`image/${format || 'png'}`)
         resize(data, format, width, height).pipe(res);
     });
-});
+});*/
 
 app.post('/getcarimages',(req,res)=>{
     console.log("Request on /getcarimages");
     db.getcarimages(req.body,data=>{
-        let files=data.message;
-        //TODO
+        res.status(data.status).send(data.message);
     });
 });
 

@@ -44,7 +44,7 @@ CREATE TABLE `cars` (
 
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
-INSERT INTO `cars` VALUES (3,2,'KE05647','Mazda','3',NULL,2019,158888,3),(4,2,'KE056DS','BMW','M3',NULL,2017,1545,1);
+INSERT INTO `cars` VALUES (3,2,'KE05647','Mazda','3',NULL,2019,158888,2),(4,2,'KE056DS','BMW','M3',NULL,2017,1545,1);
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `imagepaths` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `path` (`path`),
   KEY `idCar` (`idCar`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `imagepaths` (
 
 LOCK TABLES `imagepaths` WRITE;
 /*!40000 ALTER TABLE `imagepaths` DISABLE KEYS */;
-INSERT INTO `imagepaths` VALUES (1,'D:\\SOVY\\GlobalProjekt\\public\\car.png',0),(2,'./public/image-1578926897571.jpg',3),(3,'./public/image-1578928838891.png',3);
+INSERT INTO `imagepaths` VALUES (1,'D:\\SOVY\\GlobalProjekt\\public\\car.png',0),(2,'./public/image-1578926897571.jpg',3);
 /*!40000 ALTER TABLE `imagepaths` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `tokens` (
   `token` varchar(22) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (17,2,'2E2jVooSaDYgmJsefxAZkk'),(18,3,'6of8mXcM5LYd2gkHPz0BxW');
+INSERT INTO `tokens` VALUES (17,2,'2E2jVooSaDYgmJsefxAZkk');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +146,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'martin','krendzelak','wtffllll','6fae9cb222702086df86be80347289ec0cc354c728c81551ddf47e55','chillingplay@gmail.com',1,'1'),(3,'tomaško','pavlik','test','90a3ed9e32b2aaf4c61c410eb925426119e1a9dc53d4286ade99a809','test@test.com',1,'1');
+INSERT INTO `users` VALUES (2,'martin','krendzelak','wtffllll','6fae9cb222702086df86be80347289ec0cc354c728c81551ddf47e55','chillingplay@gmail.com',1,'704044');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-13 16:56:40
+-- Dump completed on 2020-01-13 16:07:54

@@ -72,12 +72,12 @@ module.exports={
         let login=data.login;
         let password=data.password;        
         //console.log("connected");
-        let sql = "SELECT id,first_name,last_name,email from users "+
+        let sql = "SELECT id,first_name,last_name,email,confirmed from users "+
         "where login like '"+login+"' and password like SHA2('"+password+"',224);";
         con.query(sql,(err,res)=>{
             if (err) console.log(err);
             if(res===undefined|| res.length===0){
-                callbackR({"status":401,"message":"Username with this email and password doesn't exist. Please create a account."});
+                callbackR({"status":404,"message":"Username with this email and password doesn't exist. Please create a account."});
             }
             else{
                 console.log(res);
@@ -181,7 +181,7 @@ module.exports={
         let login=data.login;
         let token=data.token;
         if(tokens.some(x=>(x.token===token)&&(x.login===login))){
-            let sql="SELECT brand,model from cars where userid=(SELECT id from users where login like'"+login+"');"
+            let sql="SELECT id,brand,model from cars where userid=(SELECT id from users where login like'"+login+"');"
             con.query(sql,(err,res)=>{
                 if(err) console.log(err);
                 if(res.length===0){
@@ -298,12 +298,13 @@ module.exports={
     
         con.query("select path from imagepaths where idcar="+carID+";",(err,res)=>{
             if(err) console.log(err);
-            res=/*JSON.parse(JSON.stringify(res))*/res;
+            res=JSON.parse(JSON.stringify(res));
             console.log(res);
+            
             const result=res.reduce((acc,value)=>
-                [...acc,value.path]   
+                [...acc,"http://itsovy.sk/www/html/krendzelakm"+(value.path.substring(1))]
             ,[]);
-            //console.log(result);
+            console.log(result);
             if(res.length!==0){
                 callbackR({"status":200,"message":result});
             }
