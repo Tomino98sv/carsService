@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,16 +15,35 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode;
 import com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword;
+import com.globalsovy.carserviceapp.POJO.Credencials;
+import com.globalsovy.carserviceapp.POJO.UserInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class UnconfirmedEmail extends AppCompatActivity {
 
     Button confirmMail;
     TextView text;
     TextView backToLogin;
+    TextView errorMessage;
 
     String email="Example@gmail.com";
+    String sixDigCode = "";
+    String login = "";
+    String password = "";
 
     EditText firstD;
     EditText secondD;
@@ -32,13 +52,20 @@ public class UnconfirmedEmail extends AppCompatActivity {
     EditText fifthD;
     EditText sixthD;
 
+    MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_digit_code);
 
+        mySharedPreferencies = new MySharedPreferencies(this);
+        myQueue = Volley.newRequestQueue(this);
+
         confirmMail = findViewById(R.id.verifyCode);
         text = findViewById(R.id.sentCodeToMailText);
+        errorMessage = findViewById(R.id.errorMessage);
 
         firstD = findViewById(R.id.firstDigit);
         secondD = findViewById(R.id.secondDigit);
@@ -49,16 +76,15 @@ public class UnconfirmedEmail extends AppCompatActivity {
         backToLogin = findViewById(R.id.backToLogin);
 
         email = getIntent().getStringExtra("email");
+        login = getIntent().getStringExtra("login");
+        password = getIntent().getStringExtra("password");
 
         confirmMail.setEnabled(false);
         confirmMail.setText("Confirm Email Adress");
         confirmMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createNewPassword = new Intent(UnconfirmedEmail.this, MainActivity.class);
-                createNewPassword.putExtra("email",email);
-                startActivity(createNewPassword);
-                overridePendingTransition(0, 0);
+                confirmAccountRequest();
             }
         });
 
@@ -120,6 +146,7 @@ public class UnconfirmedEmail extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                errorMessage.setText("");
                 String result = firstD.getText().toString()
                         +secondD.getText().toString()
                         +thirdD.getText().toString()
@@ -134,6 +161,7 @@ public class UnconfirmedEmail extends AppCompatActivity {
                     confirmMail.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     confirmMail.setTextColor(getResources().getColor(R.color.white));
                     confirmMail.setEnabled(true);
+                    sixDigCode = result;
                 }
             }
 
@@ -147,4 +175,119 @@ public class UnconfirmedEmail extends AppCompatActivity {
             }
         });
     }
+
+    public void confirmAccountRequest() {
+        String URL = mySharedPreferencies.getIp()+"/confirmuser";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                loginRequest();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("error "+error);
+                if(error.networkResponse.statusCode==401) {
+                    errorMessage.setTextColor(getResources().getColor(R.color.red));
+                    errorMessage.setText("Invalid code entered");
+                }
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("email",email);
+                    body.put("code",sixDigCode);
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+    public void loginRequest() {
+        String URL = mySharedPreferencies.getIp()+"/login";
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                Intent main = new Intent(UnconfirmedEmail.this,MainActivity.class);
+
+                try {
+                    JSONObject token = response.getJSONObject("token");
+                    Credencials credencials = new Credencials(token.getString("login"),token.getString("token"));
+                    JSONObject userinfo = response.getJSONObject("userinfo");
+                    UserInfo userInfo = new UserInfo(
+                            userinfo.getInt("id"),
+                            userinfo.getString("first_name"),
+                            userinfo.getString("last_name"),
+                            userinfo.getString("email"),
+                            userinfo.getInt("confirmed")==1
+                    );
+                    mySharedPreferencies.fillLoginData(credencials,userInfo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                startActivity(main);
+                overridePendingTransition(0, 0);
+                finish();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("VOLLEY","Error "+error.networkResponse.statusCode);
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("login",login);
+                    body.put("password",password);
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+
+
 }

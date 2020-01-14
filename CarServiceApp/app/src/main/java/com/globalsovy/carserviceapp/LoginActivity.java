@@ -77,8 +77,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     boolean passwordValidate = false;
     ImageView carFaLogin;
 
-    RequestQueue myQueue;
-
     int width = 0;
     int height = 0;
 
@@ -87,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     Animation fadeIn;
 
     MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         setContentView(R.layout.login_layout);
 
         mySharedPreferencies = new MySharedPreferencies(this);
+        myQueue = Volley.newRequestQueue(this);
 
         welcomeBack = findViewById(R.id.welcomeBack);
         notRegistred = findViewById(R.id.notRegistred);
@@ -118,8 +118,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         loginBtn.setVisibility(View.INVISIBLE);
         notRegistred.setVisibility(View.INVISIBLE);
         forgotPassword.setVisibility(View.INVISIBLE);
-
-        myQueue = Volley.newRequestQueue(this);
 
         loginBtn.setEnabled(false);
 
@@ -182,6 +180,26 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         setPasswordValidate();
         setEmailValidate();
         setLoginButton();
+
+        try {
+            login = getIntent().getStringExtra("login");
+            password = getIntent().getStringExtra("password");
+            if (!login.equals("") && !password.equals("")){
+                loginInp.setText(login);
+                passwordInp.setText(password);
+
+                loginInp.requestFocus();
+                loginInp.clearFocus();
+                passwordInp.requestFocus();
+                passwordInp.clearFocus();
+
+                loginValidate = true;
+                passwordValidate = true;
+                enable_disableLoginBTN();
+            }
+        }catch (NullPointerException e){
+
+        }
     }
 
     public void enterKeyListenerOnLogin() {
@@ -234,7 +252,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                 }
                 if (passwordValidate){
                     validPassword.setTextColor(getResources().getColor(R.color.green));
-                    validPassword.setText("Valid password form");
+                    validPassword.setText("Correct");
                 }
             }
         });
@@ -278,10 +296,8 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     public void loginRequest() {
         String URL = mySharedPreferencies.getIp()+"/login";
 
-        System.out.println("LoginRequest called");
-
-        final String login = loginInp.getText().toString();
-        final String password = passwordInp.getText().toString();
+        login = loginInp.getText().toString();
+        password = passwordInp.getText().toString();
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
 
@@ -328,6 +344,8 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                     }
                     Intent unconfirmedEmail = new Intent(LoginActivity.this,UnconfirmedEmail.class);
                     unconfirmedEmail.putExtra("email",email);
+                    unconfirmedEmail.putExtra("login",login);
+                    unconfirmedEmail.putExtra("password",password);
                     startActivity(unconfirmedEmail);
                     overridePendingTransition(0, 0);
                     finish();
@@ -362,7 +380,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         ));
         myQueue.add(stringRequest);
     }
-
 
     public void setLogIn_toWhite(){
         String text = getString(R.string.welcomeBack);

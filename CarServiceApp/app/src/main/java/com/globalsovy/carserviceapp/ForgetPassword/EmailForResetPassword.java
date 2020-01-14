@@ -21,11 +21,23 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ExitAlertDialog;
 import com.globalsovy.carserviceapp.LoginActivity;
+import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
 import com.globalsovy.carserviceapp.RegistrationActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Pattern;
 
 public class EmailForResetPassword extends AppCompatActivity {
@@ -44,10 +56,16 @@ public class EmailForResetPassword extends AppCompatActivity {
     int width = 0;
     int height = 0;
 
+    MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_for_reset_password);
+
+        mySharedPreferencies = new MySharedPreferencies(this);
+        myQueue = Volley.newRequestQueue(this);
 
         emailContainer = findViewById(R.id.sendEmailInp);
         emailInp = findViewById(R.id.email_resertPass_EditTextInp);
@@ -167,5 +185,54 @@ public class EmailForResetPassword extends AppCompatActivity {
         Display display = wm.getDefaultDisplay();
         width = display.getWidth();
         height = display.getHeight();
+    }
+
+    public void sendCodeOnMailRequest() {
+        String URL = mySharedPreferencies.getIp()+"/sendcodeforchangepassword";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                loginRequest();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("error "+error);
+                if(error.networkResponse.statusCode==401) {
+                    errorMessage.setTextColor(getResources().getColor(R.color.red));
+                    errorMessage.setText("Invalid code entered");
+                }
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("email",email);
+                    body.put("code",sixDigCode);
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
     }
 }

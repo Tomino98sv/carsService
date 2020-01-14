@@ -808,6 +808,7 @@ id emailEditTextInp
 id emailTest
 id email_resertPass_EditTextInp
 id end
+id errorMessage
 id expand_activities_button
 id expanded_menu
 id fifthDigit

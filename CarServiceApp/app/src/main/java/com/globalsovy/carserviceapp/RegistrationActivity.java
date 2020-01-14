@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,6 +22,21 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.POJO.Credencials;
+import com.globalsovy.carserviceapp.POJO.UserInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnFocusChangeListener {
@@ -70,11 +86,16 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     int onlyModifindRepeadPassword = 0;
     int onlyModifingLogin = 0;
 
+    MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        mySharedPreferencies = new MySharedPreferencies(this);
+        myQueue = Volley.newRequestQueue(this);
 
         registerButton = findViewById(R.id.registerButton);
         registrationText = findViewById(R.id.quickRegistration);
@@ -150,7 +171,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("Registration Reqeust sent");
+                registrationRequest();
             }
         });
     }
@@ -491,5 +512,76 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
         scrollViewReg.startAnimation(fadeIn);
     }
+    public void registrationRequest() {
+        System.out.println("calling registry request");
+        String URL = mySharedPreferencies.getIp()+"/register";
+
+        final String username = loginInp.getText().toString();
+        final String firstName = nameInp.getText().toString();
+        final String Surname = surnameInp.getText().toString();
+        final String Email = emailInp.getText().toString();
+        final String password = passwordInp.getText().toString();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Response "+response);
+                Intent login = new Intent(RegistrationActivity.this,LoginActivity.class);
+                login.putExtra("login",username);
+                login.putExtra("password",password);
+                startActivity(login);
+                overridePendingTransition(0, 0);
+                finish();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("error "+error);
+                if(error.networkResponse.statusCode==403) {
+                    try {
+                        String message = new String(error.networkResponse.data,"UTF-8");
+                        showToast(message);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                        showToast("uuups");
+                    }
+                }
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("login",username);
+                    body.put("password",password);
+                    body.put("fname",firstName);
+                    body.put("lname",Surname);
+                    body.put("email",Email);
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+
 
 }
