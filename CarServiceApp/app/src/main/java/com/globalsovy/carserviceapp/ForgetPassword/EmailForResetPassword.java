@@ -249,4 +249,13 @@ public class EmailForResetPassword extends AppCompatActivity {
         ));
         myQueue.add(stringRequest);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        Intent login = new Intent(EmailForResetPassword.this,LoginActivity.class);
+        startActivity(login);
+        overridePendingTransition(0, 0);
+        finish();
+    }
 }

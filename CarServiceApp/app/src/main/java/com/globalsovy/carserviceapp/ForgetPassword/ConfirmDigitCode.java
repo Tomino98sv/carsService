@@ -178,8 +178,9 @@ public class ConfirmDigitCode extends AppCompatActivity {
             public void onResponse(String response) {
                 Intent createNewPassword = new Intent(ConfirmDigitCode.this,CreateNewPassword.class);
                 createNewPassword.putExtra("email",email);
-                overridePendingTransition(0, 0);
                 startActivity(createNewPassword);
+                overridePendingTransition(0, 0);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -221,5 +222,12 @@ public class ConfirmDigitCode extends AppCompatActivity {
         myQueue.add(stringRequest);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        Intent emailForReset = new Intent(ConfirmDigitCode.this,EmailForResetPassword.class);
+        startActivity(emailForReset);
+        overridePendingTransition(0, 0);
+        finish();
+    }
 }

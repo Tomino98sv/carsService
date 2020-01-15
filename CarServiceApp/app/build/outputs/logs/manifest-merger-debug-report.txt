@@ -106,7 +106,9 @@ ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidM
 	android:name
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:19-47
 activity#com.globalsovy.carserviceapp.LoginActivity
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:9-51
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:9-83
+	android:launchMode
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:49-80
 	android:name
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:19-48
 activity#com.globalsovy.carserviceapp.UnconfirmedEmail

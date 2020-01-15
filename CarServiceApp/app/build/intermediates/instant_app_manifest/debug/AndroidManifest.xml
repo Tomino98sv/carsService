@@ -30,7 +30,9 @@
         <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
         <activity android:name="com.globalsovy.carserviceapp.MyCarsActivity" />
         <activity android:name="com.globalsovy.carserviceapp.MainActivity" />
-        <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
+        <activity
+            android:name="com.globalsovy.carserviceapp.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name="com.globalsovy.carserviceapp.UnconfirmedEmail" />
         <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >
             <intent-filter>

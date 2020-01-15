@@ -218,6 +218,7 @@ public class CreateNewPassword extends AppCompatActivity {
                 Intent login = new Intent(CreateNewPassword.this,LoginActivity.class);
                 overridePendingTransition(0, 0);
                 startActivity(login);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -253,6 +254,15 @@ public class CreateNewPassword extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        Intent emailForReset = new Intent(CreateNewPassword.this,EmailForResetPassword.class);
+        startActivity(emailForReset);
+        overridePendingTransition(0, 0);
+        finish();
     }
 
 }

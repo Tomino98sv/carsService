@@ -325,7 +325,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
 
                 startActivity(main);
                 overridePendingTransition(0, 0);
-                finish();
 
             }
         }, new Response.ErrorListener() {
@@ -348,7 +347,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                     unconfirmedEmail.putExtra("password",password);
                     startActivity(unconfirmedEmail);
                     overridePendingTransition(0, 0);
-                    finish();
                 }
             }
         }) {

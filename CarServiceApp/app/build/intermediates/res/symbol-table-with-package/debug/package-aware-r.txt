@@ -782,7 +782,6 @@ id buttonPanel
 id cancelExitDialog
 id carFaIntro
 id carFaLogin
-id carSVG
 id carSVGLogin
 id center_vertical
 id chains
@@ -849,6 +848,7 @@ id linearLayout
 id listMode
 id list_item
 id logInButton
+id logOut
 id loginEditTextInpReg
 id loginInp
 id message

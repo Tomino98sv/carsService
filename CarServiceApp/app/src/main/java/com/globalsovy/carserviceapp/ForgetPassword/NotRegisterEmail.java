@@ -58,4 +58,13 @@ public class NotRegisterEmail extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)),0,email.length(),0);
         this.text.setText(spannableString);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        Intent emailForReset = new Intent(NotRegisterEmail.this,EmailForResetPassword.class);
+        startActivity(emailForReset);
+        overridePendingTransition(0, 0);
+        finish();
+    }
 }

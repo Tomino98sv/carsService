@@ -582,6 +582,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
         ));
         myQueue.add(stringRequest);
     }
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        Intent registration = new Intent(RegistrationActivity.this,LoginActivity.class);
+        startActivity(registration);
+        overridePendingTransition(0, 0);
+        finish();
+    }
 
 
 }
