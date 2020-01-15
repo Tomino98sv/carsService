@@ -2,6 +2,7 @@ package com.globalsovy.carserviceapp.ForgetPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,6 +60,9 @@ public class EmailForResetPassword extends AppCompatActivity {
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
 
+    ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,8 @@ public class EmailForResetPassword extends AppCompatActivity {
 
         mySharedPreferencies = new MySharedPreferencies(this);
         myQueue = Volley.newRequestQueue(this);
+        progressDialog = new ProgressDialog(this);
+
 
         emailContainer = findViewById(R.id.sendEmailInp);
         emailInp = findViewById(R.id.email_resertPass_EditTextInp);
@@ -79,19 +85,15 @@ public class EmailForResetPassword extends AppCompatActivity {
         sendRequestForCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registration = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
-                registration.putExtra("email",emailInp.getText().toString());
-                startActivity(registration);
-                overridePendingTransition(0, 0);
-                finish();
+                sendCodeOnMailRequest();
             }
         });
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent login = new Intent(EmailForResetPassword.this,LoginActivity.class);
-                startActivity(login);
                 overridePendingTransition(0, 0);
+                startActivity(login);
                 finish();
             }
         });
@@ -188,21 +190,34 @@ public class EmailForResetPassword extends AppCompatActivity {
     }
 
     public void sendCodeOnMailRequest() {
+        progressDialog.setMessage("Processing..");
+        progressDialog.show();
         String URL = mySharedPreferencies.getIp()+"/sendcodeforchangepassword";
-
+        final String email = emailInp.getText().toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                loginRequest();
+                if (progressDialog.isShowing()){
+                    progressDialog.cancel();
+                }
+                Intent confirmDigitCode = new Intent(EmailForResetPassword.this, ConfirmDigitCode.class);
+                confirmDigitCode.putExtra("email",email);
+                overridePendingTransition(0, 0);
+                startActivity(confirmDigitCode);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (progressDialog.isShowing()){
+                    progressDialog.cancel();
+                }
                 System.out.println("error "+error);
-                if(error.networkResponse.statusCode==401) {
-                    errorMessage.setTextColor(getResources().getColor(R.color.red));
-                    errorMessage.setText("Invalid code entered");
+                if(error.networkResponse.statusCode==404) {
+                    Intent notExistingMail = new Intent(EmailForResetPassword.this, NotRegisterEmail.class);
+                    notExistingMail.putExtra("email",email);
+                    overridePendingTransition(0, 0);
+                    startActivity(notExistingMail);
                 }
             }
         }) {
@@ -216,7 +231,6 @@ public class EmailForResetPassword extends AppCompatActivity {
                 try {
                     JSONObject body = new JSONObject();
                     body.put("email",email);
-                    body.put("code",sixDigCode);
 
                     String bodyString = body.toString();
                     return bodyString == null ? null : bodyString.getBytes("utf-8");

@@ -45,8 +45,6 @@ public class NotRegisterEmail extends AppCompatActivity {
         TryAnotherEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newEmail = new Intent(NotRegisterEmail.this, EmailForResetPassword.class);
-                startActivity(newEmail);
                 overridePendingTransition(0, 0);
                 finish();
             }

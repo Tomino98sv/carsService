@@ -12,9 +12,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.LoginActivity;
+import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class CreateNewPassword extends AppCompatActivity {
 
@@ -31,13 +45,21 @@ public class CreateNewPassword extends AppCompatActivity {
     TextView backToLogin;
 
     String email = "example@gmail.com";
+    String password = "";
+
     boolean newPasswordValid = false;
     boolean repeadPasswordValid = false;
+
+    MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_password);
+
+        mySharedPreferencies = new MySharedPreferencies(this);
+        myQueue = Volley.newRequestQueue(this);
 
         newPassword = findViewById(R.id.newPasswordEditText);
         labelNewPassword = findViewById(R.id.labelNewPassword);
@@ -67,10 +89,8 @@ public class CreateNewPassword extends AppCompatActivity {
         createPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createPass = new Intent(CreateNewPassword.this,LoginActivity.class);
-                startActivity(createPass);
-                overridePendingTransition(0, 0);
-                finish();
+                password = newPassword.getText().toString();
+                changePasswordRequest();
             }
         });
 
@@ -188,4 +208,51 @@ public class CreateNewPassword extends AppCompatActivity {
             createPassword.setEnabled(false);
         }
     }
+
+    public void changePasswordRequest() {
+        String URL = mySharedPreferencies.getIp()+"/changepassword";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Intent login = new Intent(CreateNewPassword.this,LoginActivity.class);
+                overridePendingTransition(0, 0);
+                startActivity(login);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(CreateNewPassword.this,"WTF IS THAT MAN",Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("email",email);
+                    body.put("password",password);
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+
 }
