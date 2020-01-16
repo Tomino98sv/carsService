@@ -47,6 +47,9 @@ app.post('/confirmuser',(req,res)=>{
 app.post('/addcar',(req,res)=>{
     console.log("Request on /addcar :");
     db.addcar(req.body,data=>{
+        console.log(data);
+        console.log(data.status);
+        console.log(data.message);
         //console.log("tusom");
         res.status(data.status).send(data.message);
     });
@@ -120,7 +123,7 @@ app.post('/getcarimages',(req,res)=>{
 });
 
 var multipartUpload = multer({storage: multer.diskStorage({
-    destination: function (req, file, callback) { callback(null, './public');},
+    destination: function (req, file, callback) { callback(null, '/var/www/html/students2n/krendzelakm/public/images');},
     filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname));}})
 }).array('image');
 
@@ -130,7 +133,7 @@ app.post('/sendimage',multipartUpload,(req,res)=>{
     //console.log(req.body.carid);
     //console.log(req.file.filename);
     for(let i=0;i<req.files.length;i++){
-        db.saveImages(req.body.carid,"./public/"+req.files[i].filename,data=>{
+        db.saveImages(req.body.carid,req.files[i].filename,data=>{
             console.log("Inserted "+i+" image");
             if(i==req.files.length-1){
                 res.status(data.status).send(data.message);
