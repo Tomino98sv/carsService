@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,6 +107,12 @@ public class ConfirmDigitCode extends AppCompatActivity {
         setTextChangeListener(fifthD);
         setTextChangeListener(sixthD);
 
+        setKeyListener(firstD);
+        setKeyListener(secondD);
+        setKeyListener(thirdD);
+        setKeyListener(fourthD);
+        setKeyListener(fifthD);
+        setKeyListener(sixthD);
     }
 
     public void setPassword_toWhite() {
@@ -161,14 +168,24 @@ public class ConfirmDigitCode extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(charInp.getId() == firstD.getId()) { secondD.requestFocus();}
-                if(charInp.getId() == secondD.getId()) { thirdD.requestFocus();}
-                if(charInp.getId() == thirdD.getId()) { fourthD.requestFocus();}
-                if(charInp.getId() == fourthD.getId()) { fifthD.requestFocus();}
-                if(charInp.getId() == fifthD.getId()) { sixthD.requestFocus();}
+                if (editable.toString().equals("")) {
+                    if(charInp.getId() == secondD.getId()) { firstD.requestFocus();}
+                    if(charInp.getId() == thirdD.getId()) { secondD.requestFocus();}
+                    if(charInp.getId() == fourthD.getId()) { thirdD.requestFocus();}
+                    if(charInp.getId() == fifthD.getId()) { fourthD.requestFocus();}
+                    if(charInp.getId() == sixthD.getId()) { fifthD.requestFocus();}
+                }else {
+                    if(charInp.getId() == firstD.getId()) { secondD.requestFocus();}
+                    if(charInp.getId() == secondD.getId()) { thirdD.requestFocus();}
+                    if(charInp.getId() == thirdD.getId()) { fourthD.requestFocus();}
+                    if(charInp.getId() == fourthD.getId()) { fifthD.requestFocus();}
+                    if(charInp.getId() == fifthD.getId()) { sixthD.requestFocus();}
+                }
             }
         });
     }
+
+
 
     public void confirmCodeToChange() {
         String URL = mySharedPreferencies.getIp()+"/abletochangepassword";
@@ -229,5 +246,36 @@ public class ConfirmDigitCode extends AppCompatActivity {
         startActivity(emailForReset);
         overridePendingTransition(0, 0);
         finish();
+    }
+
+    public void setKeyListener(final EditText editText) {
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    if (editText.getId() == secondD.getId()) {
+                        firstD.setText("");
+                        firstD.requestFocus();
+                    }
+                    if (editText.getId() == thirdD.getId()) {
+                        secondD.setText("");
+                        secondD.requestFocus();
+                    }
+                    if (editText.getId() == fourthD.getId()) {
+                        thirdD.setText("");
+                        thirdD.requestFocus();
+                    }
+                    if (editText.getId() == fifthD.getId()) {
+                        fourthD.setText("");
+                        fourthD.requestFocus();
+                    }
+                    if (editText.getId() == sixthD.getId()) {
+                        fifthD.setText("");
+                        fifthD.requestFocus();
+                    }
+                }
+                return false;
+            }
+        });
     }
 }

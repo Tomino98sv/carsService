@@ -54,6 +54,6 @@ public class MySharedPreferencies {
     }
 
     public String getIp() {
-        return "http://192.168.2.111:1203";
+        return "http://itsovy.sk:1203";
     }
 }

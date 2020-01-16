@@ -20,7 +20,7 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MyCarsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity" android:launchMode="singleTask" />
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".UnconfirmedEmail"/>
         <activity android:name=".IntroActivty">
             <intent-filter>

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
@@ -542,7 +543,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
                 if(error.networkResponse.statusCode==403) {
                     try {
                         String message = new String(error.networkResponse.data,"UTF-8");
-                        showToast(message);
+                        Toast.makeText(RegistrationActivity.this,message,Toast.LENGTH_LONG).show();
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                         showToast("uuups");

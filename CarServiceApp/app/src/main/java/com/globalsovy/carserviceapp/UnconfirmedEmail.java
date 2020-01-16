@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,6 +113,13 @@ public class UnconfirmedEmail extends AppCompatActivity {
         setTextChangeListener(fourthD);
         setTextChangeListener(fifthD);
         setTextChangeListener(sixthD);
+
+        setKeyListener(firstD);
+        setKeyListener(secondD);
+        setKeyListener(thirdD);
+        setKeyListener(fourthD);
+        setKeyListener(fifthD);
+        setKeyListener(sixthD);
     }
 
     public void setPassword_toWhite() {
@@ -167,11 +175,19 @@ public class UnconfirmedEmail extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(charInp.getId() == firstD.getId()) { secondD.requestFocus();}
-                if(charInp.getId() == secondD.getId()) { thirdD.requestFocus();}
-                if(charInp.getId() == thirdD.getId()) { fourthD.requestFocus();}
-                if(charInp.getId() == fourthD.getId()) { fifthD.requestFocus();}
-                if(charInp.getId() == fifthD.getId()) { sixthD.requestFocus();}
+                if (editable.toString().equals("")) {
+                    if(charInp.getId() == secondD.getId()) { firstD.requestFocus();}
+                    if(charInp.getId() == thirdD.getId()) { secondD.requestFocus();}
+                    if(charInp.getId() == fourthD.getId()) { thirdD.requestFocus();}
+                    if(charInp.getId() == fifthD.getId()) { fourthD.requestFocus();}
+                    if(charInp.getId() == sixthD.getId()) { fifthD.requestFocus();}
+                }else {
+                    if(charInp.getId() == firstD.getId()) { secondD.requestFocus();}
+                    if(charInp.getId() == secondD.getId()) { thirdD.requestFocus();}
+                    if(charInp.getId() == thirdD.getId()) { fourthD.requestFocus();}
+                    if(charInp.getId() == fourthD.getId()) { fifthD.requestFocus();}
+                    if(charInp.getId() == fifthD.getId()) { sixthD.requestFocus();}
+                }
             }
         });
     }
@@ -287,6 +303,38 @@ public class UnconfirmedEmail extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(stringRequest);
+    }
+
+
+    public void setKeyListener(final EditText editText) {
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    if (editText.getId() == secondD.getId()) {
+                        firstD.setText("");
+                        firstD.requestFocus();
+                    }
+                    if (editText.getId() == thirdD.getId()) {
+                        secondD.setText("");
+                        secondD.requestFocus();
+                    }
+                    if (editText.getId() == fourthD.getId()) {
+                        thirdD.setText("");
+                        thirdD.requestFocus();
+                    }
+                    if (editText.getId() == fifthD.getId()) {
+                        fourthD.setText("");
+                        fourthD.requestFocus();
+                    }
+                    if (editText.getId() == sixthD.getId()) {
+                        fifthD.setText("");
+                        fifthD.requestFocus();
+                    }
+                }
+                return false;
+            }
+        });
     }
 
 

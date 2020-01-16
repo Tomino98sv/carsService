@@ -332,7 +332,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
             public void onErrorResponse(VolleyError error) {
                 Log.i("VOLLEY","Error "+error.networkResponse.statusCode);
                 if(error.networkResponse.statusCode==404) {
-                    Log.i("VOLLEY","404");
+                    Toast.makeText(LoginActivity.this,"Wrong login or password",Toast.LENGTH_LONG).show();
                 }
                 if(error.networkResponse.statusCode==401) {
                     String email = "Ecample";

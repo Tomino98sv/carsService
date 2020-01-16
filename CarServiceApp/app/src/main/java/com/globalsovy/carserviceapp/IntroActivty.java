@@ -3,6 +3,7 @@ package com.globalsovy.carserviceapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,11 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class IntroActivty extends AppCompatActivity implements View.OnClickListener {
+public class IntroActivty extends AppCompatActivity {
 
     ImageView carFa;
     ImageView describtion;
     ConstraintLayout parent;
+
+    private Handler handler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,21 +32,21 @@ public class IntroActivty extends AppCompatActivity implements View.OnClickListe
         describtion = findViewById(R.id.descLogo);
         parent = findViewById(R.id.parentIntro);
 
-        parent.setOnClickListener(this);
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                describtion.setVisibility(View.GONE);
+                Intent login = new Intent(IntroActivty.this,LoginActivity.class);
+                startActivity(login);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        };
+
+        handler.postDelayed(runnable,800);
 
     }
-
-    @Override
-    public void onClick(View view) {
-        describtion.setVisibility(View.GONE);
-        Intent login = new Intent(IntroActivty.this,LoginActivity.class);
-        startActivity(login);
-        overridePendingTransition(0, 0);
-        finish();
-    }
-
-
-
     @Override
     public void onBackPressed() {
         // Here you want to show the user a dialog box
