@@ -16,11 +16,12 @@ var transporter = nodemailer.createTransport({
 var tokens=new Array();
 
 let con=mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
+    host: "itsovy.sk",
+    user: "carfa",
+    password: "glproject",
     database: "carfa",
-    port: "3306"
+    port:3306,
+    insecureAuth:true
 });
 con.connect((err)=>{
     if(err) console.log("failed to connect to database");
@@ -47,7 +48,11 @@ module.exports={
         con.query(sql,(err,res)=>{
             if (err){
                 console.log(err);
-                callbackR({"status":403,"message":"This user already exists"});
+                var str = err.sqlMessage;
+                let newStr=str.slice(
+                    str.lastIndexOf(' ') + 1
+                );
+                callbackR({"status":403,"message":"This "+newStr+" is already used."});
             }
             else{
                 var mailOptions = {
@@ -127,6 +132,19 @@ module.exports={
                 if(err) console.log(err);
                 console.log(res);
                 if(res[0].rows==1){
+                    var mailOptions = {
+                        from: 'authorizedservicebmw@gmail.com',
+                        to: data.email,
+                        subject: 'Welcome to Carfa , your car service!',
+                        text:"Successfully confirmed account."
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                        }
+                      });
                     callbackR({"status":200,"message":"User confirmed successfully."});
                 }
                 else{
@@ -148,7 +166,7 @@ module.exports={
             }
         });
     },
-
+//affected by change
     addcar(data,callbackR){
         let userID=data.userID;
         let brand=data.brand;
@@ -157,19 +175,29 @@ module.exports={
         let vintage=data.vintage;
         let kilometrage=data.kilometrage;
         let SPZ=data.spz;
+        let fuel=data.fuel;
+        let manualTrans=data.transmission;
+        let volume=data.volume;
         let token=data.token;
 
-        let sql="INSERT INTO cars(userid,SPZ,brand,model,color,vintage,kilometrage)" +
-        "VALUES("+userID+",'"+SPZ+"','"+brand+"','"+model+"','"+color+"',"+vintage+","+kilometrage+");";
+        let selectSql="SELECT id from cars where brand like '"+brand+"' and model like '"+model+"';";
+
         if(tokens.some(x=>(x.token===token.token)&&(x.login===token.login))){
-            con.query(sql,(err)=>{
-                if(err){
-                    console.log(err);
-                    callbackR({"status":401,"message":"Car with this motor vehicle registration plate already exists."});
-                }
-                else{
-                    callbackR({"status":200,"message":"New car added successfully."});
-                }
+            con.query(selectSql,(err,res)=>{
+                if(err) console.log(err);
+                let sql="INSERT INTO cardetails(userid,SPZ,color,vintage,kilometrage,carid,fuel,manualtrans,volume)" +
+                "VALUES("+userID+",'"+SPZ+"','"+color+"',"+vintage+","+kilometrage+","+res[0].id+",'"+fuel+"',"+manualTrans+","+volume+");";
+                console.log(sql);
+                con.query(sql,(err,res)=>{
+                    if(err){
+                        console.log(err);
+                        callbackR({"status":401,"message":"Car with this motor vehicle registration plate already exists."});
+                    }
+                    else{
+                        let idčko=res.insertId;
+                        callbackR({"status":200,"message":{"id":idčko}});
+                    } 
+                });
             });
         }
         else{
@@ -177,11 +205,12 @@ module.exports={
         }
     },
 
+    //affected by change
     getAllCars(data,callbackR){
         let login=data.login;
         let token=data.token;
         if(tokens.some(x=>(x.token===token)&&(x.login===login))){
-            let sql="SELECT id,brand,model from cars where userid=(SELECT id from users where login like'"+login+"');"
+            let sql="SELECT cardetails.id,brand,model from cardetails inner join cars on cardetails.carid=cars.id where cardetails.userid=(SELECT id from users where login like'"+login+"');"
             con.query(sql,(err,res)=>{
                 if(err) console.log(err);
                 if(res.length===0){
@@ -282,10 +311,10 @@ module.exports={
     getCarProfileImage(data,callbackR){
         let carID=data.idcar;
     
-        con.query("select path from imagepaths INNER JOIN cars on imagepaths.id=cars.profileimgid where cars.id="+carID+";",(err,res)=>{
+        con.query("select path from imagepaths INNER JOIN carowners on imagepaths.id=carowners.profileimgid where carowners.id="+carID+";",(err,res)=>{
             if(err) console.log(err);
             if(res.length!==0){
-                callbackR({"status":200,"message":res[0].path});
+                callbackR({"status":200,"message":"/var/www/html/students2n/krendzelakm/public/images/"+res[0].path});
             }
             else{
                 callbackR({"status":404,"message":"Car not found."});
@@ -302,7 +331,7 @@ module.exports={
             console.log(res);
             
             const result=res.reduce((acc,value)=>
-                [...acc,"http://itsovy.sk/www/html/krendzelakm"+(value.path.substring(1))]
+                [...acc,"http://itsovy.sk/students2n/krendzelakm/public/images/"+value.path]
             ,[]);
             console.log(result);
             if(res.length!==0){
