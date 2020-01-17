@@ -1,7 +1,7 @@
 POST /login
 posielame v body: {login:"wtffllll",password:"wtf"}
 returnuje:
-{"status":401,"message":"Username with this email and password doesn't exist. Please create a account."}
+{"status":404,"message":"Username with this email and password doesn't exist. Please create a account."}
 {"status":401,"message":"Please check email to confirm your account!"}
 {"status":200,{login:"wtffllll",token:"randomtokenvygenerovany22miestny"}}
 
@@ -11,7 +11,8 @@ returnuje:
 
 POST /logout
 posielame v body: {login:"wtffllll",token:"randomtokenvygenerovany22miestny"}
-returnuje: furt 200 (to ešte fixnem ak to bude extremne potrebne)
+returnuje: 200 
+401
 
 
 
@@ -51,20 +52,26 @@ returnuje:
 POST /addcar
 posielame v body:
 {
-	"token": {"login": "wtffllll","token":"4ASYTFkG4Fkl7bzKTHtpiZ"},
-    "userID": "2",
-    "brand": "Mazda",
-    "model": "3",
+    "token": {
+        "login": "karfa",
+        "token": "1azB3xuieHinkjGMlS6ycy"
+    },
+    "userID": "4",
+    "brand": "BMW",
+    "model": "E93 Convertible",
     "color": "NULL",
     "vintage": 2019,
     "kilometrage": 25041,
-    "spz": "LE939sN"-toto je unique čiže ked daš 2x tu istu spz tak ti pošle 401 že už ma registraciu
+    "spz": "LE939sN",
+    "fuel":"petrol",
+    "transmission":true,
+    "volume":1.8
 }
 
 returnuje:
 {"status":200,"message":"New car added successfully."}
-{"status":401,"message":"Car with this motor vehicle registration plate already exists."}
-{"status":401,"message":"Wrong user token, please log in again."}
+{"status":403,"message":"Car with this motor vehicle registration plate already exists."}
+{"status":404,"message":"Wrong user token, please log in again."}
 
 
 
@@ -126,6 +133,7 @@ returnuje:
 404 ak nebolo najdene auto
 
 
+
 POST /sendimage
 posielame vo form-data: 
 carid=3
@@ -134,3 +142,18 @@ image=tvojobrazok
 returnuje:
 500-nepodarilo sa pridat
 200-pridany obrazok
+
+GET /getbrands
+posielame:nič
+
+returnuje:
+404-nulova šanca že sa stane
+200-značky aut
+
+
+POST /getmodels
+posielame: {"brand":"Tesla"}
+
+returnuje:
+404-nulova šanca že sa stane
+200-modely daneho auta

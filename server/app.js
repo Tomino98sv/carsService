@@ -63,6 +63,22 @@ app.post('/getcars',(req,res)=>{
     });
 });
 
+app.get('/getbrands',(req,res)=>{
+    console.log("Request on /getbrands :");
+    db.getBrands(data=>{
+        //console.log("tusom");
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/getmodels',(req,res)=>{
+    console.log("Request on /getmodels :");
+    db.getmodels(req.body.brand,data=>{
+        //console.log("tusom");
+        res.status(data.status).send(data.message);
+    });
+});
+
 app.post('/sendcodeforchangepassword',(req,res)=>{
     console.log("Request on /sendCodeForChangePassword");
     db.sendCodeForChangePassword(req.body,data=>{
