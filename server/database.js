@@ -15,18 +15,43 @@ var transporter = nodemailer.createTransport({
 
 var tokens=new Array();
 
-let con=mysql.createConnection({
-    host: "itsovy.sk",
-    user: "carfa",
-    password: "glproject",
-    database: "carfa",
-    port:3306,
-    insecureAuth:true
-});
-con.connect((err)=>{
-    if(err) console.log("failed to connect to database");
-    else console.log("connected to DB");
-});
+let con;
+
+function handleDisconnect() {
+    con = mysql.createConnection({
+        host: "itsovy.sk",
+        user: "carfa",
+        password: "glproject",
+        database: "carfa",
+        port:3306,
+        insecureAuth:true
+    });
+  
+    con.connect(function(err) {              
+      if(err) {                                     
+        console.log('error when connecting to db:', err);
+        setTimeout(handleDisconnect, 2000); 
+      }          
+      else{
+          console.log("connected to DB");
+      }                           
+    });                                     
+    con.on('error', function(err) {
+      console.log('db error', err);
+      if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+        handleDisconnect();                        
+      } else {                                     
+        throw err;                               
+      }
+    });
+  }
+  
+  handleDisconnect();
+
+
+
+
+
 
 let generateCode=()=>{
     return Math.floor(100000 + Math.random() * 900000);
@@ -191,7 +216,7 @@ module.exports={
                 con.query(sql,(err,res)=>{
                     if(err){
                         console.log(err);
-                        callbackR({"status":401,"message":"Car with this motor vehicle registration plate already exists."});
+                        callbackR({"status":403,"message":"Car with this motor vehicle registration plate already exists."});
                     }
                     else{
                         let idčko=res.insertId;
@@ -224,6 +249,32 @@ module.exports={
         else{
             callbackR({"status":401,"message":"Wrong user token , please log in again."});
         }
+    },
+
+    getBrands(callbackR){
+        let sql="SELECT DISTINCT brand from cars order by brand";
+        con.query(sql,(err,res)=>{
+            if (err ) console.log(err);
+            if(res.length===0){
+                callbackR({"status":404,"message":"0 cars in database."});
+            }
+            else{
+                callbackR({"status":200,"message":res});
+            }
+        });
+    },
+    
+    getmodels(brand,callbackR){
+        let sql="SELECT model from cars where brand like '"+brand+"' order by model;";
+        con.query(sql,(err,res)=>{
+            if (err ) console.log(err);
+            if(res.length===0){
+                callbackR({"status":404,"message":"0 cars in database."});
+            }
+            else{
+                callbackR({"status":200,"message":res});
+            }
+        });
     },
 
     sendCodeForChangePassword(data,callbackR){
