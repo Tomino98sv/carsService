@@ -100,6 +100,21 @@ app.post('/changepassword',(req,res)=>{
     });
 });
 
+app.post('/changefirstname',(req,res)=>{
+    console.log("Request on /changefirstname");
+    db.changeFirstName(req.body,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/changelastname',(req,res)=>{
+    console.log("Request on /changelastname");
+    db.changeSurname(req.body,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+
 app.post('/getcarprofileimage',(req,res)=>{
     console.log("Request on /getcarprofileimage");
     db.getCarProfileImage(req.body,data=>{
@@ -138,6 +153,13 @@ app.post('/getcarimages',(req,res)=>{
     });
 });
 
+app.put("/setcarprofileimg",(req,res)=>{
+    console.log("Request on /setCarProfileImg");
+    db.setProfilePic(req.body.picture,req.body.car,data=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
 var multipartUpload = multer({storage: multer.diskStorage({
     destination: function (req, file, callback) { callback(null, '/var/www/html/students2n/krendzelakm/public/images');},
     filename: function (req, file, callback) { callback(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname));}})
@@ -156,6 +178,20 @@ app.post('/sendimage',multipartUpload,(req,res)=>{
             }
         });
     }
+});
+
+app.delete('/deleteimage',(req,res)=>{
+    console.log("Request on /deleteimage");
+    db.deleteImage(req.body.id,(data)=>{
+        res.status(data.status).send(data.message);
+    });
+});
+
+app.post('/getdocument',(req,res)=>{
+    console.log("Request on /getdocument");
+    db.getPdf(req.body.id,data=>{
+        res.status(data.status).send(data.message);
+    })
 });
 
 app.listen(1203,()=>{
