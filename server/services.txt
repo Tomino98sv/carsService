@@ -157,3 +157,12 @@ posielame: {"brand":"Tesla"}
 returnuje:
 404-nulova šanca že sa stane
 200-modely daneho auta
+
+
+PUT /setcarprofileimg
+
+posielame:{"picture":2,"car":5}
+
+returnuje:
+404-keby nahodou nenašlo auto
+200- ked zmenilo

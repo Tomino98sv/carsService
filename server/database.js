@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const express = require('express');
 const TokenGenerator = require('uuid-token-generator');
 const tokgen = new TokenGenerator(128, TokenGenerator.BASE62);
-
+const fs=require('fs');
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -359,6 +359,34 @@ module.exports={
         });
     },
 
+    changeFirstName(data,callbackR){
+        let id=data.id;
+        let newfname=data.new_fname;
+        con.query("UPDATE users SET first_name='"+newfname+"' WHERE id= "+id+";",(err)=>{
+            if(err){
+                console.log(err);
+                callbackR({"status":500,"message":"Could not change firstname"});
+            }
+            else{
+                callbackR({"status":200,"message":"Successfully changed firstname."});
+            }
+        });
+    },
+
+    changeSurname(data,callbackR){
+        let id=data.id;
+        let newlname=data.new_lname;
+        con.query("UPDATE users SET last_name='"+newlname+"' WHERE id="+id+";",(err)=>{
+            if(err){
+                console.log(err);
+                callbackR({"status":500,"message":"Could not change surname."});
+            }
+            else{
+                callbackR({"status":200,"message":"Successfully changed surname."});
+            }
+        });
+    },
+
     getCarProfileImage(data,callbackR){
         let carID=data.idcar;
     
@@ -376,13 +404,13 @@ module.exports={
     getcarimages(data,callbackR){
         let carID=data.idcar;
     
-        con.query("select path from imagepaths where idcar="+carID+";",(err,res)=>{
+        con.query("select id,path from imagepaths where idcar="+carID+";",(err,res)=>{
             if(err) console.log(err);
             res=JSON.parse(JSON.stringify(res));
             console.log(res);
             
             const result=res.reduce((acc,value)=>
-                [...acc,"http://itsovy.sk/students2n/krendzelakm/public/images/"+value.path]
+                [...acc,{"id":value.id,"path":"http://itsovy.sk/students2n/krendzelakm/public/images/"+value.path}]
             ,[]);
             console.log(result);
             if(res.length!==0){
@@ -394,6 +422,18 @@ module.exports={
         });
     },
 
+    setProfilePic(idPic,idCar,callback){
+        con.query("UPDATE cardetails set profileImgId="+idPic+" WHERE id="+idCar+";",(err)=>{
+            if(err){ 
+                console.log(err)
+                callback({"status":404,"message":err.sqlMessage});
+            }
+            else{
+                callback({"status":200,"message":"successfully changed profile picture."});
+            }
+        });
+    },
+
     saveImages(id,imagePath,callbackR){
         con.query("INSERT INTO imagepaths VALUES(id,'"+imagePath+"',"+id+");",(err)=>{
             if(err) {
@@ -401,6 +441,41 @@ module.exports={
                 callbackR({"status":500,"message":"Could not upload photo."});
             }else{
                 callbackR({"status":200,"message":"Successfully added new photo!"});
+            }
+        });
+    },
+
+    deleteImage(id,callback){
+        con.query("SELECT path from imagepaths where id="+id+";",(err,res)=>{
+            if(err) console.log(err);
+            if(res.length===0){
+                callback({"status":404,"message":"File not found."});
+            }
+            else{
+                let path="/var/www/html/students2n/krendzelakm/public/images/"+res[0].path;
+                con.query("DELETE from imagepaths where id="+id+";",(err)=>{
+                    if(err) console.log(err);
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            console.error(err);
+                            callback({"status":500,"message":"Error deleting your file"});
+                        }
+                        else{
+                            callback({"status":200,"message":"Successfully deleted your image."});
+                        }
+                      });
+                });
+            }
+        });
+    },
+    getPdf(idcar,callback){
+        con.query("SELECT docPath from cars where id="+idcar+";",(err,res)=>{
+            if(err) console.log(err);
+            if(res.length===0){
+                callback({"status":404,"message":"Car not found."});
+            }
+            else{
+                callback({"status":200,"message":res[0]});
             }
         });
     }
