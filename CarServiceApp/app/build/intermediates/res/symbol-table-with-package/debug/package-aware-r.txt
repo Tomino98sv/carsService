@@ -1065,6 +1065,7 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable eye
+drawable eye_hidden
 drawable fill_hard
 drawable ic_authorized_autoservis_app
 drawable ic_car
@@ -1329,6 +1330,7 @@ id registerButton
 id right
 id right_icon
 id right_side
+id saveProChanges
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type

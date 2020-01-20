@@ -1,11 +1,23 @@
 package com.globalsovy.carserviceapp.Fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,28 +26,49 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.LoginActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
+import com.globalsovy.carserviceapp.RegistrationActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class MyProfile_fragment extends Fragment {
 
     TextView login;
-    TextView name;
-    TextView surname;
+    EditText name;
+    EditText surname;
     TextView email;
-    TextView password;
+    EditText password;
     ImageView eye;
     CheckBox accountConfirmed;
+    Button saveProfileChanges;
 
     boolean passVisible=false;
+    String firstNameValue="";
+    String lastNanemValue="";
+    String passwordValue="";
 
     MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View parent =  inflater.inflate(R.layout.fragment_my_profile,container,false);
         mySharedPreferencies = new MySharedPreferencies(getContext());
+        myQueue = Volley.newRequestQueue(parent.getContext());
+
         login = parent.findViewById(R.id.loginProfile);
         name = parent.findViewById(R.id.nameProfile);
         surname = parent.findViewById(R.id.sureNameProfile);
@@ -43,12 +76,13 @@ public class MyProfile_fragment extends Fragment {
         password = parent.findViewById(R.id.passwordProfile);
         eye = parent.findViewById(R.id.hideShowPass);
         accountConfirmed = parent.findViewById(R.id.accountConfirmedProfile);
+        saveProfileChanges = parent.findViewById(R.id.saveProChanges);
 
         login.setText(mySharedPreferencies.getLogin());
         name.setText(mySharedPreferencies.getFnameLogin());
+        password.setText(mySharedPreferencies.getPassword());
         surname.setText(mySharedPreferencies.getLnameLogin());
         email.setText(mySharedPreferencies.getEmailLogin());
-        password.setText("******");
         if (mySharedPreferencies.getConfirmedLogin()){
             accountConfirmed.setChecked(true);
         }else{
@@ -59,15 +93,241 @@ public class MyProfile_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (passVisible){
-                    password.setText("******");
+                    eye.setImageResource(R.drawable.eye);
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     passVisible=false;
                 }else{
-                    password.setText(mySharedPreferencies.getPassword());
+                    eye.setImageResource(R.drawable.eye_hidden);
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     passVisible=true;
                 }
             }
         });
+        saveProfileChanges.setEnabled(false);
+        saveProfileChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String result = "Changing: ";
+                if (!passwordValue.equals("")){
+                    result += " \npassword: "+passwordValue;
+                    changePassword();
+                }
+                if (!firstNameValue.equals("")){
+                    result += " \nfirstName: "+firstNameValue;
+                    changeFname();
+                }
+                if (!lastNanemValue.equals("")){
+                    result += " \nlastName: "+lastNanemValue;
+                    changeLname();
+                }
+                Toast.makeText(getContext(),result,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        setAddTextChangeListener(name);
+        setAddTextChangeListener(surname);
+        setAddTextChangeListener(password);
+
+        setEditorAction(name);
+        setEditorAction(surname);
+        setEditorAction(password);
 
         return parent;
     }
+
+    public void setAddTextChangeListener(final EditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editText.getId() == password.getId()){
+                    passwordValue = editable.toString();
+                    saveProfileChanges.setEnabled(true);
+                    saveProfileChanges.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    saveProfileChanges.setTextColor(getResources().getColor(R.color.white));
+                }
+                else if (editText.getId() == name.getId()){
+                    firstNameValue = editable.toString();
+                    saveProfileChanges.setEnabled(true);
+                    saveProfileChanges.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    saveProfileChanges.setTextColor(getResources().getColor(R.color.white));
+                }
+                else{
+                    lastNanemValue = editable.toString();
+                    saveProfileChanges.setEnabled(true);
+                    saveProfileChanges.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    saveProfileChanges.setTextColor(getResources().getColor(R.color.white));
+                }
+            }
+        });
+    }
+
+    public void setEditorAction(final EditText editText) {
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
+
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    if (name.getText().toString().equals(mySharedPreferencies.getFnameLogin())){
+                        firstNameValue = "";
+                    }
+                    if (surname.getText().toString().equals(mySharedPreferencies.getLnameLogin())){
+                        lastNanemValue = "";
+                    }
+                    if (password.getText().toString().equals(mySharedPreferencies.getFnameLogin())){
+                        passwordValue = "";
+                    }
+
+                    if (password.getText().toString().equals(mySharedPreferencies.getPassword()) &&
+                            name.getText().toString().equals(mySharedPreferencies.getFnameLogin()) &&
+                            surname.getText().toString().equals(mySharedPreferencies.getLnameLogin())
+                    ) {
+                        saveProfileChanges.setEnabled(false);
+                        saveProfileChanges.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                        saveProfileChanges.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+                    }
+
+                    return true;
+                }
+
+                return  false;
+            }
+        });
+    }
+
+    public void changeFname() {
+        String URL = mySharedPreferencies.getIp()+"/changefirstname";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(),"Error "+error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("id",mySharedPreferencies.getIdLogin());
+                    body.put("new_fname",name.getText().toString());
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+    public void changeLname() {
+        String URL = mySharedPreferencies.getIp()+"/changelastname";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(),"Error "+error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("id",mySharedPreferencies.getIdLogin());
+                    body.put("new_lname",surname.getText().toString());
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+    public void changePassword() {
+        String URL = mySharedPreferencies.getIp()+"/changepassword";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(),"Error "+error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("email",mySharedPreferencies.getEmailLogin());
+                    body.put("password",password.getText().toString());
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
+    }
+
+
 }
