@@ -1226,6 +1226,7 @@ id errorMessage
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id eyeLogin
 id fifthDigit
 id fill
 id fill_horizontal

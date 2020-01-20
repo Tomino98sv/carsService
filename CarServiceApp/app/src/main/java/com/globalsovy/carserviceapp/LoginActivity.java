@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Display;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -57,6 +60,9 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
     EditText passwordInp;
     TextView passwordLabel;
     TextView validPassword;
+    ImageView eye;
+
+    boolean passVisible = false;
 
     ImageView carSVG;
     Button loginBtn;
@@ -104,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         carSVG = findViewById(R.id.carSVGLogin);
         carFaLogin = findViewById(R.id.carFaLogin);
         forgotPassword = findViewById(R.id.forgetPass);
+        eye = findViewById(R.id.eyeLogin);
 
         loginContainer.setVisibility(View.INVISIBLE);
         passwordContainer.setVisibility(View.INVISIBLE);
@@ -139,12 +146,29 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                     passwordInp.setTextColor(getResources().getColor(R.color.black));
                     passwordLabel.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     passwordLabel.setTextColor(getResources().getColor(R.color.white));
+                    eye.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.SRC_IN);
                 }
                 else{
                     passwordInp.setBackground(getResources().getDrawable(R.drawable.fill_hard));
                     passwordInp.setTextColor(getResources().getColor(R.color.white));
                     passwordLabel.setBackgroundColor(getResources().getColor(R.color.white));
                     passwordLabel.setTextColor(getResources().getColor(R.color.black));
+                    eye.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+            }
+        });
+
+        eye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (passVisible){
+                    passwordInp.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    eye.setImageResource(R.drawable.eye);
+                    passVisible = false;
+                }else {
+                    passwordInp.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    eye.setImageResource(R.drawable.eye_hidden);
+                    passVisible = true;
                 }
             }
         });

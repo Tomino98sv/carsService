@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,14 +18,26 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.globalsovy.carserviceapp.alertDialogs.ExitAlertDialog;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
         mySharedPreferencies = new MySharedPreferencies(this);
-
+        myQueue = Volley.newRequestQueue(this);
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.mainActivityDrawable);
         navigationView = findViewById(R.id.nav_view);
@@ -94,6 +107,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MyCars_fragment()).commit();
@@ -137,5 +157,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return false;
+    }
+
+    public void logout() {
+        String URL = mySharedPreferencies.getIp()+"/logout";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(login);
+                finish();
+                Toast.makeText(getBaseContext(),"See you soon",Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getBaseContext(),"Error "+error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("login",mySharedPreferencies.getLogin());
+                    body.put("token",mySharedPreferencies.getToken());
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(stringRequest);
     }
 }
