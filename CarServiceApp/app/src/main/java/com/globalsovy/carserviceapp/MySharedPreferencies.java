@@ -26,6 +26,7 @@ public class MySharedPreferencies {
         editor.putString("first_name",userInfo.getFirst_name());
         editor.putString("last_name",userInfo.getLast_name());
         editor.putString("email",userInfo.getEmail());
+        editor.putString("password",userInfo.getPassword());
         editor.putBoolean("confirmed",userInfo.isConfirmed());
         editor.apply();
     }
@@ -48,6 +49,9 @@ public class MySharedPreferencies {
     }
     public String getEmailLogin() {
         return loginData.getString("email","default");
+    }
+    public String getPassword() {
+        return loginData.getString("password","default");
     }
     public boolean getConfirmedLogin() {
         return loginData.getBoolean("confirmed",false);

@@ -18,8 +18,7 @@
         <activity android:name=".ForgetPassword.ConfirmDigitCode" />
         <activity android:name=".ForgetPassword.EmailForResetPassword" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MyCarsActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".UnconfirmedEmail"/>
         <activity android:name=".IntroActivty">

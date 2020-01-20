@@ -10,6 +10,14 @@
         <item name="logInButtonColor">@color/buttonLoginColor</item>
     </style>
 
+<!--    same attributes added in the noActionBar theme but this we can add on activity level-->
+<!--    this theme is added on activity in manifest-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="forgotPassword">
         <item name="android:textSize">12sp</item>
         <item name="android:letterSpacing">0.01</item>

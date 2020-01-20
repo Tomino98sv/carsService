@@ -6,14 +6,24 @@ public class UserInfo {
     String first_name;
     String last_name;
     String email;
+    String password;
     boolean confirmed;
 
-    public UserInfo(int id, String first_name, String last_name, String email, boolean confirmed) {
+    public UserInfo(int id, String first_name, String last_name, String email, String password, boolean confirmed) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.password = password;
         this.confirmed = confirmed;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getId() {

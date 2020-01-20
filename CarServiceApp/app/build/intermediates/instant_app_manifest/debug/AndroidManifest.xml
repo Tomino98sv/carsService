@@ -28,8 +28,9 @@
         <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode" />
         <activity android:name="com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword" />
         <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
-        <activity android:name="com.globalsovy.carserviceapp.MyCarsActivity" />
-        <activity android:name="com.globalsovy.carserviceapp.MainActivity" />
+        <activity
+            android:name="com.globalsovy.carserviceapp.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
         <activity android:name="com.globalsovy.carserviceapp.UnconfirmedEmail" />
         <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >

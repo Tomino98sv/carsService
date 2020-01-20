@@ -10,4 +10,8 @@
     <string name="createNewPassword">Create your\nnew password</string>
     <string name="emailNotRegister">Email address does not appear to be registered.</string>
     <string name="uncomfirmMail">You haven\'t confirmed email yet.</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

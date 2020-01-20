@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -28,28 +27,22 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword;
 import com.globalsovy.carserviceapp.POJO.Credencials;
 import com.globalsovy.carserviceapp.POJO.UserInfo;
+import com.globalsovy.carserviceapp.alertDialogs.ExitAlertDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements Animation.AnimationListener {
 
@@ -305,7 +298,6 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
             public void onResponse(JSONObject response) {
                 System.out.println(response);
                 Intent main = new Intent(LoginActivity.this,MainActivity.class);
-
                 try {
                     JSONObject token = response.getJSONObject("token");
                     Credencials credencials = new Credencials(token.getString("login"),token.getString("token"));
@@ -315,16 +307,20 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
                             userinfo.getString("first_name"),
                             userinfo.getString("last_name"),
                             userinfo.getString("email"),
+                            password,
                             userinfo.getInt("confirmed")==1
                     );
                     mySharedPreferencies.fillLoginData(credencials,userInfo);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 startActivity(main);
+                loginInp.setText("");
+                validLogin.setText("");
+                passwordInp.setText("");
+                validPassword.setText("");
                 overridePendingTransition(0, 0);
+                finish();
 
             }
         }, new Response.ErrorListener() {

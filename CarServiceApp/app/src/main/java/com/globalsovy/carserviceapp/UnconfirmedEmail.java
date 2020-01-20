@@ -259,6 +259,7 @@ public class UnconfirmedEmail extends AppCompatActivity {
                             userinfo.getString("first_name"),
                             userinfo.getString("last_name"),
                             userinfo.getString("email"),
+                            password,
                             userinfo.getInt("confirmed")==1
                     );
                     mySharedPreferencies.fillLoginData(credencials,userInfo);

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <ScrollView
+        android:id="@+id/scrollViewReg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/loginProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelLoginProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/black"
+                android:ems="10"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:text="ExampleLogin"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/labelLoginProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Login"
+                android:textAppearance="@style/inputLabelText" />
+
+            <TextView
+                android:id="@+id/nameProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelNameProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/black"
+                android:ems="10"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:text="ExampleName"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/labelNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loginProfile"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Firstname"
+                android:textAppearance="@style/inputLabelText" />
+
+            <TextView
+                android:id="@+id/sureNameProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelsureNameProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/black"
+                android:ems="10"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:text="ExampleSurname"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/labelsureNameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameProfile"
+                android:layout_marginTop="0dp"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Surname"
+                android:textAppearance="@style/inputLabelText" />
+
+            <TextView
+                android:id="@+id/emailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelEmailProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/black"
+                android:ems="10"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:text="Example@gmail.com"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/labelEmailProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sureNameProfile"
+                android:layout_marginTop="0dp"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Email"
+                android:textAppearance="@style/inputLabelText" />
+
+            <TextView
+                android:id="@+id/passwordProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelPasswordProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/black"
+                android:ems="10"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:text="864534"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/labelPasswordProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailProfile"
+                android:layout_marginTop="0dp"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Password"
+                android:textAppearance="@style/inputLabelText" />
+
+            <ImageView
+                android:id="@+id/hideShowPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/passwordProfile"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                app:srcCompat="@drawable/eye" />
+
+            <CheckBox
+                android:id="@+id/accountConfirmedProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passwordProfile"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:buttonTint="#4CAF50"
+                android:text="Account Confirmed"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

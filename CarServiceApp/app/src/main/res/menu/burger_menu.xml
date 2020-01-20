@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+<!--    this group stay selected-->
+<!--    single mean only one can be selected-->
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/my_cars"
+            android:title="My cars"
+            >
+        </item>
+        <item
+            android:id="@+id/appointments"
+            android:title="Appointments"/>
+        <item
+            android:id="@+id/notifications"
+            android:title="Notifications"/>
+    </group>
+
+
+</menu>
