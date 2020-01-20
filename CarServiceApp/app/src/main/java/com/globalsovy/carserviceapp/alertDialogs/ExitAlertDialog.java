@@ -1,4 +1,4 @@
-package com.globalsovy.carserviceapp;
+package com.globalsovy.carserviceapp.alertDialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.globalsovy.carserviceapp.R;
 
 public class ExitAlertDialog {
 
