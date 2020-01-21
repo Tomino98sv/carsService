@@ -1180,11 +1180,13 @@ id barrier
 id beginning
 id blocking
 id bottom
+id brand
 id btnMyProfile
 id buttonPanel
 id cancelExitDialog
 id carFaIntro
 id carFaLogin
+id carImage
 id carSVGLogin
 id center
 id center_horizontal
@@ -1293,6 +1295,7 @@ id masked
 id message
 id middle
 id mini
+id model
 id msgExitAlert
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
@@ -1439,6 +1442,7 @@ id validationRepead_NewPassword
 id validationSignInLogin
 id validationSurname
 id verifyCode
+id view_Pager
 id view_offset_helper
 id visible
 id welcomeBack
@@ -1505,6 +1509,7 @@ layout activity_create_new_password
 layout activity_email_for_reset_password
 layout activity_not_register_email
 layout activity_registration
+layout car_item
 layout close_header
 layout custom_dialog
 layout design_bottom_navigation_item

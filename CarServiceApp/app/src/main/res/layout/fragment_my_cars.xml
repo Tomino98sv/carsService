@@ -19,5 +19,13 @@
         android:rotation="-40"
         app:srcCompat="@drawable/ic_car" />
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_Pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        />
+
 
 </RelativeLayout>
