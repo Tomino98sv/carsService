@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -28,6 +29,8 @@ public class MyAppointments_fragment extends Fragment {
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
+
+        ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
         toolbarTitle.setText("My Appointments");
         toolbarBtn.setImageResource(R.drawable.add);

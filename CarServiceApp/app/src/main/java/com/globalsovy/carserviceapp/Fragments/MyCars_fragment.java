@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.PageAdapter;
@@ -60,12 +61,20 @@ public class MyCars_fragment extends Fragment {
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
         viewPager = parent.findViewById(R.id.view_Pager);
 
+        ((MainActivity)getActivity()).setNavigationButtonToDefault();
+
         toolbarTitle.setText("My Cars");
         toolbarBtn.setImageResource(R.drawable.add);
         toolbarBtn.setVisibility(View.VISIBLE);
 
-        getCars();
+        toolbarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).changeFragment(NewCar_fragment.class);
+            }
+        });
 
+        getCars();
 
         viewPager.setPadding(50,50,50,50);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -116,11 +125,7 @@ public class MyCars_fragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                cars = new ArrayList<>();
-                cars.add(new CarItem(21,"DEFAULT","DEFAULT"));
-                adapter = new PageAdapter(cars,getContext());
-                viewPager.setAdapter(adapter);
-                Toast.makeText(getContext(),"No Cars",Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).changeFragment(NoCars_fragment.class);
             }
         }) {
 

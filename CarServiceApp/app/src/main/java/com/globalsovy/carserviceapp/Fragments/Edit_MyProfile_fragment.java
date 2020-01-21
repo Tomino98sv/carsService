@@ -82,6 +82,8 @@ public class Edit_MyProfile_fragment extends Fragment {
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
 
+        ((MainActivity)getActivity()).setNavigationButtonToDefault();
+
         toolbarTitle.setText("My Profile");
         toolbarBtn.setImageResource(R.drawable.done);
         toolbarBtn.setVisibility(View.VISIBLE);

@@ -64,6 +64,8 @@ public class MyProfile_fragment extends Fragment {
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
 
+        ((MainActivity)getActivity()).setNavigationButtonToDefault();
+
         password.setEnabled(false);
 
         toolbarTitle.setText("My Profile");
