@@ -296,6 +296,10 @@
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_my_profile_read.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\layout\\fragment_my_profile_read.xml"
+    },
+    {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\interpolator_mtrl_linear.xml.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\2946ca0ea6c89dab7d7d9fbc18e54292\\material-1.0.0\\res\\interpolator\\mtrl_linear.xml"
     },
@@ -2026,6 +2030,10 @@
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_done.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\drawable\\done.xml"
     },
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",

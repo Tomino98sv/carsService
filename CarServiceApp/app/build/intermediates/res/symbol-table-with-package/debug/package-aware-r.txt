@@ -1065,6 +1065,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable done
 drawable edit_white
 drawable eye
 drawable eye_hidden
@@ -1524,6 +1525,7 @@ layout exit_dialog
 layout fragment_appointments
 layout fragment_my_cars
 layout fragment_my_profile
+layout fragment_my_profile_read
 layout fragment_notifications
 layout intro_layout
 layout login_layout

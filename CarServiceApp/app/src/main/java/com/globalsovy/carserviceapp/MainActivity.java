@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -102,8 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MyProfile_fragment()).commit();
+                changeFragment(MyProfile_fragment.class);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 for (int i=0; i< navigationView.getMenu().size();i++) {
                     navigationView.getMenu().getItem(i).setChecked(false);
@@ -214,5 +215,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(stringRequest);
+    }
+
+    public void changeFragment(Class fragmentClass) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                fragment).commit();
     }
 }
