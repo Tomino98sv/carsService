@@ -30,8 +30,8 @@ import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
+import com.globalsovy.carserviceapp.Fragments.Notifications_fragment;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
-import com.globalsovy.carserviceapp.alertDialogs.ExitAlertDialog;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     TextView navFirstName;
-    TextView navSureName;
     TextView navEmail;
     TextView MyProfile;
     Button logout;
@@ -66,16 +65,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
 
         navFirstName = findViewById(R.id.firstName);
-        navSureName = findViewById(R.id.sureName);
         navEmail = findViewById(R.id.email);
         MyProfile = findViewById(R.id.btnMyProfile);
         logout = findViewById(R.id.logOut);
 
-        navFirstName.setText(mySharedPreferencies.getFnameLogin());
-        navSureName.setText(mySharedPreferencies.getLnameLogin());
+        navFirstName.setSelected(true);
+        navEmail.setSelected(true);
+
+        navFirstName.setText(mySharedPreferencies.getFnameLogin()+" "+mySharedPreferencies.getLnameLogin());
         navEmail.setText(mySharedPreferencies.getEmailLogin());
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         navigationView.setNavigationItemSelectedListener(this);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
                 R.string.navigation_drawer_open,
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MyProfile_fragment()).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                for (int i=0; i< navigationView.getMenu().size();i++) {
+                    navigationView.getMenu().getItem(i).setChecked(false);
+                }
             }
         });
 
@@ -152,6 +156,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new MyAppointments_fragment()).commit();
                     navigationView.setCheckedItem(R.id.appointments);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                break;
+            case R.id.notifications:
+                if (!menuItem.isChecked()) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Notifications_fragment()).commit();
+                    navigationView.setCheckedItem(R.id.notifications);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 break;

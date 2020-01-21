@@ -1047,6 +1047,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable add
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1064,6 +1065,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable edit_white
 drawable eye
 drawable eye_hidden
 drawable fill_hard
@@ -1252,6 +1254,7 @@ id icon
 id icon_group
 id ifRoom
 id image
+id imageView
 id info
 id invisible
 id italic
@@ -1382,7 +1385,6 @@ id start
 id stretch
 id submenuarrow
 id submit_area
-id sureName
 id sureNameProfile
 id surnameEditTextInp
 id tabMode
@@ -1399,7 +1401,6 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
-id textView
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1411,6 +1412,8 @@ id titleDividerNoCustom
 id titleExitAlert
 id title_template
 id toolbar
+id toolbarTitle
+id toolbarTool
 id top
 id topPanel
 id touch_outside
@@ -1521,6 +1524,7 @@ layout exit_dialog
 layout fragment_appointments
 layout fragment_my_cars
 layout fragment_my_profile
+layout fragment_notifications
 layout intro_layout
 layout login_layout
 layout main_layout
@@ -1601,7 +1605,6 @@ style Animation_AppCompat_DropDownUp
 style Animation_AppCompat_Tooltip
 style Animation_Design_BottomSheetDialog
 style AppTheme
-style AppTheme_NoActionBar
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog
@@ -2097,6 +2100,7 @@ style Widget_MaterialComponents_Toolbar
 style Widget_Support_CoordinatorLayout
 style forgotPassword
 style inputLabelText
+style menuItem
 style welcomeBack
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity

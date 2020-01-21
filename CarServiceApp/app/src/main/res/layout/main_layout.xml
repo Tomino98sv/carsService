@@ -20,13 +20,34 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:background="@color/black"
             android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left"
+                android:text="TITLE"
+                android:textAppearance="@style/welcomeBack"
+                android:textSize="18dp"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/toolbarTool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                android:src="@drawable/close" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -40,82 +61,74 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/black"
-        app:itemTextAppearance="@style/welcomeBack"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/burger_menu"
-        app:itemBackground="@drawable/underline_white"
-        app:headerLayout="@layout/close_header"
-        app:itemHorizontalPadding="0dp"
         android:padding="15dp"
-        >
+        android:maxWidth="200dp"
+        app:headerLayout="@layout/close_header"
+        app:itemBackground="@drawable/underline_white"
+        app:itemHorizontalPadding="0dp"
+        app:itemTextAppearance="@style/menuItem"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/burger_menu">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/firstName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/open_sans_light"
-                    android:padding="3dp"
-                    android:text="Meno"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/sureName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/open_sans_light"
-                    android:padding="3dp"
-                    android:text="Priezvisko"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/open_sans_light"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Meno"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/underline_white"
                 android:fontFamily="@font/open_sans_light"
                 android:text="email@email.com"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/white"
                 android:textStyle="normal"
-                android:background="@drawable/underline_white"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
                 />
 
             <TextView
                 android:id="@+id/btnMyProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/underline_white"
                 android:fontFamily="@font/raleway_bold"
                 android:text="My profile"
-                android:layout_marginBottom="20dp"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:background="@drawable/underline_white"/>
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/logOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="Log out"
                 android:textColor="@color/white" />

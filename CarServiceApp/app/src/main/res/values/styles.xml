@@ -12,11 +12,11 @@
 
 <!--    same attributes added in the noActionBar theme but this we can add on activity level-->
 <!--    this theme is added on activity in manifest-->
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+<!--    <style name="AppTheme.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--    </style>-->
 
     <style name="forgotPassword">
         <item name="android:textSize">12sp</item>
@@ -27,6 +27,13 @@
 
     <style name="welcomeBack">
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#5F51CB</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/raleway_bold</item>
+    </style>
+
+    <style name="menuItem">
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#5F51CB</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/raleway_bold</item>

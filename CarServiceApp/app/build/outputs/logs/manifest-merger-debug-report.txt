@@ -113,9 +113,7 @@ ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidM
 	android:name
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:19-55
 activity#com.globalsovy.carserviceapp.MainActivity
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:9-94
-	android:theme
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:48-91
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:9-50
 	android:name
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:19-47
 activity#com.globalsovy.carserviceapp.LoginActivity

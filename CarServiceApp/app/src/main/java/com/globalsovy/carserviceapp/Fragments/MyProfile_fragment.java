@@ -1,14 +1,11 @@
 package com.globalsovy.carserviceapp.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.text.method.TransformationMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +30,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.globalsovy.carserviceapp.LoginActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
-import com.globalsovy.carserviceapp.RegistrationActivity;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +49,10 @@ public class MyProfile_fragment extends Fragment {
     ImageView eye;
     CheckBox accountConfirmed;
     Button saveProfileChanges;
+
+    NavigationView navigationView;
+    TextView toolbarTitle;
+    ImageView toolbarBtn;
 
     boolean passVisible=false;
     String firstNameValue="";
@@ -77,6 +77,13 @@ public class MyProfile_fragment extends Fragment {
         eye = parent.findViewById(R.id.hideShowPass);
         accountConfirmed = parent.findViewById(R.id.accountConfirmedProfile);
         saveProfileChanges = parent.findViewById(R.id.saveProChanges);
+        navigationView = parent.findViewById(R.id.nav_view);
+        toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
+        toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
+
+        toolbarTitle.setText("My Profile");
+        toolbarBtn.setImageResource(R.drawable.edit_white);
+        toolbarBtn.setVisibility(View.VISIBLE);
 
         login.setText(mySharedPreferencies.getLogin());
         name.setText(mySharedPreferencies.getFnameLogin());
