@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,9 @@ public class NewCar_fragment extends Fragment {
     TextView toolbarTitle;
     ImageView toolbarBtn;
 
+    Spinner dropList;
+    String[] brands = new String[]{"Ferrari","BMW","Mazda"};
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class NewCar_fragment extends Fragment {
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
+        dropList = parent.findViewById(R.id.brandList);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -43,6 +49,10 @@ public class NewCar_fragment extends Fragment {
         });
         toolbarTitle.setText("New car");
         toolbarBtn.setVisibility(View.GONE);
+
+        ArrayAdapter<String> brandAdapter = new ArrayAdapter<String>(getContext(),
+                R.layout.spinner_item,R.id.brandItem,brands);
+        dropList.setAdapter(brandAdapter);
 
         return parent;
     }

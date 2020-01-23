@@ -79,6 +79,7 @@ public class BackToLoginAlertDialog {
             public void onResponse(String response) {
                 dialog.dismiss();
                 Intent login = new Intent(activity.getApplicationContext(), LoginActivity.class);
+                mySharedPreferencies.setToken("logouted");
                 activity.startActivity(login);
                 activity.finish();
                 Toast.makeText(activity.getApplicationContext(),"See you soon",Toast.LENGTH_SHORT).show();

@@ -38,6 +38,13 @@ public class NoCars_fragment extends Fragment {
         toolbarTitle.setText("My Cars");
         toolbarBtn.setImageResource(R.drawable.add);
         toolbarBtn.setVisibility(View.VISIBLE);
+        toolbarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("add car clicked");
+                ((MainActivity)getActivity()).changeFragment(NewCar_fragment.class);
+            }
+        });
         addNewCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

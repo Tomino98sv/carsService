@@ -10,4 +10,5 @@
     <color name="buttonLoginColor">#BD6A6A6A</color>
     <color name="vector_carColor">#646464</color>
     <color name="shadow">#646464</color>
+    <color name="fragBG">#020202</color>
 </resources>

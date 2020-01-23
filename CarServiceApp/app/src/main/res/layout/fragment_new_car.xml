@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242424">
+    android:background="@color/fragBG">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,6 +20,240 @@
         android:rotation="-40"
         app:srcCompat="@drawable/ic_car" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/addNewCarButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <Spinner
+                android:id="@+id/modelList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/brandList" />
+
+            <TextView
+                android:id="@+id/labelModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Model"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/modelList"
+                app:layout_constraintTop_toTopOf="@+id/modelList" />
+
+            <Spinner
+                android:id="@+id/brandList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/labelBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Brand"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/brandList"
+                app:layout_constraintTop_toTopOf="@+id/brandList" />
+
+            <Spinner
+                android:id="@+id/colorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/modelList" />
+
+            <TextView
+                android:id="@+id/labelColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Color"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/colorList"
+                app:layout_constraintTop_toTopOf="@+id/colorList" />
+
+            <Spinner
+                android:id="@+id/milageList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/colorList"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <TextView
+                android:id="@+id/labelMilage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Milage"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/milageList"
+                app:layout_constraintTop_toTopOf="@+id/milageList" />
+
+            <Spinner
+                android:id="@+id/vintageList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/colorList"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <TextView
+                android:id="@+id/labelVintage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Vintage"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/vintageList"
+                app:layout_constraintTop_toTopOf="@+id/vintageList" />
+
+
+            <Spinner
+                android:id="@+id/spzList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/milageList"
+                app:layout_constraintStart_toStartOf="@+id/milageList"
+                app:layout_constraintTop_toBottomOf="@+id/milageList" />
+
+            <TextView
+                android:id="@+id/labelSPZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="SPZ"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/spzList"
+                app:layout_constraintTop_toTopOf="@+id/spzList" />
+
+            <Spinner
+                android:id="@+id/fuelList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/vintageList"
+                app:layout_constraintStart_toStartOf="@+id/vintageList"
+                app:layout_constraintTop_toBottomOf="@+id/vintageList"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <TextView
+                android:id="@+id/labelFuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Fuel"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/fuelList"
+                app:layout_constraintTop_toTopOf="@+id/fuelList" />
+
+
+
+
+            <Spinner
+                android:id="@+id/transmissionList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/spzList"
+                app:layout_constraintStart_toStartOf="@+id/spzList"
+                app:layout_constraintTop_toBottomOf="@+id/spzList" />
+
+            <TextView
+                android:id="@+id/labelTransmission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Transmission"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/transmissionList"
+                app:layout_constraintTop_toTopOf="@+id/transmissionList" />
+
+            <Spinner
+                android:id="@+id/volumeList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/fuelList"
+                app:layout_constraintStart_toStartOf="@+id/fuelList"
+                app:layout_constraintTop_toBottomOf="@+id/fuelList"/>
+
+            <TextView
+                android:id="@+id/labelVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Volume"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/volumeList"
+                app:layout_constraintTop_toTopOf="@+id/volumeList" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/addNewCarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Save new car"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

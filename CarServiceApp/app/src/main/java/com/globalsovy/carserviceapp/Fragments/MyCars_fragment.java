@@ -70,6 +70,7 @@ public class MyCars_fragment extends Fragment {
         toolbarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("add car clicked");
                 ((MainActivity)getActivity()).changeFragment(NewCar_fragment.class);
             }
         });

@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onResponse(String response) {
                 Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                mySharedPreferencies.setToken("logouted");
                 startActivity(login);
                 finish();
                 Toast.makeText(getBaseContext(),"See you soon",Toast.LENGTH_SHORT).show();

@@ -673,6 +673,7 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color fragBG
 color green
 color highlighted_text_material_dark
 color highlighted_text_material_light
@@ -1053,8 +1054,10 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable add
+drawable arrow_down
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_spinner
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1179,6 +1182,7 @@ id add
 id addAppointment
 id addCarBtn
 id addCarLayout
+id addNewCarButton
 id alertTitle
 id all
 id always
@@ -1191,6 +1195,8 @@ id beginning
 id blocking
 id bottom
 id brand
+id brandItem
+id brandList
 id btnMyProfile
 id buttonPanel
 id cancelExitDialog
@@ -1210,6 +1216,7 @@ id clip_horizontal
 id clip_vertical
 id closeImage
 id collapseActionView
+id colorList
 id container
 id content
 id contentPanel
@@ -1257,6 +1264,7 @@ id forgetPass
 id forgotPasswordText
 id fourthDigit
 id fragment_container
+id fuelList
 id ghost_view
 id gone
 id group_divider
@@ -1274,10 +1282,15 @@ id info
 id invisible
 id italic
 id item_touch_helper_previous_elevation
+id labelBrand
+id labelColor
 id labelEmail
 id labelEmailProfile
+id labelFuel
 id labelLoginProfile
 id labelLoginReg
+id labelMilage
+id labelModel
 id labelName
 id labelNameProfile
 id labelNewPassword
@@ -1285,8 +1298,12 @@ id labelPassword
 id labelPasswordProfile
 id labelRepeadPassword
 id labelRepead_newPassword
+id labelSPZ
 id labelSignInLogin
 id labelSurname
+id labelTransmission
+id labelVintage
+id labelVolume
 id labeled
 id labelsureNameProfile
 id largeLabel
@@ -1308,8 +1325,10 @@ id masked
 id media_actions
 id message
 id middle
+id milageList
 id mini
 id model
+id modelList
 id msgExitAlert
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
@@ -1395,6 +1414,7 @@ id spacer
 id split_action_bar
 id spread
 id spread_inside
+id spzList
 id src_atop
 id src_in
 id src_over
@@ -1442,6 +1462,7 @@ id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
+id transmissionList
 id tryAnotherMail
 id unchecked
 id uniform
@@ -1460,7 +1481,9 @@ id validationSurname
 id verifyCode
 id view_Pager
 id view_offset_helper
+id vintageList
 id visible
+id volumeList
 id welcomeBack
 id withText
 id wrap
@@ -1573,6 +1596,7 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout spinner_item
 layout support_simple_spinner_dropdown_item
 menu burger_menu
 mipmap ic_launcher
