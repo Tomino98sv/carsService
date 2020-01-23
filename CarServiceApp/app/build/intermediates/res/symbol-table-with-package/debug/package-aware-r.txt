@@ -1079,9 +1079,11 @@ drawable edit_white
 drawable eye
 drawable eye_hidden
 drawable fill_hard
+drawable fill_hard_underline
 drawable ic_authorized_autoservis_app
 drawable ic_car
 drawable ic_carfa
+drawable ic_insert_photo_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
@@ -1182,7 +1184,9 @@ id add
 id addAppointment
 id addCarBtn
 id addCarLayout
+id addCarPhoto
 id addNewCarButton
+id addPhotoCarLayout
 id alertTitle
 id all
 id always
@@ -1223,6 +1227,7 @@ id contentPanel
 id coordinator
 id createPassword
 id createPasswordText
+id currentCarPhoto
 id custom
 id customPanel
 id decor_content_parent
@@ -1278,6 +1283,7 @@ id icon_group
 id ifRoom
 id image
 id imageView
+id imageView2
 id info
 id invisible
 id italic
@@ -1640,7 +1646,6 @@ string emailNotRegister
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string forgetPass
-string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string mtrl_chip_close_icon_content_description
 string navigation_drawer_close

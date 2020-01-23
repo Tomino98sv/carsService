@@ -1212,6 +1212,10 @@
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_insert_photo_black_24dp.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\drawable\\ic_insert_photo_black_24dp.xml"
+    },
+    {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
@@ -1374,6 +1378,10 @@
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\font_roboto_light.xml.flat",
         "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\font\\roboto_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_fill_hard_underline.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\drawable\\fill_hard_underline.xml"
     },
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_screen_simple_overlay_action_mode.xml.flat",

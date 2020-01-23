@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_down_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_capslock_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="arrow_down" />
-                            <entry key="sourceFile" value="C:\Users\user\Downloads\calendar\icon\action\calendar_today_24px.svg" />
+                            <entry key="outputName" value="fill_hard_underline" />
+                            <entry key="sourceFile" value="C:\Users\user\Downloads\email-svg.svg" />
                           </map>
                         </option>
                       </PersistentState>

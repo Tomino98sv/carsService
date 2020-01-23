@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.globalsovy.carserviceapp.MainActivity;
@@ -25,6 +26,9 @@ public class NewCar_fragment extends Fragment {
     TextView toolbarTitle;
     ImageView toolbarBtn;
 
+    ConstraintLayout addCarPhoto;
+    ImageView carPhoto;
+
     Spinner dropList;
     String[] brands = new String[]{"Ferrari","BMW","Mazda"};
 
@@ -37,6 +41,8 @@ public class NewCar_fragment extends Fragment {
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
         dropList = parent.findViewById(R.id.brandList);
+        addCarPhoto = parent.findViewById(R.id.addPhotoCarLayout);
+        carPhoto = parent.findViewById(R.id.currentCarPhoto);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -49,6 +55,13 @@ public class NewCar_fragment extends Fragment {
         });
         toolbarTitle.setText("New car");
         toolbarBtn.setVisibility(View.GONE);
+
+        addCarPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                carPhoto.setImageResource(R.drawable.ic_car);
+            }
+        });
 
         ArrayAdapter<String> brandAdapter = new ArrayAdapter<String>(getContext(),
                 R.layout.spinner_item,R.id.brandItem,brands);
