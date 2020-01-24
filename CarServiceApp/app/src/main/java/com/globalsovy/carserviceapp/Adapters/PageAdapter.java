@@ -1,4 +1,4 @@
-package com.globalsovy.carserviceapp;
+package com.globalsovy.carserviceapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,7 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
+import com.globalsovy.carserviceapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

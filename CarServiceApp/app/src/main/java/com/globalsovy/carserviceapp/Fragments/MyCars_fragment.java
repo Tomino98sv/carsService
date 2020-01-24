@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
-import com.globalsovy.carserviceapp.PageAdapter;
+import com.globalsovy.carserviceapp.Adapters.PageAdapter;
 import com.globalsovy.carserviceapp.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -31,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.CharArrayReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
