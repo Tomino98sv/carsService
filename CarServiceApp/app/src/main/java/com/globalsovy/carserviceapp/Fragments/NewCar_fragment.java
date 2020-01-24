@@ -6,14 +6,18 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +52,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 import static android.app.Activity.RESULT_OK;
 
 public class NewCar_fragment extends Fragment {
@@ -68,6 +74,25 @@ public class NewCar_fragment extends Fragment {
     ArrayList<String> models;
     ArrayAdapter<String> modelAdapter;
 
+    Spinner transmissionList;
+    String[] transmissions = {"Manual","Automatic"};
+    ArrayAdapter<String> transmissionAdapter;
+
+    Spinner fuelList;
+    String[] fuels = {"Gasoline","Diesel","Liquified Petroleum","Natural Gas","Ethanol","Bio-diesel","Eletric"};
+    ArrayAdapter<String> fuelAdapter;
+
+    Spinner vintageList;
+    ArrayList<Integer> vintages;
+    ArrayAdapter<Integer> vintageAdapter;
+
+    Spinner volumeList;
+    ArrayList<Double> volumes;
+    ArrayAdapter<Double> volumeAdapter;
+
+    EditText colorHex;
+    ImageView pickedColor;
+
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
 
@@ -83,8 +108,16 @@ public class NewCar_fragment extends Fragment {
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
+
         brandList = parent.findViewById(R.id.brandList);
         modelList = parent.findViewById(R.id.modelList);
+        transmissionList = parent.findViewById(R.id.transmissionList);
+        fuelList = parent.findViewById(R.id.fuelList);
+        vintageList = parent.findViewById(R.id.vintageList);
+        volumeList = parent.findViewById(R.id.volumeList);
+        colorHex = parent.findViewById(R.id.colorList);
+        pickedColor = parent.findViewById(R.id.colorPicked);
+
         addCarPhoto = parent.findViewById(R.id.addPhotoCarLayout);
         carPhoto = parent.findViewById(R.id.currentCarPhoto);
 
@@ -122,6 +155,7 @@ public class NewCar_fragment extends Fragment {
             }
         });
 
+        setSpinnerOptions();
         setSpinnerSelected();
         getCarBrands();
         return parent;
@@ -177,6 +211,72 @@ public class NewCar_fragment extends Fragment {
             }
         });
     }
+    public void setSpinnerOptions() {
+        vintages = new ArrayList<>();
+        volumes = new ArrayList<>();
+
+        int startYear = 1960;
+        for (int i=0;i<61;i++){
+            vintages.add(Integer.valueOf(startYear+i));
+        }
+        double startVolume = 0.8;
+        for (double i=startVolume;i<4.1;i+=0.1){
+            double result = Math.round(i*10);
+            result = result/10;
+            volumes.add(Double.valueOf(result));
+        }
+
+        pickedColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(getActivity(),pickedColor.getSolidColor(), new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
+
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+                        pickedColor.setBackgroundColor(color);
+                        String hexColor = String.format("#%06X", (0xFFFFFF & color));
+                        colorHex.setText(hexColor);
+                    }
+                });
+                colorPicker.show();
+            }
+        });
+        colorHex.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    pickedColor.setBackgroundColor(Color.parseColor(editable.toString()));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        transmissionAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item,R.id.brandItem,transmissions);
+        fuelAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item,R.id.brandItem,fuels);
+        vintageAdapter = new ArrayAdapter<Integer>(getContext(), R.layout.spinner_item,R.id.brandItem,vintages);
+        volumeAdapter = new ArrayAdapter<Double>(getContext(), R.layout.spinner_item,R.id.brandItem,volumes);
+
+        transmissionList.setAdapter(transmissionAdapter);
+        fuelList.setAdapter(fuelAdapter);
+        vintageList.setAdapter(vintageAdapter);
+        volumeList.setAdapter(volumeAdapter);
+
+    }
     public void getCarBrands() {
         String URL = mySharedPreferencies.getIp()+"/getbrands";
 
@@ -192,8 +292,7 @@ public class NewCar_fragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-            brandAdapter = new ArrayAdapter<String>(getContext(),
-            R.layout.spinner_item,R.id.brandItem,brands);
+            brandAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item,R.id.brandItem,brands);
                 brandList.setAdapter(brandAdapter);
             }
 
