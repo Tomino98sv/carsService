@@ -34,8 +34,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword;
 import com.globalsovy.carserviceapp.POJO.Credencials;
@@ -356,7 +355,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 Log.i("VOLLEY","Error "+error.networkResponse.statusCode);
                 if(error.networkResponse.statusCode==404) {
                     Toast.makeText(LoginActivity.this,"Wrong login or password",Toast.LENGTH_LONG).show();

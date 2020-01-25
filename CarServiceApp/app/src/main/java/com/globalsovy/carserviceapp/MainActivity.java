@@ -26,8 +26,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
@@ -186,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 Toast.makeText(getBaseContext(),"Error "+error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }) {

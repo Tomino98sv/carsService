@@ -18,8 +18,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.LoginActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
@@ -222,7 +221,7 @@ public class CreateNewPassword extends AppCompatActivity {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 Toast.makeText(CreateNewPassword.this,"WTF IS THAT MAN",Toast.LENGTH_LONG).show();
             }
         }) {

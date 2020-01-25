@@ -21,7 +21,7 @@
 13-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:7:22-77
 14
 15    <application
-15-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:9:5-36:19
+15-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:9:5-37:19
 16        android:allowBackup="true"
 16-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:9-35
 17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -85,6 +85,13 @@
 43-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:34:13-43
 44            android:resource="@array/preloaded_fonts" />
 44-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:35:13-54
-45    </application>
-46
-47</manifest>
+45
+46        <uses-library
+46-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:9-88
+47            android:name="org.apache.http.legacy"
+47-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:23-60
+48            android:required="false" />
+48-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:61-85
+49    </application>
+50
+51</manifest>

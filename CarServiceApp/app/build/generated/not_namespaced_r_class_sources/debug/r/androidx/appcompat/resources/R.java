@@ -30,8 +30,8 @@ public final class R {
 
         public static final int notification_action_color_filter = 0x7f06006e;
         public static final int notification_icon_bg_color = 0x7f06006f;
-        public static final int ripple_material_light = 0x7f06007b;
-        public static final int secondary_text_default_material_light = 0x7f06007d;
+        public static final int ripple_material_light = 0x7f06007d;
+        public static final int secondary_text_default_material_light = 0x7f06007f;
     }
     public static final class dimen {
         private dimen() {}
@@ -166,7 +166,7 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int status_bar_notification_info_overflow = 0x7f100034;
+        public static final int status_bar_notification_info_overflow = 0x7f10003b;
     }
     public static final class style {
         private style() {}

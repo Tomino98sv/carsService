@@ -391,28 +391,28 @@ public final class R {
         public static final int material_grey_900 = 0x7f060053;
         public static final int notification_action_color_filter = 0x7f06006e;
         public static final int notification_icon_bg_color = 0x7f06006f;
-        public static final int primary_dark_material_dark = 0x7f060071;
-        public static final int primary_dark_material_light = 0x7f060072;
-        public static final int primary_material_dark = 0x7f060073;
-        public static final int primary_material_light = 0x7f060074;
-        public static final int primary_text_default_material_dark = 0x7f060075;
-        public static final int primary_text_default_material_light = 0x7f060076;
-        public static final int primary_text_disabled_material_dark = 0x7f060077;
-        public static final int primary_text_disabled_material_light = 0x7f060078;
-        public static final int ripple_material_dark = 0x7f06007a;
-        public static final int ripple_material_light = 0x7f06007b;
-        public static final int secondary_text_default_material_dark = 0x7f06007c;
-        public static final int secondary_text_default_material_light = 0x7f06007d;
-        public static final int secondary_text_disabled_material_dark = 0x7f06007e;
-        public static final int secondary_text_disabled_material_light = 0x7f06007f;
-        public static final int switch_thumb_disabled_material_dark = 0x7f060081;
-        public static final int switch_thumb_disabled_material_light = 0x7f060082;
-        public static final int switch_thumb_material_dark = 0x7f060083;
-        public static final int switch_thumb_material_light = 0x7f060084;
-        public static final int switch_thumb_normal_material_dark = 0x7f060085;
-        public static final int switch_thumb_normal_material_light = 0x7f060086;
-        public static final int tooltip_background_dark = 0x7f060087;
-        public static final int tooltip_background_light = 0x7f060088;
+        public static final int primary_dark_material_dark = 0x7f060073;
+        public static final int primary_dark_material_light = 0x7f060074;
+        public static final int primary_material_dark = 0x7f060075;
+        public static final int primary_material_light = 0x7f060076;
+        public static final int primary_text_default_material_dark = 0x7f060077;
+        public static final int primary_text_default_material_light = 0x7f060078;
+        public static final int primary_text_disabled_material_dark = 0x7f060079;
+        public static final int primary_text_disabled_material_light = 0x7f06007a;
+        public static final int ripple_material_dark = 0x7f06007c;
+        public static final int ripple_material_light = 0x7f06007d;
+        public static final int secondary_text_default_material_dark = 0x7f06007e;
+        public static final int secondary_text_default_material_light = 0x7f06007f;
+        public static final int secondary_text_disabled_material_dark = 0x7f060080;
+        public static final int secondary_text_disabled_material_light = 0x7f060081;
+        public static final int switch_thumb_disabled_material_dark = 0x7f060084;
+        public static final int switch_thumb_disabled_material_light = 0x7f060085;
+        public static final int switch_thumb_material_dark = 0x7f060086;
+        public static final int switch_thumb_material_light = 0x7f060087;
+        public static final int switch_thumb_normal_material_dark = 0x7f060088;
+        public static final int switch_thumb_normal_material_light = 0x7f060089;
+        public static final int tooltip_background_dark = 0x7f06008a;
+        public static final int tooltip_background_light = 0x7f06008b;
     }
     public static final class dimen {
         private dimen() {}
@@ -526,14 +526,14 @@ public final class R {
         public static final int notification_subtext_size = 0x7f0700d4;
         public static final int notification_top_pad = 0x7f0700d5;
         public static final int notification_top_pad_large_text = 0x7f0700d6;
-        public static final int tooltip_corner_radius = 0x7f0700db;
-        public static final int tooltip_horizontal_padding = 0x7f0700dc;
-        public static final int tooltip_margin = 0x7f0700dd;
-        public static final int tooltip_precise_anchor_extra_offset = 0x7f0700de;
-        public static final int tooltip_precise_anchor_threshold = 0x7f0700df;
-        public static final int tooltip_vertical_padding = 0x7f0700e0;
-        public static final int tooltip_y_offset_non_touch = 0x7f0700e1;
-        public static final int tooltip_y_offset_touch = 0x7f0700e2;
+        public static final int tooltip_corner_radius = 0x7f0700de;
+        public static final int tooltip_horizontal_padding = 0x7f0700df;
+        public static final int tooltip_margin = 0x7f0700e0;
+        public static final int tooltip_precise_anchor_extra_offset = 0x7f0700e1;
+        public static final int tooltip_precise_anchor_threshold = 0x7f0700e2;
+        public static final int tooltip_vertical_padding = 0x7f0700e3;
+        public static final int tooltip_y_offset_non_touch = 0x7f0700e4;
+        public static final int tooltip_y_offset_touch = 0x7f0700e5;
     }
     public static final class drawable {
         private drawable() {}
@@ -886,8 +886,8 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f100018;
         public static final int abc_shareactionprovider_share_with_application = 0x7f100019;
         public static final int abc_toolbar_collapse_description = 0x7f10001a;
-        public static final int search_menu_title = 0x7f100033;
-        public static final int status_bar_notification_info_overflow = 0x7f100034;
+        public static final int search_menu_title = 0x7f10003a;
+        public static final int status_bar_notification_info_overflow = 0x7f10003b;
     }
     public static final class style {
         private style() {}

@@ -27,12 +27,8 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.globalsovy.carserviceapp.POJO.Credencials;
-import com.globalsovy.carserviceapp.POJO.UserInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -387,7 +383,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
     }
 
     private boolean isEmailValid(CharSequence s) {
-        Pattern sPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]{3,10}\\.{1}[A-Z]{2,6}$",Pattern.CASE_INSENSITIVE);
+        Pattern sPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]{3,15}\\.{1}[A-Z]{2,6}$",Pattern.CASE_INSENSITIVE);
         return sPattern.matcher(s).matches();
     }
 
@@ -538,7 +534,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnFo
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 System.out.println("error "+error);
                 if(error.networkResponse.statusCode==403) {
                     try {

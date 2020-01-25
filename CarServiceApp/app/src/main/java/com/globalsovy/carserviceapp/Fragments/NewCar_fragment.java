@@ -1,6 +1,7 @@
 package com.globalsovy.carserviceapp.Fragments;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,20 +39,21 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.request.JsonArrayRequest;
+import com.android.volley.request.JsonObjectRequest;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.globalsovy.carserviceapp.Adapters.PageAdapter;
+import com.globalsovy.carserviceapp.LoginActivity;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
-import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -60,60 +64,70 @@ import static android.app.Activity.RESULT_OK;
 
 public class NewCar_fragment extends Fragment {
 
-    Toolbar toolbar;
-    NavigationView navigationView;
-    TextView toolbarTitle;
-    ImageView toolbarBtn;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private TextView toolbarTitle;
+    private ImageView toolbarBtn;
 
-    ConstraintLayout addCarPhoto;
-    ImageView carPhoto;
+    private ConstraintLayout addCarPhoto;
+    private ImageView carPhoto;
 
-    Spinner brandList;
-    ArrayList<String> brands;
-    ArrayAdapter<String> brandAdapter;
+    private Spinner brandList;
+    private ArrayList<String> brands;
+    private ArrayAdapter<String> brandAdapter;
 
-    Spinner modelList;
-    ArrayList<String> models;
-    ArrayAdapter<String> modelAdapter;
+    private Spinner modelList;
+    private ArrayList<String> models;
+    private ArrayAdapter<String> modelAdapter;
 
-    Spinner transmissionList;
-    String[] transmissions = {"Manual","Automatic"};
-    ArrayAdapter<String> transmissionAdapter;
+    private Spinner transmissionList;
+    private String[] transmissions = {"Manual","Automatic"};
+    private ArrayAdapter<String> transmissionAdapter;
 
-    Spinner fuelList;
-    String[] fuels = {"Gasoline","Diesel","Liquified Petroleum","Natural Gas","Ethanol","Bio-diesel","Eletric"};
-    ArrayAdapter<String> fuelAdapter;
+    private Spinner fuelList;
+    private String[] fuels = {"Gasoline","Diesel","Liquified Petroleum","Natural Gas","Ethanol","Bio-diesel","Eletric"};
+    private ArrayAdapter<String> fuelAdapter;
 
-    Spinner vintageList;
-    ArrayList<Integer> vintages;
-    ArrayAdapter<Integer> vintageAdapter;
+    private Spinner vintageList;
+    private ArrayList<Integer> vintages;
+    private ArrayAdapter<Integer> vintageAdapter;
 
-    Spinner volumeList;
-    ArrayList<Double> volumes;
-    ArrayAdapter<Double> volumeAdapter;
+    private Spinner volumeList;
+    private ArrayList<Double> volumes;
+    private ArrayAdapter<Double> volumeAdapter;
 
-    EditText colorHex;
-    EditText spzEditText;
-    EditText milageEditText;
-    ImageView pickedColor;
-    Bitmap bitmapPhoto;
+    private EditText colorHex;
+    private EditText spzEditText;
+    private EditText milageEditText;
+    private ImageView pickedColor;
+    private String photoPath = "";
 
-    MySharedPreferencies mySharedPreferencies;
-    RequestQueue myQueue;
-    Button sendNewCar;
+    private MySharedPreferencies mySharedPreferencies;
+    private RequestQueue myQueue;
+    private Button sendNewCar;
 
-    int idcar;
-    int idCarPhoto;
+    private ProgressDialog progressDialog;
 
-    String pickBrand="";
-    String pickModel="";
-    String pickcolor="";
-    int pickvintage=0;
-    int pickkilom=0;
-    String pickSPZ="";
-    String pickfuel="";
-    boolean picktrans=false;
-    double pickvolume=0.0;
+    private int idcar;
+    private int idCarPhoto;
+
+    private String pickBrand="";
+    private String pickModel="";
+    private String pickcolor="";
+    private int pickvintage=0;
+    private int pickkilom=0;
+    private String pickSPZ="";
+    private String pickfuel="";
+    private boolean picktrans=false;
+    private double pickvolume=0.0;
+
+    private boolean millageFilled = false;
+    private boolean spzFilled = false;
+    private boolean colorFilled = false;
+
+    private boolean customProfileImg = false;
+    private boolean carAdded = false;
+    private boolean carPhotoAdded = false;
 
     @Nullable
     @Override
@@ -142,6 +156,9 @@ public class NewCar_fragment extends Fragment {
         addCarPhoto = parent.findViewById(R.id.addPhotoCarLayout);
         carPhoto = parent.findViewById(R.id.currentCarPhoto);
         sendNewCar = parent.findViewById(R.id.addNewCarButton);
+        sendNewCar.setEnabled(false);
+        sendNewCar.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+        sendNewCar.setTextColor(getResources().getColor(R.color.buttonLoginColor));
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -180,24 +197,16 @@ public class NewCar_fragment extends Fragment {
         sendNewCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickcolor = colorHex.getText().toString();
-                pickSPZ = spzEditText.getText().toString();
-                pickkilom = Integer.valueOf(milageEditText.getText().toString());
-                System.out.println(
-                "\nbrand: "+pickBrand
-                +"\nmodel: "+pickModel
-                +"\ncolor: "+pickcolor
-                +"\nvintage: "+pickvintage
-                +"\nkilometrage: "+pickkilom
-                +"\nspz: "+pickSPZ
-                +"\nfuel: "+pickfuel
-                +"\ntransmission: "+picktrans
-                +"\nvolume: "+pickvolume);
-                sendnewCarRequest();
-
+                    pickcolor = colorHex.getText().toString();
+                    pickSPZ = spzEditText.getText().toString();
+                    pickkilom = Integer.valueOf(milageEditText.getText().toString());
+                    if (!photoPath.equals("")){
+                        sendPhotoRequest();
+                        customProfileImg =true;
+                    }
+                    sendnewCarRequest();
             }
         });
-
         setSpinnerOptions();
         setSpinnerSelected();
         getCarBrands();
@@ -219,9 +228,11 @@ public class NewCar_fragment extends Fragment {
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
+            photoPath = imagePath;
+
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            bitmapPhoto = BitmapFactory.decodeFile(imagePath, options);
+            Bitmap bitmapPhoto = BitmapFactory.decodeFile(imagePath, options);
 
             carPhoto.setImageBitmap(bitmapPhoto);
             carPhoto.setVisibility(View.VISIBLE);
@@ -345,10 +356,86 @@ public class NewCar_fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (editable.equals("")){
+                    colorFilled = false;
+                }else {
+                    colorFilled = true;
+                }
                 try {
                     pickedColor.setBackgroundColor(Color.parseColor(editable.toString()));
                 }catch (Exception e){
                     e.printStackTrace();
+                    colorFilled = false;
+                }
+                if (colorFilled && millageFilled && spzFilled){
+                    sendNewCar.setEnabled(true);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.white));
+                }
+                if (!colorFilled || !spzFilled || !millageFilled){
+                    sendNewCar.setEnabled(false);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+                }
+            }
+        });
+        spzEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (String.valueOf(editable).equals("")){
+                    spzFilled = false;
+                }else {
+                    spzFilled = true;
+                }
+                if (colorFilled && millageFilled && spzFilled){
+                    sendNewCar.setEnabled(true);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.white));
+                }
+                if (!colorFilled || !spzFilled || !millageFilled){
+                    sendNewCar.setEnabled(false);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+                }
+            }
+        });
+        milageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (String.valueOf(editable).equals("")){
+                    millageFilled = false;
+                }else {
+                    millageFilled = true;
+                }
+                if (colorFilled && millageFilled && spzFilled){
+                    sendNewCar.setEnabled(true);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.white));
+                }
+                if (!colorFilled || !spzFilled || !millageFilled){
+                    sendNewCar.setEnabled(false);
+                    sendNewCar.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                    sendNewCar.setTextColor(getResources().getColor(R.color.buttonLoginColor));
                 }
             }
         });
@@ -386,7 +473,7 @@ public class NewCar_fragment extends Fragment {
 
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 brands = new ArrayList<>();
             }
         }) {
@@ -420,7 +507,7 @@ public class NewCar_fragment extends Fragment {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 ((MainActivity)getActivity()).changeFragment(NoCars_fragment.class);
             }
         }) {
@@ -451,18 +538,17 @@ public class NewCar_fragment extends Fragment {
     }
     public void sendnewCarRequest() {
         String URL = mySharedPreferencies.getIp()+"/addcar";
-
-        if (bitmapPhoto == null){
-            Toast.makeText(getContext(),"No Photo",Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(getContext(),"Picked Photo",Toast.LENGTH_SHORT).show();
-        }
-
         JsonObjectRequest sendNewCar = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    carAdded = true;
                     idcar = response.getInt("id");
+                    if (customProfileImg){
+                        setProfilePics();
+                    }else{
+                        ((MainActivity)getActivity()).changeFragment(MyCars_fragment.class);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -471,7 +557,7 @@ public class NewCar_fragment extends Fragment {
 
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 try {
                     String message = new String(error.networkResponse.data,"UTF-8");
                     Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
@@ -520,7 +606,94 @@ public class NewCar_fragment extends Fragment {
         ));
         myQueue.add(sendNewCar);
     }
+    public void sendPhotoRequest() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Sending image");
+        progressDialog.show();
+        String url = mySharedPreferencies.getIp()+"/sendimage";
+        SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("Response from sending image "+response);
+                        try {
+                            JSONObject answer = new JSONObject(response);
+                            idCarPhoto = answer.getInt("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (progressDialog.isShowing()){
+                            progressDialog.cancel();
+                        }
+                        carPhotoAdded = true;
+                        setProfilePics();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
+                System.out.println(error.getMessage());
+            }
+        });
+        smr.addStringParam("carid", String.valueOf(35));
+        smr.addFile("image", photoPath);
+        smr.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
 
+        myQueue.add(smr);
+    }
+
+    public void setProfilePics() {
+        if (carPhotoAdded && carAdded){
+
+            String URL = mySharedPreferencies.getIp()+"/setcarprofileimg";
+            StringRequest setProfilePics = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                            ((MainActivity)getActivity()).changeFragment(MyCars_fragment.class);
+                }
+
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(com.android.volley.error.VolleyError error) {
+                    try {
+                        String message = new String(error.networkResponse.data,"UTF-8");
+                        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+                @Override
+                public byte[] getBody() {
+                    try {
+                        JSONObject body = new JSONObject();
+                        body.put("picture",idCarPhoto);
+                        body.put("car",idcar);
+                        String bodyString = body.toString();
+                        return bodyString == null ? null : bodyString.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException | JSONException uee) {
+                        return null;
+                    }
+                }
+            };
+
+            setProfilePics.setRetryPolicy(new DefaultRetryPolicy(
+                    0,
+                    0,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ));
+            myQueue.add(setProfilePics);
+        }
+    }
 }
 
 

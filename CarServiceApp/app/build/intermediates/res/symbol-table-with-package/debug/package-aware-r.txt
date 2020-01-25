@@ -719,6 +719,8 @@ color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
+color photo_crop_dim_color
+color photo_crop_highlight_color
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -735,6 +737,7 @@ color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
 color shadow
+color solid_black
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -960,6 +963,9 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen photo_crop_stroke_width
+dimen photo_crop_width
+dimen photo_preview_size
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
@@ -1664,6 +1670,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
 string appbar_scrolling_view_behavior
+string auth_failed
 string backToLogin
 string bottom_sheet_behavior
 string character_counter_content_description
@@ -1674,11 +1681,17 @@ string emailNotRegister
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string forgetPass
+string generic_error
+string generic_server_down
+string generic_server_timeout
 string hide_bottom_view_on_scroll_behavior
 string mtrl_chip_close_icon_content_description
 string navigation_drawer_close
 string navigation_drawer_open
+string no_internet
+string no_network_connection
 string notRegistred
+string parsing_failed
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through

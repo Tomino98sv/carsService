@@ -20,9 +20,8 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.request.JsonObjectRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode;
 import com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword;
@@ -203,7 +202,7 @@ public class UnconfirmedEmail extends AppCompatActivity {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 System.out.println("error "+error);
                 if(error.networkResponse.statusCode==401) {
                     errorMessage.setTextColor(getResources().getColor(R.color.red));
@@ -273,7 +272,7 @@ public class UnconfirmedEmail extends AppCompatActivity {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
                 Log.i("VOLLEY","Error "+error.networkResponse.statusCode);
             }
         }) {
