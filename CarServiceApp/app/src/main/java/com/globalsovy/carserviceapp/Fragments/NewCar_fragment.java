@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,6 +38,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Adapters.PageAdapter;
 import com.globalsovy.carserviceapp.MainActivity;
@@ -91,10 +93,27 @@ public class NewCar_fragment extends Fragment {
     ArrayAdapter<Double> volumeAdapter;
 
     EditText colorHex;
+    EditText spzEditText;
+    EditText milageEditText;
     ImageView pickedColor;
+    Bitmap bitmapPhoto;
 
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
+    Button sendNewCar;
+
+    int idcar;
+    int idCarPhoto;
+
+    String pickBrand="";
+    String pickModel="";
+    String pickcolor="";
+    int pickvintage=0;
+    int pickkilom=0;
+    String pickSPZ="";
+    String pickfuel="";
+    boolean picktrans=false;
+    double pickvolume=0.0;
 
     @Nullable
     @Override
@@ -117,9 +136,12 @@ public class NewCar_fragment extends Fragment {
         volumeList = parent.findViewById(R.id.volumeList);
         colorHex = parent.findViewById(R.id.colorList);
         pickedColor = parent.findViewById(R.id.colorPicked);
+        spzEditText = parent.findViewById(R.id.spzList);
+        milageEditText = parent.findViewById(R.id.milageList);
 
         addCarPhoto = parent.findViewById(R.id.addPhotoCarLayout);
         carPhoto = parent.findViewById(R.id.currentCarPhoto);
+        sendNewCar = parent.findViewById(R.id.addNewCarButton);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -155,6 +177,27 @@ public class NewCar_fragment extends Fragment {
             }
         });
 
+        sendNewCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickcolor = colorHex.getText().toString();
+                pickSPZ = spzEditText.getText().toString();
+                pickkilom = Integer.valueOf(milageEditText.getText().toString());
+                System.out.println(
+                "\nbrand: "+pickBrand
+                +"\nmodel: "+pickModel
+                +"\ncolor: "+pickcolor
+                +"\nvintage: "+pickvintage
+                +"\nkilometrage: "+pickkilom
+                +"\nspz: "+pickSPZ
+                +"\nfuel: "+pickfuel
+                +"\ntransmission: "+picktrans
+                +"\nvolume: "+pickvolume);
+                sendnewCarRequest();
+
+            }
+        });
+
         setSpinnerOptions();
         setSpinnerSelected();
         getCarBrands();
@@ -178,9 +221,9 @@ public class NewCar_fragment extends Fragment {
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+            bitmapPhoto = BitmapFactory.decodeFile(imagePath, options);
 
-            carPhoto.setImageBitmap(bitmap);
+            carPhoto.setImageBitmap(bitmapPhoto);
             carPhoto.setVisibility(View.VISIBLE);
             cursor.close();
 
@@ -191,6 +234,7 @@ public class NewCar_fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int index, long l) {
                 getCarModels(brands.get(index));
+                pickBrand = brands.get(index);
             }
 
             @Override
@@ -198,11 +242,54 @@ public class NewCar_fragment extends Fragment {
 
             }
         });
-
         modelList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                pickModel = models.get(index);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        transmissionList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                picktrans = transmissions[index].equals("Manual");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        fuelList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                pickfuel = fuels[index];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        vintageList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                pickvintage = vintages.get(index);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        volumeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                pickvolume = volumes.get(index);
             }
 
             @Override
@@ -361,6 +448,77 @@ public class NewCar_fragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(stringRequest);
+    }
+    public void sendnewCarRequest() {
+        String URL = mySharedPreferencies.getIp()+"/addcar";
+
+        if (bitmapPhoto == null){
+            Toast.makeText(getContext(),"No Photo",Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getContext(),"Picked Photo",Toast.LENGTH_SHORT).show();
+        }
+
+        JsonObjectRequest sendNewCar = new JsonObjectRequest(Request.Method.POST, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    idcar = response.getInt("id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    String message = new String(error.networkResponse.data,"UTF-8");
+                    Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+
+                    JSONObject auth = new JSONObject();
+                    auth.put("login",mySharedPreferencies.getLogin());
+                    auth.put("token",mySharedPreferencies.getToken());
+                    body.put("token",auth);
+                    body.put("userID",mySharedPreferencies.getIdLogin());
+                    body.put("brand",pickBrand);
+                    body.put("model",pickModel);
+                    body.put("color",pickcolor);
+                    body.put("vintage",pickvintage);
+                    body.put("kilometrage",pickkilom);
+                    body.put("spz",pickSPZ);
+                    body.put("fuel",pickfuel);
+                    body.put("transmission",picktrans);
+                    body.put("volume",pickvolume);
+
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        sendNewCar.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(sendNewCar);
     }
 
 }
