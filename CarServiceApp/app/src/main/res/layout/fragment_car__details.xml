@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragBG">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-100dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginEnd="20dp"
+        android:rotation="-40"
+        app:srcCompat="@drawable/ic_car" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/singCarForService"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="32dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+            <ImageView
+                android:id="@+id/carPhoto"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@color/colorPrimary"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/brandVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carPhoto"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45"/>
+
+            <TextView
+                android:id="@+id/labeVstBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Brand"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/brandVstCar"
+                app:layout_constraintTop_toTopOf="@+id/brandVstCar" />
+
+            <TextView
+                android:id="@+id/modelVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carPhoto"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Model"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/modelVstCar"
+                app:layout_constraintTop_toTopOf="@+id/modelVstCar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/singCarForService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorPrimary"
+        android:text="I want sign this car for service"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

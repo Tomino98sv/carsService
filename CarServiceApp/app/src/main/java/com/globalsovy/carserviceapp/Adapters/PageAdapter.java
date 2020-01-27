@@ -1,5 +1,6 @@
 package com.globalsovy.carserviceapp.Adapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +22,9 @@ import com.android.volley.Response;
 //import com.android.volley.VolleyError;
 //import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
+import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
+import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
@@ -64,7 +68,7 @@ public class PageAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container, int position) {
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.car_item,container,false);
 
@@ -81,7 +85,12 @@ public class PageAdapter extends PagerAdapter {
         model.setText(carItems.get(position).getModel());
 
         container.addView(view,0);
-
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)context).changeFragment(Car_Details_fragment.class);
+            }
+        });
         return view;
     }
 
@@ -105,7 +114,7 @@ public class PageAdapter extends PagerAdapter {
         protected Bitmap doInBackground(String... params) {
             Bitmap ThumbImage=null;
             try {
-                //ipconfig
+                //ipconfig;
                 URL url = new URL(mySharedPreferencies.getIp() + "/getcarprofileimage?idcar=" + id);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
@@ -133,67 +142,6 @@ public class PageAdapter extends PagerAdapter {
             carImage.setImageBitmap(result);
         }
     }
-
-//    private class SendHttpReqeustForImage extends AsyncTask<String, Void, Void> {
-//
-//        int id;
-//        ImageView carImage;
-//
-//        SendHttpReqeustForImage(int id, ImageView carImage) {
-//            this.id =id;
-//            this.carImage = carImage;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(String... params) {
-//            try {
-//                //ipconfig
-//                String url = mySharedPreferencies.getIp()+"/getcarprofileimage";
-//
-//                ImageRequest imageRequest = new ImageRequest(url,new Response.Listener<Bitmap>() {
-//                    @Override
-//                    public void onResponse(Bitmap response) {
-//                        carImage.setImageBitmap(response);
-//                    }
-//                },0,0, ImageView.ScaleType.CENTER_CROP,null,new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                    }
-//                }) {
-//
-//                    @Override
-//                    public String getBodyContentType() {
-//                        return "application/json; charset=utf-8";
-//                    }
-//                    @Override
-//                    public byte[] getBody() {
-//                        try {
-//                            JSONObject body = new JSONObject();
-//                            body.put("idcar",id);
-//
-//                            String bodyString = body.toString();
-//                            return bodyString == null ? null : bodyString.getBytes("utf-8");
-//                        } catch (UnsupportedEncodingException | JSONException uee) {
-//                            return null;
-//                        }
-//                    }
-//                };
-//
-//                imageRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                        0,
-//                        0,
-//                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-//                ));
-//                myQueue.add(imageRequest);
-//
-//            }catch (Exception e){
-//            }
-//
-//            return null;
-//        }
-//
-//    }
-
 
 }
 

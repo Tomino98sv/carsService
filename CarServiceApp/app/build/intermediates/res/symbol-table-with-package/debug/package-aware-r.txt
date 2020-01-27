@@ -1102,6 +1102,7 @@ drawable ic_authorized_autoservis_app
 drawable ic_car
 drawable ic_carfa
 drawable ic_insert_photo_black_24dp
+drawable ic_keyboard_backspace_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
@@ -1232,6 +1233,7 @@ id bottom
 id brand
 id brandItem
 id brandList
+id brandVstCar
 id btnMyProfile
 id buttonPanel
 id cancelExitDialog
@@ -1239,6 +1241,7 @@ id cancel_action
 id carFaIntro
 id carFaLogin
 id carImage
+id carPhoto
 id carSVGLogin
 id center
 id center_horizontal
@@ -1320,6 +1323,7 @@ id info
 id invisible
 id italic
 id item_touch_helper_previous_elevation
+id labeVstBrand
 id labelBrand
 id labelColor
 id labelEmail
@@ -1342,6 +1346,7 @@ id labelSurname
 id labelTransmission
 id labelVintage
 id labelVolume
+id labelVstModel
 id labeled
 id labelsureNameProfile
 id largeLabel
@@ -1367,6 +1372,7 @@ id milageList
 id mini
 id model
 id modelList
+id modelVstCar
 id msgExitAlert
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
@@ -1442,6 +1448,7 @@ id showCustom
 id showHome
 id showTitle
 id signInLoginTextInp
+id singCarForService
 id sixthDigit
 id smallLabel
 id snackbar_action
@@ -1607,6 +1614,7 @@ layout design_navigation_menu_item
 layout design_text_input_password_icon
 layout exit_dialog
 layout fragment_appointments
+layout fragment_car__details
 layout fragment_my_cars
 layout fragment_my_profile
 layout fragment_my_profile_read

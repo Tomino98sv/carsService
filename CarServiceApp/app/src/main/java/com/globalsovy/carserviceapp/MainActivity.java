@@ -28,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView navEmail;
     TextView MyProfile;
     Button logout;
+
+    int currentIdCar=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onResponse(String response) {
                 Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                mySharedPreferencies.setToken("logouted");
+                mySharedPreferencies.setToken("deafult");
                 startActivity(login);
                 finish();
                 Toast.makeText(getBaseContext(),"See you soon",Toast.LENGTH_SHORT).show();
@@ -197,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public byte[] getBody() {
                 try {
+                    System.out.println("odhlasuejm sa "+mySharedPreferencies.getLogin());
+                    System.out.println("odhlasujeme sa "+mySharedPreferencies.getToken());
                     JSONObject body = new JSONObject();
                     body.put("login",mySharedPreferencies.getLogin());
                     body.put("token",mySharedPreferencies.getToken());
@@ -240,5 +245,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 //        Synchronize the stat
+    }
+
+    public int getCurrentIdCar() {
+        return currentIdCar;
+    }
+
+    public void setCurrentIdCar(int currentIdCar) {
+        this.currentIdCar = currentIdCar;
     }
 }

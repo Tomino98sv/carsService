@@ -78,7 +78,7 @@ public class MyCars_fragment extends Fragment {
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                ((MainActivity)getActivity()).setCurrentIdCar(cars.get(position).getId());
             }
 
             @Override

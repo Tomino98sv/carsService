@@ -44,7 +44,6 @@ import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.globalsovy.carserviceapp.LoginActivity;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;

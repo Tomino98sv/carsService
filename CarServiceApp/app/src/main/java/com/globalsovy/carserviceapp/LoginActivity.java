@@ -118,12 +118,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         notRegistred.setVisibility(View.INVISIBLE);
         forgotPassword.setVisibility(View.INVISIBLE);
 
-        if (!mySharedPreferencies.getToken().equals("logouted")){
-            Intent main = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(main);
-            overridePendingTransition(0, 0);
-            finish();
-        }
+        loginRequest();
 
         loginBtn.setEnabled(false);
 
