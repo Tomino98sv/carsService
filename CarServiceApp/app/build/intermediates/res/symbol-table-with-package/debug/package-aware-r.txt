@@ -1418,7 +1418,9 @@ id passwordRepeadEditTextInt
 id pdfManual
 id percent
 id photo
+id pickImages
 id pickedColorOnVstCar
+id pictureGallery
 id pin
 id progress_circular
 id progress_horizontal
@@ -1454,6 +1456,7 @@ id secondDigit
 id select_dialog_listview
 id selected
 id sendEmailInp
+id sendImages
 id sendResetCode
 id sentCodeToMailText
 id shortcut
@@ -1630,6 +1633,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
 layout exit_dialog
+layout fragment_add_photos
 layout fragment_appointments
 layout fragment_car__details
 layout fragment_my_cars

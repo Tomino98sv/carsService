@@ -1,5 +1,6 @@
 package com.globalsovy.carserviceapp.Fragments;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -115,7 +116,14 @@ public class Car_Details_fragment extends Fragment {
                 ((MainActivity)getActivity()).changeFragment(MyCars_fragment.class);
             }
         });
-        toolbarBtn.setVisibility(View.GONE);
+        toolbarBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_insert_photo_black_24dp));
+        toolbarBtn.setVisibility(View.VISIBLE);
+        toolbarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).changeFragment(Add_Photos.class);
+            }
+        });
 
         requestForPhoto(((MainActivity)getActivity()).getCurrentIdCar());
         reqeustCarDetails(((MainActivity)getActivity()).getCurrentIdCar());

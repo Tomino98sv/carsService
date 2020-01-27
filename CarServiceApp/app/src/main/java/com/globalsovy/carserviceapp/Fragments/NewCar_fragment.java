@@ -633,7 +633,7 @@ public class NewCar_fragment extends Fragment {
                 System.out.println(error.getMessage());
             }
         });
-        smr.addStringParam("carid", String.valueOf(35));
+        smr.addStringParam("carid", String.valueOf(idcar));
         smr.addFile("image", photoPath);
         smr.setRetryPolicy(new DefaultRetryPolicy(
                 0,
