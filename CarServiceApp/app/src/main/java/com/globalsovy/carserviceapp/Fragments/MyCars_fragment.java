@@ -116,6 +116,9 @@ public class MyCars_fragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
+                System.out.println("/n");
+                System.out.println("getCars request");
+                System.out.println("/n");
                 System.out.println(cars.toArray().toString());
                 adapter = new PageAdapter(cars,getContext());
                 viewPager.setAdapter(adapter);

@@ -117,9 +117,7 @@ public class LoginActivity extends AppCompatActivity implements Animation.Animat
         loginBtn.setVisibility(View.INVISIBLE);
         notRegistred.setVisibility(View.INVISIBLE);
         forgotPassword.setVisibility(View.INVISIBLE);
-
-        loginRequest();
-
+        
         loginBtn.setEnabled(false);
 
         loginInp.setOnFocusChangeListener(new View.OnFocusChangeListener() {

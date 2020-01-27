@@ -38,6 +38,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class PageAdapter extends PagerAdapter {
@@ -79,8 +80,8 @@ public class PageAdapter extends PagerAdapter {
         brand = view.findViewById(R.id.brand);
         model = view.findViewById(R.id.model);
 
-        new SendHttpReqeustForImage(carItems.get(position).getId(),carImage).execute();
-
+        SendHttpReqeustForImage getProgil = new SendHttpReqeustForImage(carItems.get(position).getId(),carImage);
+        getProgil.execute();
         brand.setText(carItems.get(position).getBrand());
         model.setText(carItems.get(position).getModel());
 
@@ -104,6 +105,8 @@ public class PageAdapter extends PagerAdapter {
 
         int id;
         ImageView carImage;
+        HttpURLConnection connection;
+        InputStream input;
 
         SendHttpReqeustForImage(int id, ImageView carImage) {
             this.id = id;
@@ -116,10 +119,10 @@ public class PageAdapter extends PagerAdapter {
             try {
                 //ipconfig;
                 URL url = new URL(mySharedPreferencies.getIp() + "/getcarprofileimage?idcar=" + id);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
-                InputStream input = connection.getInputStream();
+                input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input);
 
                 final int THUMBSIZE = 254;
@@ -140,6 +143,13 @@ public class PageAdapter extends PagerAdapter {
         @Override
         protected void onPostExecute(Bitmap result) {
             carImage.setImageBitmap(result);
+            connection.disconnect();
+            try {
+                input.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.cancel(true);
         }
     }
 

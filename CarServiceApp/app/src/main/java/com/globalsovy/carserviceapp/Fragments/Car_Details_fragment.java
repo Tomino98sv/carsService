@@ -2,6 +2,7 @@ package com.globalsovy.carserviceapp.Fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,6 +63,15 @@ public class Car_Details_fragment extends Fragment {
     ImageView carPics;
     TextView brand;
     TextView model;
+    TextView spz;
+    TextView vintage;
+    TextView kilometrage;
+    TextView fuel;
+    TextView transmission;
+    TextView color;
+    ImageView pickedColor;
+    TextView getPdfManual;
+    TextView volume;
 
     @Nullable
     @Override
@@ -77,6 +87,15 @@ public class Car_Details_fragment extends Fragment {
         carPics = parent.findViewById(R.id.carPhoto);
         brand = parent.findViewById(R.id.brandVstCar);
         model = parent.findViewById(R.id.modelVstCar);
+        spz = parent.findViewById(R.id.spzVstCar);
+        vintage = parent.findViewById(R.id.vintageVstCar);
+        kilometrage = parent.findViewById(R.id.kilometreVstCar);
+        fuel = parent.findViewById(R.id.fuelVstCar);
+        transmission = parent.findViewById(R.id.transmissionVstCar);
+        color = parent.findViewById(R.id.colorVstCar);
+        pickedColor = parent.findViewById(R.id.pickedColorOnVstCar);
+        getPdfManual = parent.findViewById(R.id.pdfManual);
+        volume = parent.findViewById(R.id.volumeVstCar);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -166,12 +185,38 @@ public class Car_Details_fragment extends Fragment {
         toolbarTitle.setText(carDetails.getModel());
         brand.setText(carDetails.getBrand());
         model.setText(carDetails.getModel());
+        spz.setText(carDetails.getSPZ());
+        vintage.setText(String.valueOf(carDetails.getVintage()));
+        kilometrage.setText(String.valueOf(carDetails.getKilometrage()));
+        fuel.setText(carDetails.getFuel());
+        volume.setText(String.valueOf(carDetails.getVolume()));
+        if (carDetails.isManualtrans()){
+            transmission.setText("Manual");
+        }else {
+            transmission.setText("Automatic");
+        }
+        color.setText(carDetails.getColor());
+        try {
+            pickedColor.setBackgroundColor(Color.parseColor(carDetails.getColor()));
+        }catch (Exception e){
+            e.getMessage();
+            pickedColor.setBackgroundColor(R.drawable.fill_hard);
+        }
+        getPdfManual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"downloading pdf manual",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private class SendHttpReqeustForImage extends AsyncTask<String, Void, Bitmap> {
 
         int id;
         ImageView carImage;
+        HttpURLConnection connection;
+        InputStream input;
 
         SendHttpReqeustForImage(int id, ImageView carImage) {
             this.id = id;
@@ -184,10 +229,10 @@ public class Car_Details_fragment extends Fragment {
             try {
                 //ipconfig;
                 URL url = new URL(mySharedPreferencies.getIp() + "/getcarprofileimage?idcar=" + id);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
-                InputStream input = connection.getInputStream();
+                input = connection.getInputStream();
                 myBitmap = BitmapFactory.decodeStream(input);
 
             } catch (MalformedURLException e) {
@@ -202,6 +247,13 @@ public class Car_Details_fragment extends Fragment {
         @Override
         protected void onPostExecute(Bitmap result) {
             carImage.setImageBitmap(result);
+            connection.disconnect();
+            try {
+                input.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.cancel(true);
         }
     }
 

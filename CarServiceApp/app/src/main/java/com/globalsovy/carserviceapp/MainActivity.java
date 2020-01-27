@@ -129,9 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void logOutRequest() {
-        finish();
-    }
 
     @Override
     public void onBackPressed() {
@@ -181,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onResponse(String response) {
                 Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                mySharedPreferencies.setToken("deafult");
                 startActivity(login);
                 finish();
                 Toast.makeText(getBaseContext(),"See you soon",Toast.LENGTH_SHORT).show();
@@ -200,8 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public byte[] getBody() {
                 try {
-                    System.out.println("odhlasuejm sa "+mySharedPreferencies.getLogin());
-                    System.out.println("odhlasujeme sa "+mySharedPreferencies.getToken());
                     JSONObject body = new JSONObject();
                     body.put("login",mySharedPreferencies.getLogin());
                     body.put("token",mySharedPreferencies.getToken());

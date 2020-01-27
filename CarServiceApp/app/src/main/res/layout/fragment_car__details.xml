@@ -25,22 +25,23 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/singCarForService"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="32dp">
+        android:layout_marginTop="-15dp"
+        android:layout_marginBottom="47dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:background="@drawable/fill_hard">
 
 
             <ImageView
                 android:id="@+id/carPhoto"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:src="@color/colorPrimary"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:src="@drawable/fill_hard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/carPhoto"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.45"/>
+                app:layout_constraintWidth_percent="0.45" />
 
             <TextView
                 android:id="@+id/labeVstBrand"
@@ -94,6 +95,208 @@
                 android:textAppearance="@style/inputLabelText"
                 app:layout_constraintStart_toStartOf="@+id/modelVstCar"
                 app:layout_constraintTop_toTopOf="@+id/modelVstCar" />
+
+            <TextView
+                android:id="@+id/spzVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/brandVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/brandVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstSpz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="SPZ"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/spzVstCar"
+                app:layout_constraintTop_toTopOf="@+id/spzVstCar" />
+
+            <TextView
+                android:id="@+id/vintageVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/modelVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/modelVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstVintage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Vintage"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/vintageVstCar"
+                app:layout_constraintTop_toTopOf="@+id/vintageVstCar" />
+
+
+
+
+            <TextView
+                android:id="@+id/kilometreVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/spzVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/spzVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstKilometre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Kilometrage"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/kilometreVstCar"
+                app:layout_constraintTop_toTopOf="@+id/kilometreVstCar" />
+
+            <TextView
+                android:id="@+id/fuelVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/vintageVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/vintageVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstFuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Fuel"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/fuelVstCar"
+                app:layout_constraintTop_toTopOf="@+id/fuelVstCar" />
+
+
+            <TextView
+                android:id="@+id/transmissionVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/kilometreVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/kilometreVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstTransmission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Transmission"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/transmissionVstCar"
+                app:layout_constraintTop_toTopOf="@+id/transmissionVstCar" />
+
+            <TextView
+                android:id="@+id/volumeVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/fuelVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/fuelVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <TextView
+                android:id="@+id/labelVstVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Volume"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/volumeVstCar"
+                app:layout_constraintTop_toTopOf="@+id/volumeVstCar" />
+
+            <TextView
+                android:id="@+id/colorVstCar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="bottom|start"
+                android:paddingStart="16dp"
+                android:paddingBottom="8dp"
+                android:text="#sefs"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/volumeVstCar"
+                app:layout_constraintStart_toStartOf="@+id/transmissionVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/transmissionVstCar" />
+
+            <TextView
+                android:id="@+id/labelVstColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Color"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/colorVstCar"
+                app:layout_constraintTop_toTopOf="@+id/colorVstCar" />
+
+            <ImageView
+                android:id="@+id/pickedColorOnVstCar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/colorVstCar"
+                app:layout_constraintEnd_toEndOf="@+id/colorVstCar"
+                app:layout_constraintTop_toTopOf="@+id/colorVstCar"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/pdfManual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download PDF manual"
+                android:textAppearance="@style/forgotPassword"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/colorVstCar"
+                app:layout_constraintTop_toBottomOf="@+id/colorVstCar"
+                app:layout_constraintEnd_toEndOf="@+id/colorVstCar"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -1256,6 +1256,7 @@ id closeImage
 id collapseActionView
 id colorList
 id colorPicked
+id colorVstCar
 id container
 id content
 id contentPanel
@@ -1305,6 +1306,7 @@ id forgotPasswordText
 id fourthDigit
 id fragment_container
 id fuelList
+id fuelVstCar
 id ghost_view
 id gone
 id group_divider
@@ -1323,6 +1325,7 @@ id info
 id invisible
 id italic
 id item_touch_helper_previous_elevation
+id kilometreVstCar
 id labeVstBrand
 id labelBrand
 id labelColor
@@ -1346,7 +1349,14 @@ id labelSurname
 id labelTransmission
 id labelVintage
 id labelVolume
+id labelVstColor
+id labelVstFuel
+id labelVstKilometre
 id labelVstModel
+id labelVstSpz
+id labelVstTransmission
+id labelVstVintage
+id labelVstVolume
 id labeled
 id labelsureNameProfile
 id largeLabel
@@ -1405,7 +1415,9 @@ id passwordEditTextInt
 id passwordInt
 id passwordProfile
 id passwordRepeadEditTextInt
+id pdfManual
 id percent
+id pickedColorOnVstCar
 id pin
 id progress_circular
 id progress_horizontal
@@ -1460,6 +1472,7 @@ id split_action_bar
 id spread
 id spread_inside
 id spzList
+id spzVstCar
 id src_atop
 id src_in
 id src_over
@@ -1508,6 +1521,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id transmissionList
+id transmissionVstCar
 id tryAnotherMail
 id unchecked
 id uniform
@@ -1527,8 +1541,10 @@ id verifyCode
 id view_Pager
 id view_offset_helper
 id vintageList
+id vintageVstCar
 id visible
 id volumeList
+id volumeVstCar
 id welcomeBack
 id withText
 id wrap
