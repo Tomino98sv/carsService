@@ -1,9 +1,9 @@
 package com.globalsovy.carserviceapp.Adapters;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -13,14 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-//import com.android.volley.VolleyError;
-//import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
@@ -29,16 +25,12 @@ import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class PageAdapter extends PagerAdapter {
@@ -47,18 +39,17 @@ public class PageAdapter extends PagerAdapter {
     LayoutInflater inflater;
     Context context;
     MySharedPreferencies mySharedPreferencies;
-    RequestQueue myQueue;
 
     public PageAdapter(List<CarItem> carItems, Context context) {
         super();
         mySharedPreferencies = new MySharedPreferencies(context);
-        myQueue = Volley.newRequestQueue(context);
         this.carItems = carItems;
         this.context = context;
     }
 
     @Override
     public int getCount() {
+        System.out.println("getCount");
         return carItems.size();
     }
 
@@ -70,6 +61,7 @@ public class PageAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull final ViewGroup container, int position) {
+        System.out.println("INSTATIATEitem");
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.car_item,container,false);
 
@@ -84,7 +76,6 @@ public class PageAdapter extends PagerAdapter {
         getProgil.execute();
         brand.setText(carItems.get(position).getBrand());
         model.setText(carItems.get(position).getModel());
-
         container.addView(view,0);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 
 import com.android.volley.DefaultRetryPolicy;
@@ -27,26 +28,33 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
+import com.android.volley.request.JsonArrayRequest;
 import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Adapters.PageAdapter;
+import com.globalsovy.carserviceapp.Adapters.PageAdapterPhotos;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarDetails;
+import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Car_Details_fragment extends Fragment {
 
@@ -60,7 +68,6 @@ public class Car_Details_fragment extends Fragment {
 
     CarDetails carDetails;
 
-    ImageView carPics;
     TextView brand;
     TextView model;
     TextView spz;
@@ -72,6 +79,8 @@ public class Car_Details_fragment extends Fragment {
     ImageView pickedColor;
     TextView getPdfManual;
     TextView volume;
+
+    ViewPager carPics;
 
     @Nullable
     @Override
@@ -108,8 +117,7 @@ public class Car_Details_fragment extends Fragment {
         });
         toolbarBtn.setVisibility(View.GONE);
 
-        new SendHttpReqeustForImage(((MainActivity)getActivity()).getCurrentIdCar(),carPics).execute();
-
+        requestForPhoto(((MainActivity)getActivity()).getCurrentIdCar());
         reqeustCarDetails(((MainActivity)getActivity()).getCurrentIdCar());
         return parent;
     }
@@ -211,50 +219,64 @@ public class Car_Details_fragment extends Fragment {
 
     }
 
-    private class SendHttpReqeustForImage extends AsyncTask<String, Void, Bitmap> {
-
-        int id;
-        ImageView carImage;
-        HttpURLConnection connection;
-        InputStream input;
-
-        SendHttpReqeustForImage(int id, ImageView carImage) {
-            this.id = id;
-            this.carImage = carImage;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            Bitmap myBitmap=null;
-            try {
-                //ipconfig;
-                URL url = new URL(mySharedPreferencies.getIp() + "/getcarprofileimage?idcar=" + id);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                input = connection.getInputStream();
-                myBitmap = BitmapFactory.decodeStream(input);
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void requestForPhoto(final int idcar){
+        String url = mySharedPreferencies.getIp()+"/getcarimages";
+        JsonArrayRequest carPicsRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                List<String> carPhotos = new ArrayList<>();
+                carPhotos.add("getProfile");
+                try {
+                    for (int i=0;i<response.length();i++) {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        carPhotos.add(jsonObject.getString("path"));
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar);
+                carPics.setAdapter(pageAdapterPhotos);
             }
-            return myBitmap;
-
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            carImage.setImageBitmap(result);
-            connection.disconnect();
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                List<String> carPhotos = new ArrayList<>();
+                carPhotos.add("getProfile");
+                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar);
+                carPics.setAdapter(pageAdapterPhotos);
+                try {
+                    String message = new String(error.networkResponse.data,"UTF-8");
+                    Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                }
             }
-            this.cancel(true);
-        }
+        }){
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("idcar",idcar);
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        carPicsRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(carPicsRequest);
     }
 
 }

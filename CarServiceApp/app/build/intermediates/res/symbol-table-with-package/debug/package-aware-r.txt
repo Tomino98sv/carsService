@@ -1417,6 +1417,7 @@ id passwordProfile
 id passwordRepeadEditTextInt
 id pdfManual
 id percent
+id photo
 id pickedColorOnVstCar
 id pin
 id progress_circular
@@ -1638,6 +1639,7 @@ layout fragment_new_car
 layout fragment_no_cars
 layout fragment_notifications
 layout intro_layout
+layout item_photo
 layout login_layout
 layout main_layout
 layout mtrl_layout_snackbar
