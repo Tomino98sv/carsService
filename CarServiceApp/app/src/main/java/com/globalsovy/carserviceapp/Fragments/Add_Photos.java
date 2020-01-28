@@ -91,6 +91,7 @@ public class Add_Photos extends Fragment {
         toolbarBtn.setVisibility(View.GONE);
 
         idcar = ((MainActivity)getActivity()).getCurrentIdCar();
+        photoPaths = new ArrayList<>();
 
         if (ContextCompat.checkSelfPermission(((MainActivity)getActivity()), Manifest.permission.READ_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -111,6 +112,18 @@ public class Add_Photos extends Fragment {
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
 
                 startActivityForResult(chooserIntent, PICK_IMAGE);
+            }
+        });
+
+        saveImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Sending "+ photoPaths.size() +" images");
+                progressDialog.show();
+                for (int i=0;i<photoPaths.size();i++) {
+                    sendPhotoRequest(photoPaths.get(i),i+1);
+                }
             }
         });
 
@@ -159,9 +172,8 @@ public class Add_Photos extends Fragment {
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
-            photoPaths = new ArrayList<>();
             photoPaths.add(imagePath);
-
+            alreadyPicked.removeAllViews();
             for (int i=0;i<photoPaths.size();i++){
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -180,18 +192,15 @@ public class Add_Photos extends Fragment {
         }
     }
 
-    public void sendPhotoRequest() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Sending image");
-        progressDialog.show();
+    public void sendPhotoRequest(String imagePath, final int position) {
         String url = mySharedPreferencies.getIp()+"/sendimage";
         SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Response from sending image "+response);
-                        if (progressDialog.isShowing()){
+                        if (progressDialog.isShowing() && position == photoPaths.size()){
                             progressDialog.cancel();
+                            ((MainActivity)getActivity()).changeFragment(Car_Details_fragment.class);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -201,7 +210,7 @@ public class Add_Photos extends Fragment {
             }
         });
         smr.addStringParam("carid", String.valueOf(idcar));
-        //smr.addFile("image", photoPath);
+        smr.addFile("image", imagePath);
         smr.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 0,

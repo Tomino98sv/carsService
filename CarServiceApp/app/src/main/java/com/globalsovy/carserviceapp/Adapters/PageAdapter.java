@@ -60,7 +60,7 @@ public class PageAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull final ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container,final int position) {
         System.out.println("INSTATIATEitem");
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.car_item,container,false);

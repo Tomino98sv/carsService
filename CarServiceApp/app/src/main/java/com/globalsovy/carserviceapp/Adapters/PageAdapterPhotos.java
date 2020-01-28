@@ -1,5 +1,6 @@
 package com.globalsovy.carserviceapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +20,11 @@ import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
+import com.globalsovy.carserviceapp.POJO.CarImage;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
+import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
+import com.globalsovy.carserviceapp.alertDialogs.DeleteImageDialog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,18 +35,20 @@ import java.util.List;
 
 public class PageAdapterPhotos extends PagerAdapter {
 
-    List<String> carPhotoUrls;
+    List<CarImage> carPhotoUrls;
     LayoutInflater inflater;
     MySharedPreferencies mySharedPreferencies;
     Context context;
     int idcar;
+    Activity activity;
 
-    public PageAdapterPhotos(List<String> carPhotoUrls, Context context,int idcar) {
+    public PageAdapterPhotos(List<CarImage> carPhotoUrls, Context context, int idcar, Activity activity) {
         super();
         this.carPhotoUrls = carPhotoUrls;
         this.context = context;
         mySharedPreferencies = new MySharedPreferencies(context);
         this.idcar = idcar;
+        this.activity = activity;
     }
 
     @Override
@@ -58,16 +64,16 @@ public class PageAdapterPhotos extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull final ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
         System.out.println("INSTATIATEitem");
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_photo,container,false);
 
-        ImageView carImage;
+        final ImageView carImage;
 
         carImage = view.findViewById(R.id.photo);
 
-        if (carPhotoUrls.get(position).equals("getProfile")){
+        if (carPhotoUrls.get(position).getUrl().equals("getProfile")){
             SendHttpReqeustForProfile getProfil = new SendHttpReqeustForProfile(carImage);
             getProfil.execute();
         }else {
@@ -75,6 +81,15 @@ public class PageAdapterPhotos extends PagerAdapter {
             getImg.execute();
         }
         container.addView(view,0);
+        if (carPhotoUrls.get(position).getId() != -1) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DeleteImageDialog dialog = new DeleteImageDialog();
+                    dialog.showDialog(activity,"Delete this image?","Image will be removed from this car",carPhotoUrls.get(position).getId());
+                }
+            });
+        }
         return view;
     }
 
@@ -86,13 +101,13 @@ public class PageAdapterPhotos extends PagerAdapter {
 
     private class SendHttpReqeustForImage extends AsyncTask<String, Void, Bitmap> {
 
-        String url;
+        CarImage image;
         ImageView carImage;
         HttpURLConnection connection;
         InputStream input;
 
-        SendHttpReqeustForImage(String url, ImageView carImage) {
-            this.url = url;
+        SendHttpReqeustForImage(CarImage image, ImageView carImage) {
+            this.image = image;
             this.carImage = carImage;
         }
 
@@ -101,7 +116,7 @@ public class PageAdapterPhotos extends PagerAdapter {
             Bitmap ThumbImage=null;
             try {
                 //ipconfig;
-                URL url = new URL(this.url);
+                URL url = new URL(image.getUrl());
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();

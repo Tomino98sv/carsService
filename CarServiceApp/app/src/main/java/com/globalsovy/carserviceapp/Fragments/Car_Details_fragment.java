@@ -37,6 +37,7 @@ import com.globalsovy.carserviceapp.Adapters.PageAdapterPhotos;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarDetails;
+import com.globalsovy.carserviceapp.POJO.CarImage;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
@@ -232,25 +233,26 @@ public class Car_Details_fragment extends Fragment {
         JsonArrayRequest carPicsRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                List<String> carPhotos = new ArrayList<>();
-                carPhotos.add("getProfile");
+                List<CarImage> carPhotos = new ArrayList<>();
+                carPhotos.add(new CarImage(-1,"getProfile"));
                 try {
                     for (int i=0;i<response.length();i++) {
                         JSONObject jsonObject = response.getJSONObject(i);
-                        carPhotos.add(jsonObject.getString("path"));
+                        CarImage carImage = new CarImage(jsonObject.getInt("id"),jsonObject.getString("path"));
+                        carPhotos.add(carImage);
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar);
+                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity());
                 carPics.setAdapter(pageAdapterPhotos);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                List<String> carPhotos = new ArrayList<>();
-                carPhotos.add("getProfile");
-                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar);
+                List<CarImage> carPhotos = new ArrayList<>();
+                carPhotos.add(new CarImage(-1,"getProfile"));
+                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity());
                 carPics.setAdapter(pageAdapterPhotos);
                 try {
                     String message = new String(error.networkResponse.data,"UTF-8");
