@@ -1,5 +1,6 @@
 package com.globalsovy.carserviceapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.android.volley.RequestQueue;
@@ -24,6 +26,8 @@ import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
+import com.globalsovy.carserviceapp.alertDialogs.DeleteCarDialog;
+import com.globalsovy.carserviceapp.alertDialogs.DeleteImageDialog;
 
 
 import java.io.IOException;
@@ -39,12 +43,16 @@ public class PageAdapter extends PagerAdapter {
     LayoutInflater inflater;
     Context context;
     MySharedPreferencies mySharedPreferencies;
+    Fragment fragment;
+    Activity activity;
 
-    public PageAdapter(List<CarItem> carItems, Context context) {
+    public PageAdapter(List<CarItem> carItems, Context context, Activity activity, Fragment fragment) {
         super();
         mySharedPreferencies = new MySharedPreferencies(context);
         this.carItems = carItems;
         this.context = context;
+        this.fragment = fragment;
+        this.activity = activity;
     }
 
     @Override
@@ -83,6 +91,18 @@ public class PageAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 ((MainActivity)context).changeFragment(Car_Details_fragment.class);
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                DeleteCarDialog dialog = new DeleteCarDialog();
+                dialog.showDialog(activity,
+                        "Delete this Car?",carItems.get(position).getBrand()+" "+carItems.get(position).getModel()+"\n will be removed from your list of cars",
+                        carItems.get(position).getId(),
+                        position,
+                        fragment);
+                return false;
             }
         });
         return view;

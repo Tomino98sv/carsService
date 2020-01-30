@@ -146,8 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
             case R.id.my_cars:
                 if (!menuItem.isChecked()){
+                    fragment = new MyCars_fragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MyCars_fragment()).commit();
+                            fragment).commit();
                     navigationView.setCheckedItem(R.id.my_cars);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }

@@ -18,6 +18,7 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
+import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
 
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class DeleteImageDialog {
+public class DeleteCarDialog {
 
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
@@ -34,7 +35,7 @@ public class DeleteImageDialog {
     int positionInArray;
     Fragment fragment;
 
-    public void showDialog(final Activity activity, String title, String msg, final int idImg, final int positionInArray, final Fragment fragment) {
+    public void showDialog(final Activity activity, String title, String msg, final int idCar, final int positionInArray, final Fragment fragment) {
 
         mySharedPreferencies = new MySharedPreferencies(activity.getApplicationContext());
         myQueue = Volley.newRequestQueue(activity.getApplicationContext());
@@ -58,7 +59,7 @@ public class DeleteImageDialog {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestForDeletePhoto(idImg,activity);
+                requestForDeleteCar(idCar,activity);
             }
         });
 
@@ -74,13 +75,13 @@ public class DeleteImageDialog {
     }
 
 
-    public void requestForDeletePhoto(final int idImg, final Activity activity){
-        String url = mySharedPreferencies.getIp()+"/deleteimage";
-        StringRequest deleteImg = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+    public void requestForDeleteCar(final int idcar, final Activity activity){
+        String url = mySharedPreferencies.getIp()+"/deletecar";
+        StringRequest deleteCar = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(activity.getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-                ((Car_Details_fragment)fragment).adapterRebuild(positionInArray);
+                ((MyCars_fragment)fragment).adapterRebuild(positionInArray);
                 dialog.dismiss();
             }
         }, new Response.ErrorListener() {
@@ -106,7 +107,7 @@ public class DeleteImageDialog {
             public byte[] getBody() {
                 try {
                     JSONObject body = new JSONObject();
-                    body.put("id",idImg);
+                    body.put("id",idcar);
                     String bodyString = body.toString();
                     System.out.println("BODY"+bodyString);
                     return bodyString == null ? null : bodyString.getBytes("utf-8");
@@ -116,15 +117,12 @@ public class DeleteImageDialog {
             }
         };
 
-        deleteImg.setRetryPolicy(new DefaultRetryPolicy(
+        deleteCar.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
-        myQueue.add(deleteImg);
+        myQueue.add(deleteCar);
     }
 
 }
-
-
-

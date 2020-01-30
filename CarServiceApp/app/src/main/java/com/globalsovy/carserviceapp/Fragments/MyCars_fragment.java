@@ -45,6 +45,7 @@ public class MyCars_fragment extends Fragment {
     ViewPager viewPager;
     PageAdapter adapter;
     List<CarItem> cars;
+    Fragment fragment;
 
     @Nullable
     @Override
@@ -71,7 +72,7 @@ public class MyCars_fragment extends Fragment {
                 ((MainActivity)getActivity()).changeFragment(NewCar_fragment.class);
             }
         });
-
+        fragment = ((MainActivity)getActivity()).getFragment();
         getCars();
 
         viewPager.setPadding(50,50,50,50);
@@ -95,6 +96,12 @@ public class MyCars_fragment extends Fragment {
         return parent;
     }
 
+    public void adapterRebuild(int position){
+        cars.remove(position);
+//        pageAdapterPhotos.notifyDataSetChanged();
+        viewPager.setAdapter(adapter);
+    }
+
     public void getCars() {
         String URL = mySharedPreferencies.getIp()+"/getcars";
 
@@ -107,8 +114,8 @@ public class MyCars_fragment extends Fragment {
                         JSONObject car = response.getJSONObject(i);
                         CarItem carItem = new CarItem(
                                 car.getInt("id"),
-                                car.getString("brand"),
-                                car.getString("model")
+                                car.getString("model"),
+                                car.getString("brand")
                         );
                         System.out.println(carItem.toString());
                         cars.add(carItem);
@@ -120,7 +127,7 @@ public class MyCars_fragment extends Fragment {
                 System.out.println("getCars request");
                 System.out.println("/n");
                 System.out.println(cars.toArray().toString());
-                adapter = new PageAdapter(cars,getContext());
+                adapter = new PageAdapter(cars,getContext(),getActivity(),fragment);
                 viewPager.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
