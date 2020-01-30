@@ -1484,6 +1484,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id specialOption
 id split_action_bar
 id spread
 id spread_inside

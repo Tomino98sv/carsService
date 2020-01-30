@@ -18,6 +18,8 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
+import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
+import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.R;
 
@@ -50,15 +52,26 @@ public class DeleteImageDialog {
         TextView msgView = dialog.findViewById(R.id.msgExitAlert);
         TextView cancel = dialog.findViewById(R.id.cancelExitDialog);
         TextView delete = dialog.findViewById(R.id.leaveExitDialog);
+        TextView setProfile = dialog.findViewById(R.id.specialOption);
 
+        setProfile.setVisibility(View.VISIBLE);
         titleView.setText(title);
         msgView.setText(msg);
+        setProfile.setText("Set as profile picture");
         delete.setText("Delete");
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestForDeletePhoto(idImg,activity);
+            }
+        });
+
+        setProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                setProfilePics(idImg,((MainActivity)activity).getCurrentIdCar());
             }
         });
 
@@ -124,6 +137,52 @@ public class DeleteImageDialog {
         myQueue.add(deleteImg);
     }
 
+    public void setProfilePics(final int idImg, final int idcar) {
+
+            String URL = mySharedPreferencies.getIp()+"/setcarprofileimg";
+            StringRequest setProfilePics = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                }
+
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(com.android.volley.error.VolleyError error) {
+                    try {
+                        String message = new String(error.networkResponse.data,"UTF-8");
+                        Toast.makeText(fragment.getContext(),message,Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(fragment.getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+                @Override
+                public byte[] getBody() {
+                    try {
+                        JSONObject body = new JSONObject();
+                        body.put("picture",idImg);
+                        body.put("car",idcar);
+                        String bodyString = body.toString();
+                        return bodyString == null ? null : bodyString.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException | JSONException uee) {
+                        return null;
+                    }
+                }
+            };
+
+            setProfilePics.setRetryPolicy(new DefaultRetryPolicy(
+                    0,
+                    0,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ));
+            myQueue.add(setProfilePics);
+    }
 }
 
 

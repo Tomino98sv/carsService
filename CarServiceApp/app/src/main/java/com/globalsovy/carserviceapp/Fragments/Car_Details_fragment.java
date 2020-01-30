@@ -238,7 +238,14 @@ public class Car_Details_fragment extends Fragment {
         getPdfManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadPDF(carDetails.getDocPath());
+                File manual = new File(Environment.getExternalStorageDirectory()
+                        + File.separator + "Download/manual/"+carDetails.getBrand()+"_"+carDetails.getModel()+".pdf");
+                if (manual.exists()){
+                    ((MainActivity)getActivity()).setUrlPdf(manual.getAbsolutePath());
+                    ((MainActivity)getActivity()).changeFragment(PDF_fragment.class);
+                }else {
+                    downloadPDF(carDetails.getDocPath());
+                }
             }
         });
     }

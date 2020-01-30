@@ -51,7 +51,9 @@ public class DeleteCarDialog {
         TextView msgView = dialog.findViewById(R.id.msgExitAlert);
         TextView cancel = dialog.findViewById(R.id.cancelExitDialog);
         TextView delete = dialog.findViewById(R.id.leaveExitDialog);
+        TextView setProfile = dialog.findViewById(R.id.specialOption);
 
+        setProfile.setVisibility(View.GONE);
         titleView.setText(title);
         msgView.setText(msg);
         delete.setText("Delete");
