@@ -39,7 +39,9 @@ import com.google.android.material.navigation.NavigationView;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -121,9 +123,15 @@ public class Add_Photos extends Fragment {
                 progressDialog = new ProgressDialog(getContext());
                 progressDialog.setMessage("Sending "+ photoPaths.size() +" images");
                 progressDialog.show();
-                for (int i=0;i<photoPaths.size();i++) {
-                    sendPhotoRequest(photoPaths.get(i),i+1);
+                if (photoPaths.size()==0){
+                    if (progressDialog.isShowing())
+                    progressDialog.cancel();
+                }else{
+                    for (int i=0;i<photoPaths.size();i++) {
+                        sendPhotoRequest(photoPaths.get(i),i+1);
+                    }
                 }
+
             }
         });
 
@@ -131,33 +139,6 @@ public class Add_Photos extends Fragment {
     }
 
     public static final int PICK_IMAGE = 1;
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        super.onActivityResult(requestCode,resultCode,data);
-//
-//        if (resultCode == RESULT_OK && data != null) {
-//            if(requestCode == 1){
-//                photoPaths = new ArrayList<String>();
-//                String[] imagesPath = data.getStringExtra("data").split("\\|");
-//                try{
-//                    alreadyPicked.removeAllViews();
-//                }catch (Throwable e){
-//                    e.printStackTrace();
-//                }
-//                for (int i=0;i<imagesPath.length;i++){
-//                    photoPaths.add(imagesPath[i]);
-//                    Bitmap yourbitmap = BitmapFactory.decodeFile(imagesPath[i]);
-//                    ImageView imageView = new ImageView(getContext());
-//                    imageView.setImageBitmap(yourbitmap);
-//                    imageView.setAdjustViewBounds(true);
-//                    alreadyPicked.addView(imageView);
-//                }
-//            }
-//        }
-//
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -209,6 +190,9 @@ public class Add_Photos extends Fragment {
                 System.out.println(error.getMessage());
             }
         });
+
+        Map<String,String> images = new HashMap<>();
+
         smr.addStringParam("carid", String.valueOf(idcar));
         smr.addFile("image", imagePath);
         smr.setRetryPolicy(new DefaultRetryPolicy(
@@ -219,4 +203,5 @@ public class Add_Photos extends Fragment {
 
         myQueue.add(smr);
     }
+
 }

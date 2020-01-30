@@ -2,6 +2,7 @@ package com.globalsovy.carserviceapp.Fragments;
 
 import android.Manifest;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -78,7 +79,7 @@ public class Car_Details_fragment extends Fragment {
     TextView transmission;
     TextView color;
     ImageView pickedColor;
-    TextView getPdfManual;
+    ImageView getPdfManual;
     TextView volume;
     WebView webView;
 
@@ -310,6 +311,10 @@ public class Car_Details_fragment extends Fragment {
     }
 
     public void downloadPDF(String url){
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Downloading...");
+        progressDialog.show();
+
     InputStreamVolleyRequest requestDownload = new InputStreamVolleyRequest(Request.Method.GET, "http://"+url,
                 new Response.Listener<byte[]>() {
                     @Override
@@ -334,8 +339,11 @@ public class Car_Details_fragment extends Fragment {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                Toast.makeText(getContext(), "File saved to"+file.getAbsolutePath()+" folder",
-                                        Toast.LENGTH_LONG).show();
+                                if (progressDialog.isShowing()){
+                                    progressDialog.cancel();
+                                }
+                                ((MainActivity)getActivity()).setUrlPdf(file.getAbsolutePath());
+                                ((MainActivity)getActivity()).changeFragment(PDF_fragment.class);
                             }
                         }catch (Exception e){
                             e.printStackTrace();
@@ -349,11 +357,11 @@ public class Car_Details_fragment extends Fragment {
         }) {
 
         };
-//        requestDownload.setRetryPolicy(new DefaultRetryPolicy(
-//                0,
-//                0,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-//        ));
+        requestDownload.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         myQueue.add(requestDownload);
     }
 

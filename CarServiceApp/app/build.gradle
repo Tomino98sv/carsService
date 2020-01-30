@@ -22,6 +22,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'dev.dworks.libs:volleyplus:+'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.0.3'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support:appcompat-v7:29.1.0'
     implementation 'com.android.support:design:29.1.0'
@@ -34,6 +35,5 @@ dependencies {
 }
 
 //implementation 'com.android.volley:volley:1.1.0'
-//implementation 'com.github.barteksc:android-pdf-viewer:2.0.3'
 
 

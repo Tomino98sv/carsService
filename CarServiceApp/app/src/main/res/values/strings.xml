@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarServiceApp</string>
+    <string name="app_name">CarFa</string>
     <string name="forgetPass">Forgot password?</string>
     <string name="notRegistred">Not registered?</string>
     <string name="backToLogin">Back to Login</string>
