@@ -83,6 +83,9 @@ public class Car_Details_fragment extends Fragment {
     TextView volume;
 
     ViewPager carPics;
+    Fragment fragment;
+    List<CarImage> carPhotos;
+    PageAdapterPhotos pageAdapterPhotos;
 
     @Nullable
     @Override
@@ -125,6 +128,8 @@ public class Car_Details_fragment extends Fragment {
                 ((MainActivity)getActivity()).changeFragment(Add_Photos.class);
             }
         });
+
+        fragment = ((MainActivity)getActivity()).getFragment();
 
         requestForPhoto(((MainActivity)getActivity()).getCurrentIdCar());
         reqeustCarDetails(((MainActivity)getActivity()).getCurrentIdCar());
@@ -225,7 +230,12 @@ public class Car_Details_fragment extends Fragment {
                 Toast.makeText(getContext(),"downloading pdf manual",Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    public void adapterRebuild(int position){
+        carPhotos.remove(position);
+//        pageAdapterPhotos.notifyDataSetChanged();
+        carPics.setAdapter(pageAdapterPhotos);
     }
 
     public void requestForPhoto(final int idcar){
@@ -233,7 +243,7 @@ public class Car_Details_fragment extends Fragment {
         JsonArrayRequest carPicsRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                List<CarImage> carPhotos = new ArrayList<>();
+                carPhotos = new ArrayList<>();
                 carPhotos.add(new CarImage(-1,"getProfile"));
                 try {
                     for (int i=0;i<response.length();i++) {
@@ -244,15 +254,15 @@ public class Car_Details_fragment extends Fragment {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity());
+                pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity(),fragment);
                 carPics.setAdapter(pageAdapterPhotos);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                List<CarImage> carPhotos = new ArrayList<>();
+                carPhotos = new ArrayList<>();
                 carPhotos.add(new CarImage(-1,"getProfile"));
-                PageAdapterPhotos pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity());
+                pageAdapterPhotos = new PageAdapterPhotos(carPhotos,getContext(),idcar,getActivity(),fragment);
                 carPics.setAdapter(pageAdapterPhotos);
                 try {
                     String message = new String(error.networkResponse.data,"UTF-8");

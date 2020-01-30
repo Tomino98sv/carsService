@@ -77,6 +77,8 @@ public class PageAdapter extends PagerAdapter {
         brand.setText(carItems.get(position).getBrand());
         model.setText(carItems.get(position).getModel());
         container.addView(view,0);
+
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,11 +137,6 @@ public class PageAdapter extends PagerAdapter {
         protected void onPostExecute(Bitmap result) {
             carImage.setImageBitmap(result);
             connection.disconnect();
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             this.cancel(true);
         }
     }

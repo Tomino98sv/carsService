@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.android.volley.RequestQueue;
@@ -41,14 +42,16 @@ public class PageAdapterPhotos extends PagerAdapter {
     Context context;
     int idcar;
     Activity activity;
+    Fragment fragment;
 
-    public PageAdapterPhotos(List<CarImage> carPhotoUrls, Context context, int idcar, Activity activity) {
+    public PageAdapterPhotos(List<CarImage> carPhotoUrls, Context context, int idcar, Activity activity, Fragment fragment) {
         super();
         this.carPhotoUrls = carPhotoUrls;
         this.context = context;
         mySharedPreferencies = new MySharedPreferencies(context);
         this.idcar = idcar;
         this.activity = activity;
+        this.fragment = fragment;
     }
 
     @Override
@@ -86,7 +89,7 @@ public class PageAdapterPhotos extends PagerAdapter {
                 @Override
                 public void onClick(View view) {
                     DeleteImageDialog dialog = new DeleteImageDialog();
-                    dialog.showDialog(activity,"Delete this image?","Image will be removed from this car",carPhotoUrls.get(position).getId());
+                    dialog.showDialog(activity,"Delete this image?","Image will be removed from this car",carPhotoUrls.get(position).getId(),position,fragment);
                 }
             });
         }
@@ -141,11 +144,6 @@ public class PageAdapterPhotos extends PagerAdapter {
             if (result != null){
                 carImage.setImageBitmap(result);
                 connection.disconnect();
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 this.cancel(true);
             }else {
                 carImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_car));
@@ -194,11 +192,6 @@ public class PageAdapterPhotos extends PagerAdapter {
         protected void onPostExecute(Bitmap result) {
             carImage.setImageBitmap(result);
             connection.disconnect();
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             this.cancel(true);
         }
     }

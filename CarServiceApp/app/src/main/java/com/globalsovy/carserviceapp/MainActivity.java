@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button logout;
 
     int currentIdCar=0;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void changeFragment(Class fragmentClass) {
-        Fragment fragment = null;
+        fragment = null;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Insert the fragment by replacing any existing fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 fragment).commit();
+
     }
 
     public void setNavigationButtonToDefault(){
@@ -247,5 +249,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setCurrentIdCar(int currentIdCar) {
         this.currentIdCar = currentIdCar;
+    }
+    public Fragment getFragment() {
+        return fragment;
     }
 }
