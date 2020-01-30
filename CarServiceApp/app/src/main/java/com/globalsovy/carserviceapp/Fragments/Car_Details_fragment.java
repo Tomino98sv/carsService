@@ -1,21 +1,24 @@
 package com.globalsovy.carserviceapp.Fragments;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.Manifest;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.media.ThumbnailUtils;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,29 +35,25 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.JsonArrayRequest;
 import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.globalsovy.carserviceapp.Adapters.PageAdapter;
 import com.globalsovy.carserviceapp.Adapters.PageAdapterPhotos;
+import com.globalsovy.carserviceapp.InputStreamVolleyRequest;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarDetails;
 import com.globalsovy.carserviceapp.POJO.CarImage;
-import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
-import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +80,7 @@ public class Car_Details_fragment extends Fragment {
     ImageView pickedColor;
     TextView getPdfManual;
     TextView volume;
+    WebView webView;
 
     ViewPager carPics;
     Fragment fragment;
@@ -133,6 +133,16 @@ public class Car_Details_fragment extends Fragment {
 
         requestForPhoto(((MainActivity)getActivity()).getCurrentIdCar());
         reqeustCarDetails(((MainActivity)getActivity()).getCurrentIdCar());
+        if (ContextCompat.checkSelfPermission(((MainActivity)getActivity()), Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(((MainActivity)getActivity()), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    200);
+        }
+        if (ContextCompat.checkSelfPermission(((MainActivity)getActivity()), Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(((MainActivity)getActivity()), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                    200);
+        }
         return parent;
     }
     public void reqeustCarDetails(final int carId) {
@@ -227,7 +237,7 @@ public class Car_Details_fragment extends Fragment {
         getPdfManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"downloading pdf manual",Toast.LENGTH_SHORT).show();
+                downloadPDF(carDetails.getDocPath());
             }
         });
     }
@@ -297,6 +307,54 @@ public class Car_Details_fragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(carPicsRequest);
+    }
+
+    public void downloadPDF(String url){
+    InputStreamVolleyRequest requestDownload = new InputStreamVolleyRequest(Request.Method.GET, "http://"+url,
+                new Response.Listener<byte[]>() {
+                    @Override
+                    public void onResponse(byte[] response) {
+                        try {
+                            if (response!=null){
+                                String RootDir = Environment.getExternalStorageDirectory()
+                                        + File.separator + "Download/manual";
+
+                                File myDir = new File(RootDir);
+                                myDir.mkdirs();
+
+                                String manualpdf = carDetails.getBrand()+"_"+carDetails.getModel()+".pdf";
+                                File file = new File(myDir, manualpdf);
+                                if (file.exists())
+                                    file.delete();
+                                try {
+                                    FileOutputStream out = new FileOutputStream(file);
+                                    out.write(response);
+                                    out.flush();
+                                    out.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                Toast.makeText(getContext(), "File saved to"+file.getAbsolutePath()+" folder",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+
+        };
+//        requestDownload.setRetryPolicy(new DefaultRetryPolicy(
+//                0,
+//                0,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+//        ));
+        myQueue.add(requestDownload);
     }
 
 }

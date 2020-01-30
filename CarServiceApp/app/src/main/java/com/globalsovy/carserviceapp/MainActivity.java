@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int currentIdCar=0;
     Fragment fragment;
+    String pdfUrl="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,16 +156,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.appointments:
                 if (!menuItem.isChecked()) {
+                    fragment = new MyAppointments_fragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MyAppointments_fragment()).commit();
+                            fragment).commit();
                     navigationView.setCheckedItem(R.id.appointments);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 break;
             case R.id.notifications:
                 if (!menuItem.isChecked()) {
+                    fragment = new Notifications_fragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Notifications_fragment()).commit();
+                            fragment).commit();
                     navigationView.setCheckedItem(R.id.notifications);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
@@ -247,11 +250,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public int getCurrentIdCar() {
         return currentIdCar;
     }
-
     public void setCurrentIdCar(int currentIdCar) {
         this.currentIdCar = currentIdCar;
     }
     public Fragment getFragment() {
         return fragment;
     }
+    public void setUrlPdf(String url){
+        pdfUrl = url;
+    }
+    public String getUrlPdf(){
+        return pdfUrl;
+    }
+
 }

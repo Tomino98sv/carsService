@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
 MERGED from [dev.dworks.libs:volleyplus:0.1.4] C:\Users\user\.gradle\caches\transforms-2\files-2.1\8b333a9e9012b89ec93db851e7fff7fa\jetified-volleyplus-0.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\2946ca0ea6c89dab7d7d9fbc18e54292\material-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\d74b5b498b35fd5cb32d0a6997bb1d3d\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
@@ -42,20 +42,20 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\user\.gradle\caches\
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\df65787e67fe4b4bc0635deed9695797\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\a1f5477cd6fd5fad9baa3e263bec7d60\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\60b50828def4ba3859898ffb4c971c21\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
-INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
 	package
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:3:5-43
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-39:12
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:1-40:12
 		INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:2:11-69
@@ -71,8 +71,12 @@ uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:7:5-79
 	android:name
 		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:8:22-78
 application
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:9:5-37:19
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:5-38:19
 MERGED from [dev.dworks.libs:volleyplus:0.1.4] C:\Users\user\.gradle\caches\transforms-2\files-2.1\8b333a9e9012b89ec93db851e7fff7fa\jetified-volleyplus-0.1.4\AndroidManifest.xml:9:5-20
 MERGED from [dev.dworks.libs:volleyplus:0.1.4] C:\Users\user\.gradle\caches\transforms-2\files-2.1\8b333a9e9012b89ec93db851e7fff7fa\jetified-volleyplus-0.1.4\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\2946ca0ea6c89dab7d7d9fbc18e54292\material-1.0.0\AndroidManifest.xml:22:5-20
@@ -86,77 +90,77 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\us
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\f01b27bb220ecb79298884ef36a7a2fb\core-1.1.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:9-35
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:9-40
 	android:networkSecurityConfig
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:13:9-69
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:14:9-69
 activity#com.globalsovy.carserviceapp.ForgetPassword.NotRegisterEmail
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:9-78
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:9-78
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:17:19-66
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:19-66
 activity#com.globalsovy.carserviceapp.ForgetPassword.CreateNewPassword
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:9-70
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:9-70
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:18:19-67
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:19-67
 activity#com.globalsovy.carserviceapp.ForgetPassword.ConfirmDigitCode
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:9-69
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:9-69
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:19:19-66
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:19-66
 activity#com.globalsovy.carserviceapp.ForgetPassword.EmailForResetPassword
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:9-74
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:9-74
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:20:19-71
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:19-71
 activity#com.globalsovy.carserviceapp.RegistrationActivity
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:9-58
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:9-58
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:21:19-55
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:19-55
 activity#com.globalsovy.carserviceapp.MainActivity
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:9-50
-	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:19-47
-activity#com.globalsovy.carserviceapp.LoginActivity
 ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:9-50
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:19-48
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:19-47
+activity#com.globalsovy.carserviceapp.LoginActivity
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:9-50
+	android:name
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:19-48
 activity#com.globalsovy.carserviceapp.UnconfirmedEmail
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:9-53
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:9-53
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:19-51
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:19-51
 activity#com.globalsovy.carserviceapp.IntroActivty
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:9-31:20
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:9-32:20
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:19-47
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:13-30:29
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:13-31:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:17-69
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:25-66
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:17-77
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:17-77
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:27-74
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:27-74
 meta-data#preloaded_fonts
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:33:9-35:57
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:34:9-36:57
 	android:resource
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:35:13-54
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:13-54
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:34:13-43
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:35:13-43
 uses-library#org.apache.http.legacy
-ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:9-88
+ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:9-88
 	android:required
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:61-85
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:61-85
 	android:name
-		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:23-60
+		ADDED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:23-60
 uses-sdk
 INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml
