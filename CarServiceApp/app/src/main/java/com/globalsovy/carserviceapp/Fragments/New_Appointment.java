@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -26,6 +29,11 @@ public class New_Appointment extends Fragment {
     ImageView toolbarBtn;
 
     ScrollView scrollView;
+    TextView pickDate;
+    CalendarView calendarView;
+
+    Animation scaleDown;
+    Animation scaleUp;
 
     @Nullable
     @Override
@@ -37,6 +45,11 @@ public class New_Appointment extends Fragment {
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
         toolbar = getActivity().findViewById(R.id.toolbar);
         scrollView = parent.findViewById(R.id.scrollOnNewAppoint);
+        pickDate = parent.findViewById(R.id.pickDisplayDate);
+        calendarView = parent.findViewById(R.id.calendarView);
+
+        scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up_down);
+        scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down_toup);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -44,6 +57,7 @@ public class New_Appointment extends Fragment {
         toolbarTitle.setText("Select Date & Time");
         toolbarBtn.setVisibility(View.GONE);
         toolbar.setNavigationIcon(R.drawable.close);
+        calendarView.setVisibility(View.GONE);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +65,114 @@ public class New_Appointment extends Fragment {
             }
         });
 
+        scaleUp.setAnimationListener(new Animation.AnimationListener() {
+            //z hora na dol
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                calendarView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        scaleDown.setAnimationListener(new Animation.AnimationListener() {
+            //z dola na hor
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                calendarView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (calendarView.getVisibility() == View.GONE){
+                    calendarView.startAnimation(scaleUp);
+                }else {
+                    calendarView.startAnimation(scaleDown);
+                }
+            }
+        });
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                String date = formatDay(day)+" "+formatMonth(month)+" "+year;
+                pickDate.setText(date);
+                calendarView.setVisibility(View.GONE);
+            }
+        });
+
         return parent;
+    }
+
+    public String formatDay(int day){
+        if (day<10){
+            return "0"+day+".";
+        }else {
+            return ""+day+".";
+        }
+    }
+
+    public String formatMonth(int month){
+        String m="";
+        switch (month) {
+            case 1:
+                m="January";
+                break;
+            case 2:
+                m="February";
+                break;
+            case 3:
+                m="March";
+                break;
+            case 4:
+                m="April";
+                break;
+            case 5:
+                m="May";
+                break;
+            case 6:
+                m="June";
+                break;
+            case 7:
+                m="July";
+                break;
+            case 8:
+                m="August";
+                break;
+            case 9:
+                m="September";
+                break;
+            case 10:
+                m="October";
+                break;
+            case 11:
+                m="November";
+                break;
+            case 12:
+                m="December";
+                break;
+
+        }
+        return m;
     }
 }

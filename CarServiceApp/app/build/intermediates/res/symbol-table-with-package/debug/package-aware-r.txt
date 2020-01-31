@@ -35,6 +35,8 @@ anim fade_in
 anim fade_out
 anim move_right_disapear
 anim rotate
+anim scale_down_toup
+anim scale_up_down
 anim smooth_forward
 anim smooth_rotate
 animator design_appbar_state_list_animator
@@ -1265,6 +1267,7 @@ id brandList
 id brandVstCar
 id btnMyProfile
 id buttonPanel
+id calendarView
 id cancelExitDialog
 id cancel_action
 id carFaIntro
