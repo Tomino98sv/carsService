@@ -28,11 +28,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.Fragments.Add_Photos;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
+import com.globalsovy.carserviceapp.Fragments.NewCar_fragment;
 import com.globalsovy.carserviceapp.Fragments.Notifications_fragment;
+import com.globalsovy.carserviceapp.Fragments.PDF_fragment;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.google.android.material.navigation.NavigationView;
 
@@ -136,6 +139,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
+        }else if(fragment instanceof Car_Details_fragment) {
+            changeFragment(MyCars_fragment.class);
+        }else if(fragment instanceof NewCar_fragment) {
+            changeFragment(MyCars_fragment.class);
+        }
+        else if(fragment instanceof NewCar_fragment) {
+            changeFragment(MyCars_fragment.class);
+        }else if(fragment instanceof PDF_fragment) {
+            changeFragment(Car_Details_fragment.class);
+        }else if(fragment instanceof Add_Photos) {
+            changeFragment(Car_Details_fragment.class);
+        }else if(fragment instanceof MyProfile_fragment) {
+            changeFragment(MyCars_fragment.class);
         }else {
             BackToLoginAlertDialog dialog = new BackToLoginAlertDialog();
             dialog.showDialog(MainActivity.this,"Log Out","You will be routed back to login screen");

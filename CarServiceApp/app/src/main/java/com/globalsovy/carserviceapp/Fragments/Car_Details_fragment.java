@@ -54,6 +54,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PipedOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -252,6 +253,12 @@ public class Car_Details_fragment extends Fragment {
 
     public void adapterRebuild(int position){
         carPhotos.remove(position);
+//        pageAdapterPhotos.notifyDataSetChanged();
+        carPics.setAdapter(pageAdapterPhotos);
+    }
+
+    public void setNewProfileRebuild(int position){
+        carPhotos.set(0,carPhotos.get(position));
 //        pageAdapterPhotos.notifyDataSetChanged();
         carPics.setAdapter(pageAdapterPhotos);
     }

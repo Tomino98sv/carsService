@@ -143,9 +143,9 @@ public class DeleteImageDialog {
             StringRequest setProfilePics = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    ((Car_Details_fragment)fragment).setNewProfileRebuild(positionInArray);
+                    dialog.dismiss();
                 }
-
-
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(com.android.volley.error.VolleyError error) {
