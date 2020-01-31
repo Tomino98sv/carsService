@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragBG">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-100dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginEnd="20dp"
+        android:rotation="-40"
+        app:srcCompat="@drawable/ic_car" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
+            android:weightSum="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/prevDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:src="@drawable/arrow_back" />
+
+            <TextView
+                android:id="@+id/pickDisplayDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="0.6"
+                android:text="00. Januar Year"
+                android:textAlignment="center"
+                android:textAppearance="@style/welcomeBack"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/nextDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:src="@drawable/arrow_next" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollOnNewAppoint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            android:fillViewport="true"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/t830"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="8:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/arrow1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t830"
+                    app:layout_constraintEnd_toEndOf="@+id/t830"
+                    app:layout_constraintTop_toTopOf="@+id/t830"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t900"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="9:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t830"
+                    app:layout_constraintStart_toStartOf="@+id/t830"
+                    app:layout_constraintTop_toBottomOf="@+id/t830" />
+
+                <ImageView
+                    android:id="@+id/arrow2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t900"
+                    app:layout_constraintEnd_toEndOf="@+id/t900"
+                    app:layout_constraintTop_toTopOf="@+id/t900"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t930"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="9:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t900"
+                    app:layout_constraintStart_toStartOf="@+id/t900"
+                    app:layout_constraintTop_toBottomOf="@+id/t900" />
+
+                <ImageView
+                    android:id="@+id/arrow3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t930"
+                    app:layout_constraintEnd_toEndOf="@+id/t930"
+                    app:layout_constraintTop_toTopOf="@+id/t930"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="10:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t930"
+                    app:layout_constraintStart_toStartOf="@+id/t930"
+                    app:layout_constraintTop_toBottomOf="@+id/t930" />
+
+                <ImageView
+                    android:id="@+id/arrow4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1000"
+                    app:layout_constraintEnd_toEndOf="@+id/t1000"
+                    app:layout_constraintTop_toTopOf="@+id/t1000"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1030"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="10:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1000"
+                    app:layout_constraintStart_toStartOf="@+id/t1000"
+                    app:layout_constraintTop_toBottomOf="@+id/t1000" />
+
+                <ImageView
+                    android:id="@+id/arrow5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1030"
+                    app:layout_constraintEnd_toEndOf="@+id/t1030"
+                    app:layout_constraintTop_toTopOf="@+id/t1030"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="11:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1030"
+                    app:layout_constraintStart_toStartOf="@+id/t1030"
+                    app:layout_constraintTop_toBottomOf="@+id/t1030" />
+
+                <ImageView
+                    android:id="@+id/arrow6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1100"
+                    app:layout_constraintEnd_toEndOf="@+id/t1100"
+                    app:layout_constraintTop_toTopOf="@+id/t1100"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1130"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="11:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1100"
+                    app:layout_constraintStart_toStartOf="@+id/t1100"
+                    app:layout_constraintTop_toBottomOf="@+id/t1100" />
+
+                <ImageView
+                    android:id="@+id/arrow7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1130"
+                    app:layout_constraintEnd_toEndOf="@+id/t1130"
+                    app:layout_constraintTop_toTopOf="@+id/t1130"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1200"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="12:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1130"
+                    app:layout_constraintStart_toStartOf="@+id/t1130"
+                    app:layout_constraintTop_toBottomOf="@+id/t1130" />
+
+                <ImageView
+                    android:id="@+id/arrow8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1200"
+                    app:layout_constraintEnd_toEndOf="@+id/t1200"
+                    app:layout_constraintTop_toTopOf="@+id/t1200"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1230"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="12:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1200"
+                    app:layout_constraintStart_toStartOf="@+id/t1200"
+                    app:layout_constraintTop_toBottomOf="@+id/t1200" />
+
+                <ImageView
+                    android:id="@+id/arrow9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1230"
+                    app:layout_constraintEnd_toEndOf="@+id/t1230"
+                    app:layout_constraintTop_toTopOf="@+id/t1230"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1300"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="13:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1230"
+                    app:layout_constraintStart_toStartOf="@+id/t1230"
+                    app:layout_constraintTop_toBottomOf="@+id/t1230" />
+
+                <ImageView
+                    android:id="@+id/arrow10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1300"
+                    app:layout_constraintEnd_toEndOf="@+id/t1300"
+                    app:layout_constraintTop_toTopOf="@+id/t1300"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1330"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="13:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1300"
+                    app:layout_constraintStart_toStartOf="@+id/t1300"
+                    app:layout_constraintTop_toBottomOf="@+id/t1300" />
+
+                <ImageView
+                    android:id="@+id/arrow11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1330"
+                    app:layout_constraintEnd_toEndOf="@+id/t1330"
+                    app:layout_constraintTop_toTopOf="@+id/t1330"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="14:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1330"
+                    app:layout_constraintStart_toStartOf="@+id/t1330"
+                    app:layout_constraintTop_toBottomOf="@+id/t1330" />
+
+                <ImageView
+                    android:id="@+id/arrow12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1400"
+                    app:layout_constraintEnd_toEndOf="@+id/t1400"
+                    app:layout_constraintTop_toTopOf="@+id/t1400"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1430"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="14:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1400"
+                    app:layout_constraintStart_toStartOf="@+id/t1400"
+                    app:layout_constraintTop_toBottomOf="@+id/t1400" />
+
+                <ImageView
+                    android:id="@+id/arrow13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1430"
+                    app:layout_constraintEnd_toEndOf="@+id/t1430"
+                    app:layout_constraintTop_toTopOf="@+id/t1430"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1500"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="15:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1430"
+                    app:layout_constraintStart_toStartOf="@+id/t1430"
+                    app:layout_constraintTop_toBottomOf="@+id/t1430" />
+
+                <ImageView
+                    android:id="@+id/arrow14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1500"
+                    app:layout_constraintEnd_toEndOf="@+id/t1500"
+                    app:layout_constraintTop_toTopOf="@+id/t1500"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1530"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="15:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1500"
+                    app:layout_constraintStart_toStartOf="@+id/t1500"
+                    app:layout_constraintTop_toBottomOf="@+id/t1500" />
+
+                <ImageView
+                    android:id="@+id/arrow15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1530"
+                    app:layout_constraintEnd_toEndOf="@+id/t1530"
+                    app:layout_constraintTop_toTopOf="@+id/t1530"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t1600"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="16:00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t1530"
+                    app:layout_constraintStart_toStartOf="@+id/t1530"
+                    app:layout_constraintTop_toBottomOf="@+id/t1530" />
+
+                <ImageView
+                    android:id="@+id/arrow16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t1600"
+                    app:layout_constraintEnd_toEndOf="@+id/t1600"
+                    app:layout_constraintTop_toTopOf="@+id/t1600"
+                    app:srcCompat="@drawable/arrow_next" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

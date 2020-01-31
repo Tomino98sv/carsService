@@ -34,6 +34,7 @@ import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
 import com.globalsovy.carserviceapp.Fragments.NewCar_fragment;
+import com.globalsovy.carserviceapp.Fragments.New_Appointment;
 import com.globalsovy.carserviceapp.Fragments.Notifications_fragment;
 import com.globalsovy.carserviceapp.Fragments.PDF_fragment;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragment(Car_Details_fragment.class);
         }else if(fragment instanceof MyProfile_fragment) {
             changeFragment(MyCars_fragment.class);
+        }else if(fragment instanceof New_Appointment) {
+            changeFragment(MyAppointments_fragment.class);
         }else {
             BackToLoginAlertDialog dialog = new BackToLoginAlertDialog();
             dialog.showDialog(MainActivity.this,"Log Out","You will be routed back to login screen");
