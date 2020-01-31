@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 public class PageAdapterPhotos extends PagerAdapter {
@@ -43,6 +44,7 @@ public class PageAdapterPhotos extends PagerAdapter {
     int idcar;
     Activity activity;
     Fragment fragment;
+    HashMap<Integer, Bitmap> alreadyDownloaded;
 
     public PageAdapterPhotos(List<CarImage> carPhotoUrls, Context context, int idcar, Activity activity, Fragment fragment) {
         super();
@@ -52,6 +54,7 @@ public class PageAdapterPhotos extends PagerAdapter {
         this.idcar = idcar;
         this.activity = activity;
         this.fragment = fragment;
+        alreadyDownloaded = new HashMap<>();
     }
 
     @Override
@@ -71,20 +74,26 @@ public class PageAdapterPhotos extends PagerAdapter {
         System.out.println("INSTATIATEitem");
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_photo,container,false);
+        CarImage currentCarImage = carPhotoUrls.get(position);
 
         final ImageView carImage;
 
         carImage = view.findViewById(R.id.photo);
 
-        if (carPhotoUrls.get(position).getUrl().equals("getProfile")){
-            SendHttpReqeustForProfile getProfil = new SendHttpReqeustForProfile(carImage);
-            getProfil.execute();
+        if (alreadyDownloaded.get(currentCarImage.getId()) == null){
+            if (currentCarImage.getUrl().equals("getProfile")){
+                SendHttpReqeustForProfile getProfil = new SendHttpReqeustForProfile(carImage,position);
+                getProfil.execute();
+            }else {
+                SendHttpReqeustForImage getImg = new SendHttpReqeustForImage(carImage,position);
+                getImg.execute();
+            }
         }else {
-            SendHttpReqeustForImage getImg = new SendHttpReqeustForImage(carPhotoUrls.get(position),carImage);
-            getImg.execute();
+            carImage.setImageBitmap(alreadyDownloaded.get(currentCarImage.getId()));
         }
+
         container.addView(view,0);
-        if (carPhotoUrls.get(position).getId() != -1) {
+        if (currentCarImage.getId() != -1) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -108,10 +117,12 @@ public class PageAdapterPhotos extends PagerAdapter {
         ImageView carImage;
         HttpURLConnection connection;
         InputStream input;
+        int position;
 
-        SendHttpReqeustForImage(CarImage image, ImageView carImage) {
-            this.image = image;
+        SendHttpReqeustForImage(ImageView carImage, int position) {
+            this.image = carPhotoUrls.get(position);
             this.carImage = carImage;
+            this.position = position;
         }
 
         @Override
@@ -142,6 +153,7 @@ public class PageAdapterPhotos extends PagerAdapter {
         @Override
         protected void onPostExecute(Bitmap result) {
             if (result != null){
+                alreadyDownloaded.put(carPhotoUrls.get(position).getId(),result);
                 carImage.setImageBitmap(result);
                 connection.disconnect();
                 this.cancel(true);
@@ -156,9 +168,11 @@ public class PageAdapterPhotos extends PagerAdapter {
         ImageView carImage;
         HttpURLConnection connection;
         InputStream input;
+        int position;
 
-        SendHttpReqeustForProfile(ImageView carImage) {
+        SendHttpReqeustForProfile(ImageView carImage, int position) {
             this.carImage = carImage;
+            this.position = position;
         }
 
         @Override
@@ -190,6 +204,7 @@ public class PageAdapterPhotos extends PagerAdapter {
 
         @Override
         protected void onPostExecute(Bitmap result) {
+            alreadyDownloaded.put(carPhotoUrls.get(position).getId(),result);
             carImage.setImageBitmap(result);
             connection.disconnect();
             this.cancel(true);

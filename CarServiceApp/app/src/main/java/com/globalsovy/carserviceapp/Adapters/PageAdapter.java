@@ -24,6 +24,7 @@ import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
+import com.globalsovy.carserviceapp.POJO.CarImage;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 import com.globalsovy.carserviceapp.alertDialogs.DeleteCarDialog;
@@ -35,6 +36,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 public class PageAdapter extends PagerAdapter {
@@ -45,6 +47,7 @@ public class PageAdapter extends PagerAdapter {
     MySharedPreferencies mySharedPreferencies;
     Fragment fragment;
     Activity activity;
+    HashMap<Integer, Bitmap> alreadyDownloaded;
 
     public PageAdapter(List<CarItem> carItems, Context context, Activity activity, Fragment fragment) {
         super();
@@ -53,6 +56,7 @@ public class PageAdapter extends PagerAdapter {
         this.context = context;
         this.fragment = fragment;
         this.activity = activity;
+        alreadyDownloaded = new HashMap<>();
     }
 
     @Override
@@ -72,6 +76,7 @@ public class PageAdapter extends PagerAdapter {
         System.out.println("INSTATIATEitem");
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.car_item,container,false);
+        final CarItem currentCarItem = carItems.get(position);
 
         ImageView carImage;
         TextView brand,model;
@@ -80,10 +85,17 @@ public class PageAdapter extends PagerAdapter {
         brand = view.findViewById(R.id.brand);
         model = view.findViewById(R.id.model);
 
-        SendHttpReqeustForImage getProgil = new SendHttpReqeustForImage(carItems.get(position).getId(),carImage);
-        getProgil.execute();
-        brand.setText(carItems.get(position).getBrand());
-        model.setText(carItems.get(position).getModel());
+        if (alreadyDownloaded.get(currentCarItem.getId()) == null){
+            SendHttpReqeustForImage getProgil = new SendHttpReqeustForImage(currentCarItem.getId(),carImage);
+            getProgil.execute();
+        }else {
+            carImage.setImageBitmap(alreadyDownloaded.get(currentCarItem.getId()));
+        }
+
+
+
+        brand.setText(currentCarItem.getBrand());
+        model.setText(currentCarItem.getModel());
         container.addView(view,0);
 
 
@@ -98,8 +110,8 @@ public class PageAdapter extends PagerAdapter {
             public boolean onLongClick(View view) {
                 DeleteCarDialog dialog = new DeleteCarDialog();
                 dialog.showDialog(activity,
-                        "Delete this Car?",carItems.get(position).getBrand()+" "+carItems.get(position).getModel()+"\n will be removed from your list of cars",
-                        carItems.get(position).getId(),
+                        "Delete this Car?",currentCarItem.getBrand()+" "+currentCarItem.getModel()+"\n will be removed from your list of cars",
+                        currentCarItem.getId(),
                         position,
                         fragment);
                 return false;
@@ -155,6 +167,7 @@ public class PageAdapter extends PagerAdapter {
 
         @Override
         protected void onPostExecute(Bitmap result) {
+            alreadyDownloaded.put(id,result);
             carImage.setImageBitmap(result);
             connection.disconnect();
             this.cancel(true);
