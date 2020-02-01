@@ -75,7 +75,7 @@
                     android:background="@drawable/fill_hard"
                     android:gravity="start"
                     android:hint="@string/hintAppointmentNote"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:minHeight="150dp"
                     android:paddingStart="5dp"
                     android:paddingTop="15dp"

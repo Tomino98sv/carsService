@@ -58,7 +58,7 @@ public class PageAdapter extends PagerAdapter {
         this.context = context;
         this.fragment = fragment;
         this.activity = activity;
-        alreadyDownloaded = new HashMap<>();
+        alreadyDownloaded = ((MainActivity)activity).getAlreadyDownloaded();
     }
 
     @Override
@@ -88,9 +88,10 @@ public class PageAdapter extends PagerAdapter {
         model = view.findViewById(R.id.model);
 
         if (alreadyDownloaded.get(currentCarItem.getId()) == null){
-            SendHttpReqeustForImage getProgil = new SendHttpReqeustForImage(currentCarItem.getId(),carImage);
+            SendHttpReqeustForImage getProgil = new SendHttpReqeustForImage(currentCarItem.getId(),carImage,activity);
             getProgil.execute();
         }else {
+            System.out.println("NO NEED DOWNLOAD IMAGE");
             carImage.setImageBitmap(alreadyDownloaded.get(currentCarItem.getId()));
         }
 
@@ -134,10 +135,12 @@ public class PageAdapter extends PagerAdapter {
         ImageView carImage;
         HttpURLConnection connection;
         InputStream input;
+        Activity activity;
 
-        SendHttpReqeustForImage(int id, ImageView carImage) {
+        SendHttpReqeustForImage(int id, ImageView carImage,Activity activity) {
             this.id = id;
             this.carImage = carImage;
+            this.activity = activity;
         }
 
         @Override
@@ -170,6 +173,7 @@ public class PageAdapter extends PagerAdapter {
         @Override
         protected void onPostExecute(Bitmap result) {
             alreadyDownloaded.put(id,result);
+            ((MainActivity)activity).setAlreadyDownloaded(alreadyDownloaded);
             carImage.setImageBitmap(result);
             connection.disconnect();
             this.cancel(true);

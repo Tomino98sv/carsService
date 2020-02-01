@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -47,6 +48,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     long newAppointmentDate=0;
     String newAppointmentTime="";
     ArrayList<CarItem> myCars;
+    HashMap<Integer, Bitmap> alreadyDownloaded = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,6 +310,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void setMyCars(ArrayList<CarItem> myCars){
         this.myCars = myCars;
+    }
+    public HashMap<Integer, Bitmap> getAlreadyDownloaded(){
+        return alreadyDownloaded;
+    }
+    public void setAlreadyDownloaded(HashMap<Integer, Bitmap> alreadyDownloaded){
+        this.alreadyDownloaded = alreadyDownloaded;
     }
 
 //    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
