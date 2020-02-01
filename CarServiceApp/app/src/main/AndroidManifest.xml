@@ -20,7 +20,8 @@
         <activity android:name=".ForgetPassword.ConfirmDigitCode" />
         <activity android:name=".ForgetPassword.EmailForResetPassword" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".UnconfirmedEmail"/>
         <activity android:name=".IntroActivty">

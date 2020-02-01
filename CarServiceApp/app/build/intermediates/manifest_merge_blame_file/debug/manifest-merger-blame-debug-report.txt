@@ -24,7 +24,7 @@
 14-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:8:22-78
 15
 16    <application
-16-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:5-38:19
+16-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:10:5-39:19
 17        android:allowBackup="true"
 17-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:11:9-35
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -58,43 +58,46 @@
 31        <activity android:name="com.globalsovy.carserviceapp.RegistrationActivity" />
 31-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:9-58
 31-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:22:19-55
-32        <activity android:name="com.globalsovy.carserviceapp.MainActivity" />
-32-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:9-50
-32-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:19-47
-33        <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
-33-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:9-50
-33-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:19-48
-34        <activity android:name="com.globalsovy.carserviceapp.UnconfirmedEmail" />
-34-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:9-53
-34-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:19-51
-35        <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >
-35-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:9-32:20
-35-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:19-47
-36            <intent-filter>
-36-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:13-31:29
-37                <action android:name="android.intent.action.MAIN" />
-37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:17-69
-37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:25-66
-38
-39                <category android:name="android.intent.category.LAUNCHER" />
-39-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:17-77
-39-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:30:27-74
-40            </intent-filter>
-41        </activity>
-42
-43        <meta-data
-43-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:34:9-36:57
-44            android:name="preloaded_fonts"
-44-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:35:13-43
-45            android:resource="@array/preloaded_fonts" />
-45-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:13-54
-46
-47        <uses-library
-47-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:9-88
-48            android:name="org.apache.http.legacy"
-48-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:23-60
-49            android:required="false" />
-49-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:61-85
-50    </application>
-51
-52</manifest>
+32        <activity
+32-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:9-24:54
+33            android:name="com.globalsovy.carserviceapp.MainActivity"
+33-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:23:19-47
+34            android:windowSoftInputMode="adjustPan" />
+34-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:24:13-52
+35        <activity android:name="com.globalsovy.carserviceapp.LoginActivity" />
+35-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:9-50
+35-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:25:19-48
+36        <activity android:name="com.globalsovy.carserviceapp.UnconfirmedEmail" />
+36-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:9-53
+36-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:26:19-51
+37        <activity android:name="com.globalsovy.carserviceapp.IntroActivty" >
+37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:9-33:20
+37-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:27:19-47
+38            <intent-filter>
+38-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:28:13-32:29
+39                <action android:name="android.intent.action.MAIN" />
+39-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:17-69
+39-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:29:25-66
+40
+41                <category android:name="android.intent.category.LAUNCHER" />
+41-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:31:17-77
+41-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:31:27-74
+42            </intent-filter>
+43        </activity>
+44
+45        <meta-data
+45-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:35:9-37:57
+46            android:name="preloaded_fonts"
+46-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:36:13-43
+47            android:resource="@array/preloaded_fonts" />
+47-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:37:13-54
+48
+49        <uses-library
+49-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:38:9-88
+50            android:name="org.apache.http.legacy"
+50-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:38:23-60
+51            android:required="false" />
+51-->C:\Users\user\Desktop\carsService\CarServiceApp\app\src\main\AndroidManifest.xml:38:61-85
+52    </application>
+53
+54</manifest>

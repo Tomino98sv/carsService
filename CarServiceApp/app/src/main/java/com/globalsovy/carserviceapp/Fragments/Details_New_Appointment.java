@@ -1,6 +1,15 @@
 package com.globalsovy.carserviceapp.Fragments;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +21,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.globalsovy.carserviceapp.MainActivity;
@@ -33,6 +45,8 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Details_New_Appointment extends Fragment {
 
@@ -49,11 +63,18 @@ public class Details_New_Appointment extends Fragment {
     EditText notes;
     ConstraintLayout addPic;
     Button saveNewAppointment;
+    LinearLayout linearLayoutPics;
+
+//    LayoutInflater inflater;
+//    View layout;
+    ArrayList<String> urlPhotos;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View parent = inflater.inflate(R.layout.fragment_details_new_appointment, container, false);
+
+        urlPhotos = new ArrayList<>();
 
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
@@ -63,6 +84,8 @@ public class Details_New_Appointment extends Fragment {
         notes = parent.findViewById(R.id.note);
         addPic = parent.findViewById(R.id.addPhotoAppointmentLayout);
         saveNewAppointment = parent.findViewById(R.id.saveAppointment);
+        linearLayoutPics = parent.findViewById(R.id.appointmentImages);
+
 
         myCars = ((MainActivity)getActivity()).getMyCars();
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
@@ -75,6 +98,18 @@ public class Details_New_Appointment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).changeFragment(New_Appointment.class);
+            }
+        });
+        if (ContextCompat.checkSelfPermission(((MainActivity)getActivity()), Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(((MainActivity)getActivity()), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                    200);
+        }
+
+        addPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addPicsMethod();
             }
         });
 
@@ -106,5 +141,56 @@ public class Details_New_Appointment extends Fragment {
         });
     }
 
+    public void addPicsMethod() {
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent, 1);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            Uri pickedImage = data.getData();
+
+            String[] filePath = { MediaStore.Images.Media.DATA};
+            Cursor cursor = ((MainActivity)getActivity()).getContentResolver().query(pickedImage,filePath,null,null,null);
+            cursor.moveToFirst();
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            cursor.close();
+
+            urlPhotos.add(imagePath);
+            addToView(imagePath);
+        }
+    }
+
+
+    public void addToView(String imgPath){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmapPhoto = BitmapFactory.decodeFile(imgPath, options);
+        bitmapPhoto = ThumbnailUtils.extractThumbnail(bitmapPhoto,
+                150, 150);
+
+
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View layout =  inflater.inflate(R.layout.appoint_car_photo_item, null, false);
+        ConstraintLayout container = (ConstraintLayout) layout.findViewById(R.id.appoint_pics_parent);
+        ImageView imageView = layout.findViewById(R.id.appointPics);
+        imageView.setImageBitmap(bitmapPhoto);
+
+        linearLayoutPics.addView(container);
+    }
 }
 

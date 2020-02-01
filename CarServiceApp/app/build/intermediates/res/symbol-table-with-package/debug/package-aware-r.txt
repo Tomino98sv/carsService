@@ -1238,6 +1238,9 @@ id ambilwarna_target
 id ambilwarna_viewContainer
 id ambilwarna_viewHue
 id ambilwarna_viewSatBri
+id appointPics
+id appoint_pics_parent
+id appointmentImages
 id appointments
 id arrow0
 id arrow1
@@ -1468,6 +1471,7 @@ id progress_horizontal
 id quickRegistration
 id radio
 id registerButton
+id removePics
 id right
 id right_icon
 id right_side
@@ -1677,6 +1681,7 @@ layout activity_not_register_email
 layout activity_registration
 layout ambilwarna_dialog
 layout ambilwarna_pref_widget
+layout appoint_car_photo_item
 layout car_item
 layout close_header
 layout custom_dialog

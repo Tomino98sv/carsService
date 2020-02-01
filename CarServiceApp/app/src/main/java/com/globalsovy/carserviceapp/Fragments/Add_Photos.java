@@ -167,9 +167,6 @@ public class Add_Photos extends Fragment {
                 alreadyPicked.addView(imageView);
             }
             cursor.close();
-
-
-
         }
     }
 
