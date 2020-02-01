@@ -392,10 +392,6 @@
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_scale_down_toup.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\anim\\scale_down_toup.xml"
-    },
-    {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_new_car.xml.flat",
         "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\layout\\fragment_new_car.xml"
     },
@@ -1000,6 +996,10 @@
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_show.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\anim\\show.xml"
+    },
+    {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-ldrtl-xxxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -1324,10 +1324,6 @@
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_scale_up_down.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\anim\\scale_up_down.xml"
-    },
-    {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
@@ -1514,6 +1510,10 @@
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_hide.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\anim\\hide.xml"
     },
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\anim_btn_radio_to_off_mtrl_dot_group_animation.xml.flat",
@@ -1878,6 +1878,10 @@
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_menu_item_layout.xml.flat",
         "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\d74b5b498b35fd5cb32d0a6997bb1d3d\\appcompat-1.1.0\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_details_new_appointment.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\src\\main\\res\\layout\\fragment_details_new_appointment.xml"
     },
     {
         "merged": "C:\\Users\\user\\Desktop\\carsService\\CarServiceApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",

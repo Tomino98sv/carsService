@@ -30,6 +30,7 @@ import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Add_Photos;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
+import com.globalsovy.carserviceapp.Fragments.Details_New_Appointment;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
@@ -37,6 +38,7 @@ import com.globalsovy.carserviceapp.Fragments.NewCar_fragment;
 import com.globalsovy.carserviceapp.Fragments.New_Appointment;
 import com.globalsovy.carserviceapp.Fragments.Notifications_fragment;
 import com.globalsovy.carserviceapp.Fragments.PDF_fragment;
+import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.google.android.material.navigation.NavigationView;
 
@@ -44,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,12 +66,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int currentIdCar=0;
     Fragment fragment;
     String pdfUrl="";
+    long newAppointmentDate=0;
+    String newAppointmentTime="";
+    ArrayList<CarItem> myCars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
         mySharedPreferencies = new MySharedPreferencies(this);
+        myCars = new ArrayList<>();
         myQueue = Volley.newRequestQueue(this);
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.mainActivityDrawable);
@@ -155,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragment(MyCars_fragment.class);
         }else if(fragment instanceof New_Appointment) {
             changeFragment(MyAppointments_fragment.class);
+        }else if(fragment instanceof Details_New_Appointment){
+            changeFragment(New_Appointment.class);
         }else {
             BackToLoginAlertDialog dialog = new BackToLoginAlertDialog();
             dialog.showDialog(MainActivity.this,"Log Out","You will be routed back to login screen");
@@ -281,5 +290,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String getUrlPdf(){
         return pdfUrl;
     }
+    public long getNewAppointmentDate(){
+        return newAppointmentDate;
+    }
+    public void setNewAppointmentDate(long date){
+        newAppointmentDate = date;
+    }
+    public String getNewAppointmentTime(){
+        return newAppointmentTime;
+    }
+    public void setNewAppointmentTime(String time){
+        newAppointmentTime = time;
+    }
+    public ArrayList<CarItem> getMyCars(){
+        return myCars;
+    }
+    public void setMyCars(ArrayList<CarItem> myCars){
+        this.myCars = myCars;
+    }
+
+//    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//    String selectedDate = sdf.format(new Date(calendar.getDate()));
 
 }

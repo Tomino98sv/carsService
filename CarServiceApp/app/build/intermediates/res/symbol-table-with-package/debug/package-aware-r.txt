@@ -33,10 +33,10 @@ anim disapear
 anim down_and_dispear
 anim fade_in
 anim fade_out
+anim hide
 anim move_right_disapear
 anim rotate
-anim scale_down_toup
-anim scale_up_down
+anim show
 anim smooth_forward
 anim smooth_rotate
 animator design_appbar_state_list_animator
@@ -1220,6 +1220,7 @@ id addCarBtn
 id addCarLayout
 id addCarPhoto
 id addNewCarButton
+id addPhotoAppointmentLayout
 id addPhotoCarLayout
 id alertTitle
 id all
@@ -1238,6 +1239,7 @@ id ambilwarna_viewContainer
 id ambilwarna_viewHue
 id ambilwarna_viewSatBri
 id appointments
+id arrow0
 id arrow1
 id arrow10
 id arrow11
@@ -1360,6 +1362,7 @@ id item_touch_helper_previous_elevation
 id kilometreVstCar
 id labeVstBrand
 id labelBrand
+id labelCarAppnt
 id labelColor
 id labelEmail
 id labelEmailProfile
@@ -1371,6 +1374,7 @@ id labelModel
 id labelName
 id labelNameProfile
 id labelNewPassword
+id labelNote
 id labelPassword
 id labelPasswordProfile
 id labelRepeadPassword
@@ -1398,7 +1402,6 @@ id left
 id line1
 id line3
 id linearLayout
-id linearLayout2
 id listMode
 id list_item
 id logInButton
@@ -1428,11 +1431,12 @@ id navigation_header_container
 id never
 id newPasswordEditText
 id newPasswordInp
-id nextDate
 id noAppointment
 id none
 id normal
 id notRegistred
+id note
+id notesLayout
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -1459,7 +1463,6 @@ id pickImages
 id pickedColorOnVstCar
 id pictureGallery
 id pin
-id prevDate
 id progress_circular
 id progress_horizontal
 id quickRegistration
@@ -1468,6 +1471,7 @@ id registerButton
 id right
 id right_icon
 id right_side
+id saveAppointment
 id saveProChanges
 id save_image_matrix
 id save_non_transition_alpha
@@ -1512,6 +1516,7 @@ id snap
 id snapMargins
 id spacer
 id specialOption
+id spinnerMyCars
 id split_action_bar
 id spread
 id spread_inside
@@ -1541,6 +1546,7 @@ id t1430
 id t1500
 id t1530
 id t1600
+id t800
 id t830
 id t900
 id t930
@@ -1692,6 +1698,7 @@ layout exit_dialog
 layout fragment_add_photos
 layout fragment_appointments
 layout fragment_car__details
+layout fragment_details_new_appointment
 layout fragment_my_cars
 layout fragment_my_profile
 layout fragment_my_profile_read
@@ -1776,6 +1783,7 @@ string generic_error
 string generic_server_down
 string generic_server_timeout
 string hide_bottom_view_on_scroll_behavior
+string hintAppointmentNote
 string mtrl_chip_close_icon_content_description
 string navigation_drawer_close
 string navigation_drawer_open

@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,10 +50,11 @@ public class PageAdapter extends PagerAdapter {
     Activity activity;
     HashMap<Integer, Bitmap> alreadyDownloaded;
 
-    public PageAdapter(List<CarItem> carItems, Context context, Activity activity, Fragment fragment) {
+    public PageAdapter(ArrayList<CarItem> carItems, Context context, Activity activity, Fragment fragment) {
         super();
         mySharedPreferencies = new MySharedPreferencies(context);
         this.carItems = carItems;
+        ((MainActivity)activity).setMyCars(carItems);
         this.context = context;
         this.fragment = fragment;
         this.activity = activity;

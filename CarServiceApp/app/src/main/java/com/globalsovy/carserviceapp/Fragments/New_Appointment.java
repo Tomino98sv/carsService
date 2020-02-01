@@ -20,6 +20,12 @@ import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.R;
 import com.google.android.material.navigation.NavigationView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 public class New_Appointment extends Fragment {
 
@@ -32,8 +38,11 @@ public class New_Appointment extends Fragment {
     TextView pickDate;
     CalendarView calendarView;
 
-    Animation scaleDown;
-    Animation scaleUp;
+    Animation hide;
+    Animation show;
+
+    String monthYear="";
+    String dayMonthYear="";
 
     @Nullable
     @Override
@@ -47,17 +56,17 @@ public class New_Appointment extends Fragment {
         scrollView = parent.findViewById(R.id.scrollOnNewAppoint);
         pickDate = parent.findViewById(R.id.pickDisplayDate);
         calendarView = parent.findViewById(R.id.calendarView);
+        initializeTimes(parent);
 
-        scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up_down);
-        scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down_toup);
-
+        hide = AnimationUtils.loadAnimation(getContext(),R.anim.hide);
+        show = AnimationUtils.loadAnimation(getContext(),R.anim.show);
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
 
         toolbarTitle.setText("Select Date & Time");
         toolbarBtn.setVisibility(View.GONE);
         toolbar.setNavigationIcon(R.drawable.close);
-        calendarView.setVisibility(View.GONE);
+        calendarView.setVisibility(View.VISIBLE);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +74,7 @@ public class New_Appointment extends Fragment {
             }
         });
 
-        scaleUp.setAnimationListener(new Animation.AnimationListener() {
+        show.setAnimationListener(new Animation.AnimationListener() {
             //z hora na dol
             @Override
             public void onAnimationStart(Animation animation) {
@@ -83,7 +92,7 @@ public class New_Appointment extends Fragment {
             }
         });
 
-        scaleDown.setAnimationListener(new Animation.AnimationListener() {
+        hide.setAnimationListener(new Animation.AnimationListener() {
             //z dola na hor
             @Override
             public void onAnimationStart(Animation animation) {
@@ -105,9 +114,11 @@ public class New_Appointment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (calendarView.getVisibility() == View.GONE){
-                    calendarView.startAnimation(scaleUp);
+                    calendarView.startAnimation(show);
+                    pickDate.setText(monthYear);
                 }else {
-                    calendarView.startAnimation(scaleDown);
+                    calendarView.startAnimation(hide);
+                    pickDate.setText(dayMonthYear);
                 }
             }
         });
@@ -115,9 +126,10 @@ public class New_Appointment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                String date = formatDay(day)+" "+formatMonth(month)+" "+year;
-                pickDate.setText(date);
-                calendarView.setVisibility(View.GONE);
+                monthYear = formatMonth(month)+" "+year;
+                dayMonthYear = formatDay(day)+" "+formatMonth(month)+" "+year;
+                pickDate.setText(dayMonthYear);
+                calendarView.startAnimation(hide);
             }
         });
 
@@ -174,5 +186,42 @@ public class New_Appointment extends Fragment {
 
         }
         return m;
+    }
+
+    public void initializeTimes(View parent) {
+        for (int i=8;i<17;i++){
+            String name="t"+i;
+            name+="00";
+            int resourceId = this.getResources().
+                    getIdentifier(name,"id",getContext().getPackageName());
+            final TextView textViewnul = parent.findViewById(resourceId);
+            if (textViewnul!=null){
+                textViewnul.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((MainActivity)getActivity()).setNewAppointmentDate(calendarView.getDate());
+                        ((MainActivity)getActivity()).setNewAppointmentTime(textViewnul.getText().toString());
+                        ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
+                    }
+                });
+            }
+
+
+            name="t"+i;
+            name+="30";
+            resourceId = this.getResources().
+                    getIdentifier(name,"id",getContext().getPackageName());
+            final TextView textViewhalf = parent.findViewById(resourceId);
+            if (textViewhalf!=null){
+                textViewhalf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((MainActivity)getActivity()).setNewAppointmentDate(calendarView.getDate());
+                        ((MainActivity)getActivity()).setNewAppointmentTime(textViewhalf.getText().toString());
+                        ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
+                    }
+                });
+            }
+        }
     }
 }

@@ -24,43 +24,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <TextView
+            android:id="@+id/pickDisplayDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.6"
             android:background="@color/colorPrimary"
-            android:padding="5dp"
-            android:weightSum="1.0"
+            android:padding="10dp"
+            android:text="Pick date"
+            android:textAlignment="center"
+            android:textAppearance="@style/welcomeBack"
+            android:textColor="@color/white"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/prevDate"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:src="@drawable/arrow_back" />
-
-            <TextView
-                android:id="@+id/pickDisplayDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="0.6"
-                android:text="Pick date"
-                android:textAlignment="center"
-                android:textAppearance="@style/welcomeBack"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-            <ImageView
-                android:id="@+id/nextDate"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:src="@drawable/arrow_next" />
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/scrollOnNewAppoint"
@@ -70,8 +48,8 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintStart_toStartOf="@+id/pickDisplayDate"
+            app:layout_constraintTop_toBottomOf="@+id/pickDisplayDate"
             android:fillViewport="true"
             >
 
@@ -80,20 +58,47 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="4dp">
 
+
                 <TextView
-                    android:id="@+id/t830"
+                    android:id="@+id/t800"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/fill_hard"
                     android:gravity="center"
-                    android:text="8:30"
+                    android:text="8:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/arrow0"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/t800"
+                    app:layout_constraintEnd_toEndOf="@+id/t800"
+                    app:layout_constraintTop_toTopOf="@+id/t800"
+                    app:srcCompat="@drawable/arrow_next" />
+
+                <TextView
+                    android:id="@+id/t830"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="center"
+                    android:text="8:30"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/t800"
+                    app:layout_constraintStart_toStartOf="@+id/t800"
+                    app:layout_constraintTop_toBottomOf="@+id/t800" />
 
                 <ImageView
                     android:id="@+id/arrow1"
@@ -117,6 +122,7 @@
                     android:text="9:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t830"
                     app:layout_constraintStart_toStartOf="@+id/t830"
                     app:layout_constraintTop_toBottomOf="@+id/t830" />
@@ -143,6 +149,7 @@
                     android:text="9:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t900"
                     app:layout_constraintStart_toStartOf="@+id/t900"
                     app:layout_constraintTop_toBottomOf="@+id/t900" />
@@ -169,6 +176,7 @@
                     android:text="10:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t930"
                     app:layout_constraintStart_toStartOf="@+id/t930"
                     app:layout_constraintTop_toBottomOf="@+id/t930" />
@@ -195,6 +203,7 @@
                     android:text="10:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1000"
                     app:layout_constraintStart_toStartOf="@+id/t1000"
                     app:layout_constraintTop_toBottomOf="@+id/t1000" />
@@ -221,6 +230,7 @@
                     android:text="11:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1030"
                     app:layout_constraintStart_toStartOf="@+id/t1030"
                     app:layout_constraintTop_toBottomOf="@+id/t1030" />
@@ -247,6 +257,7 @@
                     android:text="11:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1100"
                     app:layout_constraintStart_toStartOf="@+id/t1100"
                     app:layout_constraintTop_toBottomOf="@+id/t1100" />
@@ -273,6 +284,7 @@
                     android:text="12:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1130"
                     app:layout_constraintStart_toStartOf="@+id/t1130"
                     app:layout_constraintTop_toBottomOf="@+id/t1130" />
@@ -299,6 +311,7 @@
                     android:text="12:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1200"
                     app:layout_constraintStart_toStartOf="@+id/t1200"
                     app:layout_constraintTop_toBottomOf="@+id/t1200" />
@@ -325,6 +338,7 @@
                     android:text="13:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1230"
                     app:layout_constraintStart_toStartOf="@+id/t1230"
                     app:layout_constraintTop_toBottomOf="@+id/t1230" />
@@ -351,6 +365,7 @@
                     android:text="13:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1300"
                     app:layout_constraintStart_toStartOf="@+id/t1300"
                     app:layout_constraintTop_toBottomOf="@+id/t1300" />
@@ -377,6 +392,7 @@
                     android:text="14:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1330"
                     app:layout_constraintStart_toStartOf="@+id/t1330"
                     app:layout_constraintTop_toBottomOf="@+id/t1330" />
@@ -403,6 +419,7 @@
                     android:text="14:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1400"
                     app:layout_constraintStart_toStartOf="@+id/t1400"
                     app:layout_constraintTop_toBottomOf="@+id/t1400" />
@@ -429,6 +446,7 @@
                     android:text="15:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1430"
                     app:layout_constraintStart_toStartOf="@+id/t1430"
                     app:layout_constraintTop_toBottomOf="@+id/t1430" />
@@ -455,6 +473,7 @@
                     android:text="15:30"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1500"
                     app:layout_constraintStart_toStartOf="@+id/t1500"
                     app:layout_constraintTop_toBottomOf="@+id/t1500" />
@@ -481,6 +500,7 @@
                     android:text="16:00"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/t1530"
                     app:layout_constraintStart_toStartOf="@+id/t1530"
                     app:layout_constraintTop_toBottomOf="@+id/t1530" />
@@ -503,10 +523,11 @@
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/black"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintStart_toStartOf="@+id/pickDisplayDate"
+            app:layout_constraintTop_toBottomOf="@+id/pickDisplayDate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

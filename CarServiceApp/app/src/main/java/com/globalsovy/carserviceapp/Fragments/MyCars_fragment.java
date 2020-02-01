@@ -44,7 +44,7 @@ public class MyCars_fragment extends Fragment {
 
     ViewPager viewPager;
     PageAdapter adapter;
-    List<CarItem> cars;
+    ArrayList<CarItem> cars;
     Fragment fragment;
 
     @Nullable

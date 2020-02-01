@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragBG">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-100dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginEnd="20dp"
+        android:rotation="-40"
+        app:srcCompat="@drawable/ic_car" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+
+        <Spinner
+            android:id="@+id/spinnerMyCars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelCarAppnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:padding="2dp"
+            android:text="Car"
+            android:textAppearance="@style/inputLabelText"
+            app:layout_constraintStart_toStartOf="@+id/spinnerMyCars"
+            app:layout_constraintTop_toTopOf="@+id/spinnerMyCars" />
+
+        <ScrollView
+            android:id="@+id/notesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerMyCars">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/fill_hard"
+                    android:gravity="start"
+                    android:hint="@string/hintAppointmentNote"
+                    android:inputType="text"
+                    android:minHeight="150dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/buttonLoginColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/labelNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:padding="2dp"
+                    android:text="Note"
+                    android:textAppearance="@style/inputLabelText"
+                    app:layout_constraintStart_toStartOf="@+id/note"
+                    app:layout_constraintTop_toTopOf="@+id/note" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addPhotoAppointmentLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/notesLayout"
+            app:layout_constraintStart_toStartOf="@+id/notesLayout"
+            app:layout_constraintEnd_toEndOf="@+id/notesLayout">
+
+            <TextView
+                android:id="@+id/addCarPhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add profile photo car"
+                android:textAppearance="@style/forgotPassword"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_insert_photo_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/addCarPhoto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/addCarPhoto" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/saveAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/colorPrimary"
+            android:text="Save New Apointment"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/addPhotoAppointmentLayout"
+            app:layout_constraintStart_toStartOf="@+id/addPhotoAppointmentLayout"
+            app:layout_constraintEnd_toEndOf="@+id/addPhotoAppointmentLayout"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
