@@ -127,7 +127,7 @@ public class PageAdapterPhotos extends PagerAdapter {
 
         @Override
         protected Bitmap doInBackground(String... params) {
-            Bitmap ThumbImage=null;
+            Bitmap myBitmap=null;
             try {
                 //ipconfig;
                 URL url = new URL(image.getUrl());
@@ -135,18 +135,12 @@ public class PageAdapterPhotos extends PagerAdapter {
                 connection.setDoInput(true);
                 connection.connect();
                 input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-                final int THUMBSIZE = 254;
-
-                ThumbImage = ThumbnailUtils.extractThumbnail(myBitmap,
-                        THUMBSIZE, THUMBSIZE);
-
+                myBitmap = BitmapFactory.decodeStream(input);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return ThumbImage;
+            return myBitmap;
 
         }
 
@@ -177,7 +171,7 @@ public class PageAdapterPhotos extends PagerAdapter {
 
         @Override
         protected Bitmap doInBackground(String... params) {
-            Bitmap ThumbImage=null;
+            Bitmap myBitmap = null;
             try {
                 //ipconfig;
                 URL url = new URL(mySharedPreferencies.getIp() + "/getcarprofileimage?idcar=" + idcar);
@@ -185,20 +179,14 @@ public class PageAdapterPhotos extends PagerAdapter {
                 connection.setDoInput(true);
                 connection.connect();
                 input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-                final int THUMBSIZE = 254;
-
-                ThumbImage = ThumbnailUtils.extractThumbnail(myBitmap,
-                        THUMBSIZE, THUMBSIZE);
-
+                myBitmap = BitmapFactory.decodeStream(input);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return ThumbImage;
+            return myBitmap;
 
         }
 

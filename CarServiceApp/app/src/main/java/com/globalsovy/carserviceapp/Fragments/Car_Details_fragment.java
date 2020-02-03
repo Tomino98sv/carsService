@@ -291,7 +291,9 @@ public class Car_Details_fragment extends Fragment {
                 carPics.setAdapter(pageAdapterPhotos);
                 try {
                     String message = new String(error.networkResponse.data,"UTF-8");
-                    Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                    if (!message.equals("Car not found.")){
+                        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();

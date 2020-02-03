@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -19,8 +22,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.JsonArrayRequest;
+import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Adapters.PageAdapterPhotos;
+import com.globalsovy.carserviceapp.Adapters.RecycleViewAdapterAppItems;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.Appointment;
@@ -46,6 +51,8 @@ public class MyAppointments_fragment extends Fragment {
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
 
+    RecyclerView recyclerView;
+    RecycleViewAdapterAppItems adapter;
     ArrayList<Appointment> appointments;
 
     @Nullable
@@ -56,6 +63,7 @@ public class MyAppointments_fragment extends Fragment {
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarBtn = getActivity().findViewById(R.id.toolbarTool);
+        recyclerView = parent.findViewById(R.id.myAppointmentRecView);
         mySharedPreferencies = new MySharedPreferencies(getContext());
         myQueue = Volley.newRequestQueue(getContext());
 
@@ -95,11 +103,13 @@ public class MyAppointments_fragment extends Fragment {
                                 appointmentJSON.getString("model")
                         );
                         appointments.add(appointmentObject);
+                        System.out.println("i "+i);
+                        System.out.println("response.length "+(response.length()-1));
+                        getAppointmentImages(i,appointmentObject.getId(), response.length()-1);
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -140,5 +150,77 @@ public class MyAppointments_fragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         myQueue.add(getAppointments);
+    }
+
+
+    public void getAppointmentImages(final int positionArray, final int idAppointment, final int last) {
+        String url = mySharedPreferencies.getIp()+"/getappimages";
+
+        final StringRequest getImages = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                ArrayList<String> urls = new ArrayList<>();
+
+                response = response.replaceAll("[\"]",""); //odstran "
+                response = response.replaceAll("[\\]]",""); // odstran ]
+                response = response.replaceAll("[\\[]",""); // odstran [
+                String[] array = response.split("\\,", -1); // rozdel podla ,
+                for (int i = 0; i<array.length;i++){
+                    urls.add(array[i]);
+                }
+                appointments.get(positionArray).setUrlImages(urls);
+                if (positionArray == last) {
+                    adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                adapter.notifyDataSetChanged();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    String message = new String(error.networkResponse.data,"UTF-8");
+                    if (!message.equals("Appointment images not found..")){
+                        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                }
+
+                if (positionArray == last) {
+                    adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                adapter.notifyDataSetChanged();
+                }
+            }
+        }){
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject body = new JSONObject();
+                    body.put("appointmentID",idAppointment);
+                    String bodyString = body.toString();
+                    return bodyString == null ? null : bodyString.getBytes("utf-8");
+                } catch (UnsupportedEncodingException | JSONException uee) {
+                    return null;
+                }
+            }
+        };
+
+        getImages.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        myQueue.add(getImages);
     }
 }

@@ -1,5 +1,7 @@
 package com.globalsovy.carserviceapp.POJO;
 
+import java.util.ArrayList;
+
 public class Appointment {
 
     int id;
@@ -8,6 +10,8 @@ public class Appointment {
     String message;
     String brand;
     String model;
+    ArrayList<String> urlImages;
+    boolean expandV;
 
     public Appointment(int id, String date, String time, String message, String brand, String model) {
         this.id = id;
@@ -16,6 +20,8 @@ public class Appointment {
         this.message = message;
         this.brand = brand;
         this.model = model;
+        urlImages = new ArrayList<>();
+        expandV = false;
     }
 
     public int getId() {
@@ -64,5 +70,21 @@ public class Appointment {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public boolean isExpandV() {
+        return expandV;
+    }
+
+    public void setExpandV(boolean expandV) {
+        this.expandV = expandV;
+    }
+
+    public ArrayList<String> getUrlImages() {
+        return urlImages;
+    }
+
+    public void setUrlImages(ArrayList<String> urlImages) {
+        this.urlImages = urlImages;
     }
 }
