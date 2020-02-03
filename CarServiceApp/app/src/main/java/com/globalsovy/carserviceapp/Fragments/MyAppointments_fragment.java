@@ -84,6 +84,14 @@ public class MyAppointments_fragment extends Fragment {
         return parent;
     }
 
+    public void removeAndRebuildList(int position ){
+        appointments.remove(position);
+        adapter.notifyDataSetChanged();
+//        adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
     public void getAppointments() {
         String url = mySharedPreferencies.getIp()+"/getappointments";
 
