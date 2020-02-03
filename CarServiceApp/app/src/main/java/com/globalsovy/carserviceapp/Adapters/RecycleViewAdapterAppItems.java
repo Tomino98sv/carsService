@@ -43,9 +43,11 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
     Activity activity;
+    HashMap<String,Bitmap> alreadyDownloaded;
 
     Animation scaleUp;
     Animation scaleDown;
+
 
     public RecycleViewAdapterAppItems(ArrayList<Appointment> listOfAppointment, Context context, Activity activity) {
         this.listOfAppointment = listOfAppointment;
@@ -53,6 +55,7 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
         mySharedPreferencies = new MySharedPreferencies(context);
         myQueue = Volley.newRequestQueue(context);
         this.activity = activity;
+        this.alreadyDownloaded = ((MainActivity)activity).getAlreadyDownloadedApp();
 
 //        items = new HashMap<>();
         scaleUp = AnimationUtils.loadAnimation(context,R.anim.scale_up);
@@ -84,7 +87,11 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
             params.setMargins(2,2,2,2);
             imageView.setLayoutParams(params);
             holder.picturesContainer.addView(imageView);
-            new SendHttpReqeustForImage(urlImages.get(i),imageView,activity).execute();
+            if (alreadyDownloaded.get(urlImages.get(i)) != null){
+                imageView.setImageBitmap(alreadyDownloaded.get(urlImages.get(i)));
+            }else {
+                new SendHttpReqeustForImage(urlImages.get(i),imageView,activity).execute();
+            }
         }
 
         holder.expand.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +199,8 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
         @Override
         protected void onPostExecute(Bitmap result) {
             if (result != null){
-//                alreadyDownloaded.put(carPhotoUrls.get(position).getId(),result);
+                alreadyDownloaded.put(urlString,result);
+                ((MainActivity)activity).setAlreadyDownloadedApp(alreadyDownloaded);
                 carImage.setImageBitmap(result);
                 connection.disconnect();
                 this.cancel(true);

@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String newAppointmentTime="";
     ArrayList<CarItem> myCars;
     HashMap<Integer, Bitmap> alreadyDownloaded = new HashMap<>();
+    HashMap<String, Bitmap> alreadyDownloadedApp = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -316,6 +318,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void setAlreadyDownloaded(HashMap<Integer, Bitmap> alreadyDownloaded){
         this.alreadyDownloaded = alreadyDownloaded;
+    }
+    public HashMap<String, Bitmap> getAlreadyDownloadedApp(){
+        return alreadyDownloadedApp;
+    }
+    public void setAlreadyDownloadedApp(HashMap<String, Bitmap> alreadyDownloadedApp){
+        this.alreadyDownloadedApp = alreadyDownloadedApp;
     }
 
 //    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
