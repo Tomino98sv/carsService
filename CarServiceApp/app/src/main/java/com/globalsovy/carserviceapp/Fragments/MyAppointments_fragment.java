@@ -89,6 +89,10 @@ public class MyAppointments_fragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    public void cancelAppointmentFromFragment(final int idAppointment, final int position, final ArrayList<String> eraseOldBitMap){
+        adapter.cancelAppRequest(idAppointment,position,eraseOldBitMap);
+    }
+
     public void getAppointments() {
         String url = mySharedPreferencies.getIp()+"/getappointments";
 

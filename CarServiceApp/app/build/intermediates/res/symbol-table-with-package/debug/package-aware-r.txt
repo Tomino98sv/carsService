@@ -1119,6 +1119,7 @@ drawable ic_arrow_drop_up_black_24dp
 drawable ic_authorized_autoservis_app
 drawable ic_car
 drawable ic_carfa
+drawable ic_close_black_24dp
 drawable ic_insert_photo_black_24dp
 drawable ic_keyboard_backspace_black_24dp
 drawable ic_launcher_background
@@ -1279,6 +1280,7 @@ id btnMyProfile
 id buttonPanel
 id calendarView
 id cancelAppointment
+id cancelAppointmentFromDialog
 id cancelExitDialog
 id cancel_action
 id carFaIntro
@@ -1323,6 +1325,7 @@ id dialog_button
 id dimensions
 id direct
 id disableHome
+id dismissWindow
 id edit_query
 id email
 id emailEditTextInp
@@ -1584,6 +1587,8 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textView
+id textView2
+id textView3
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1698,6 +1703,7 @@ layout ambilwarna_dialog
 layout ambilwarna_pref_widget
 layout appoint_car_photo_item
 layout appointment_item
+layout cancel_appointment_dialog
 layout car_item
 layout close_header
 layout custom_dialog

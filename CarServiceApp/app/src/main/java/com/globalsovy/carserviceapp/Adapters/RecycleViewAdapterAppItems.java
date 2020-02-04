@@ -35,6 +35,8 @@ import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.Appointment;
 import com.globalsovy.carserviceapp.R;
+import com.globalsovy.carserviceapp.alertDialogs.CancelAppointmentDialog;
+import com.globalsovy.carserviceapp.alertDialogs.DeleteImageDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -128,7 +130,10 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
         holder.cancelAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelAppRequest(appointment.getId(),position,appointment.getUrlImages());
+
+                CancelAppointmentDialog dialog = new CancelAppointmentDialog();
+                dialog.showDialog(activity,((MainActivity)activity).getFragment(),appointment.getId(),position,appointment.getUrlImages());
+//                cancelAppRequest(appointment.getId(),position,appointment.getUrlImages());
             }
         });
     }
