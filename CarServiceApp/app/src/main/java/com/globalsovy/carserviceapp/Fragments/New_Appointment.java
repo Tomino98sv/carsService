@@ -44,6 +44,8 @@ public class New_Appointment extends Fragment {
     String monthYear="";
     String dayMonthYear="";
 
+    String resultDateReq="";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -110,6 +112,7 @@ public class New_Appointment extends Fragment {
             }
         });
 
+
         pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,8 +121,14 @@ public class New_Appointment extends Fragment {
                     pickDate.setText(monthYear);
                 }else {
                     calendarView.startAnimation(hide);
+                    dayMonthYear = new SimpleDateFormat("dd/MM/yyyy").format(new Date(calendarView.getDate()));
+                    String[] array = dayMonthYear.split("/",-1);
+                    dayMonthYear = formatDay(Integer.valueOf(array[0]))+" "+formatMonth(Integer.valueOf(array[1]))+" "+array[2];
                     pickDate.setText(dayMonthYear);
                 }
+
+                resultDateReq = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
+
             }
         });
 
@@ -130,6 +139,10 @@ public class New_Appointment extends Fragment {
                 dayMonthYear = formatDay(day)+" "+formatMonth(month)+" "+year;
                 pickDate.setText(dayMonthYear);
                 calendarView.startAnimation(hide);
+
+                String dayString = day<10 ? "0"+day : day+"";
+                String monthString = month<10 ? "0"+month : month+"";
+                resultDateReq = dayString+"."+monthString+"."+year;
             }
         });
 
@@ -199,7 +212,9 @@ public class New_Appointment extends Fragment {
                 textViewnul.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((MainActivity)getActivity()).setNewAppointmentDate(calendarView.getDate());
+                        String test = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
+                        System.out.println("TEST "+ test);
+                        ((MainActivity)getActivity()).setNewAppointmentDate(resultDateReq);
                         ((MainActivity)getActivity()).setNewAppointmentTime(textViewnul.getText().toString());
                         ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
                     }
@@ -216,7 +231,9 @@ public class New_Appointment extends Fragment {
                 textViewhalf.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((MainActivity)getActivity()).setNewAppointmentDate(calendarView.getDate());
+                        String test = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
+                        System.out.println("TEST "+ test);
+                        ((MainActivity)getActivity()).setNewAppointmentDate(resultDateReq);
                         ((MainActivity)getActivity()).setNewAppointmentTime(textViewhalf.getText().toString());
                         ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
                     }

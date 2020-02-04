@@ -87,9 +87,6 @@ public class MyAppointments_fragment extends Fragment {
     public void removeAndRebuildList(int position ){
         appointments.remove(position);
         adapter.notifyDataSetChanged();
-//        adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void getAppointments() {

@@ -1310,6 +1310,7 @@ id currentCarPhoto
 id custom
 id customPanel
 id dateAndtime
+id datePicked
 id decor_content_parent
 id default_activity_button
 id descLogo
@@ -1376,6 +1377,7 @@ id labeVstBrand
 id labelBrand
 id labelCarAppnt
 id labelColor
+id labelDatePicked
 id labelEmail
 id labelEmailProfile
 id labelFuel

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int currentIdCar=0;
     Fragment fragment;
     String pdfUrl="";
-    long newAppointmentDate=0;
+    String newAppointmentDate="";
     String newAppointmentTime="";
     ArrayList<CarItem> myCars;
     HashMap<Integer, Bitmap> alreadyDownloaded = new HashMap<>();
@@ -295,10 +295,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String getUrlPdf(){
         return pdfUrl;
     }
-    public long getNewAppointmentDate(){
+    public String getNewAppointmentDate(){
         return newAppointmentDate;
     }
-    public void setNewAppointmentDate(long date){
+    public void setNewAppointmentDate(String date){
         newAppointmentDate = date;
     }
     public String getNewAppointmentTime(){

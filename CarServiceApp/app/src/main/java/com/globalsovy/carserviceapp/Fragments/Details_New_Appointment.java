@@ -1,6 +1,7 @@
 package com.globalsovy.carserviceapp.Fragments;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,6 +11,8 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,16 +38,26 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.MainActivity;
+import com.globalsovy.carserviceapp.MySharedPreferencies;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.R;
 import com.google.android.material.navigation.NavigationView;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -65,9 +78,15 @@ public class Details_New_Appointment extends Fragment {
     Button saveNewAppointment;
     LinearLayout linearLayoutPics;
 
-//    LayoutInflater inflater;
-//    View layout;
+    TextView datePick;
+
     ArrayList<String> urlPhotos;
+    MySharedPreferencies mySharedPreferencies;
+    RequestQueue myQueue;
+
+    String date = "";
+    String time = "";
+    int carId = 0;
 
     @Nullable
     @Override
@@ -75,6 +94,8 @@ public class Details_New_Appointment extends Fragment {
         View parent = inflater.inflate(R.layout.fragment_details_new_appointment, container, false);
 
         urlPhotos = new ArrayList<>();
+        mySharedPreferencies = new MySharedPreferencies(getContext());
+        myQueue = Volley.newRequestQueue(getContext());
 
         navigationView = parent.findViewById(R.id.nav_view);
         toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
@@ -85,11 +106,16 @@ public class Details_New_Appointment extends Fragment {
         addPic = parent.findViewById(R.id.addPhotoAppointmentLayout);
         saveNewAppointment = parent.findViewById(R.id.saveAppointment);
         linearLayoutPics = parent.findViewById(R.id.appointmentImages);
+        datePick = parent.findViewById(R.id.datePicked);
 
 
         myCars = ((MainActivity)getActivity()).getMyCars();
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
+        date = ((MainActivity)getActivity()).getNewAppointmentDate();
+        time = ((MainActivity)getActivity()).getNewAppointmentTime();
+
+        datePick.setText(date+" - "+time);
 
         toolbarTitle.setText("New Appointment");
         toolbarBtn.setVisibility(View.GONE);
@@ -113,7 +139,16 @@ public class Details_New_Appointment extends Fragment {
             }
         });
 
+        saveNewAppointment.setEnabled(false);
+        saveNewAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendAppointmentRequest();
+            }
+        });
+
         setSpinner();
+        setTextWatcher();
         return parent;
     }
 
@@ -128,10 +163,7 @@ public class Details_New_Appointment extends Fragment {
         myCarsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date(((MainActivity)getActivity()).getNewAppointmentDate()));
-                System.out.println("Time "+((MainActivity)getActivity()).getNewAppointmentTime());
-                System.out.println("Date"+date);
-                System.out.println("position"+position);
+                carId = myCars.get(position).getId();
             }
 
             @Override
@@ -174,6 +206,32 @@ public class Details_New_Appointment extends Fragment {
         }
     }
 
+    public void setTextWatcher() {
+        notes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0){
+                    saveNewAppointment.setBackgroundColor(getResources().getColor(R.color.buttonLoginColor));
+                    saveNewAppointment.setTextColor(getResources().getColor(R.color.buttonLoginColor));
+                    saveNewAppointment.setEnabled(false);
+                }else {
+                    saveNewAppointment.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    saveNewAppointment.setTextColor(getResources().getColor(R.color.white));
+                    saveNewAppointment.setEnabled(true);
+                }
+            }
+        });
+    }
 
     public void addToView(String imgPath){
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -191,6 +249,53 @@ public class Details_New_Appointment extends Fragment {
         imageView.setImageBitmap(bitmapPhoto);
 
         linearLayoutPics.addView(container);
+    }
+
+    public void sendAppointmentRequest() {
+        String url = mySharedPreferencies.getIp()+"/createappointment";
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Sending...");
+        progressDialog.show();
+
+        SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (progressDialog.isShowing()){
+                            ((MainActivity)getActivity()).changeFragment(MyAppointments_fragment.class);
+                            progressDialog.cancel();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(com.android.volley.error.VolleyError error) {
+                try {
+                    String message = new String(error.networkResponse.data,"UTF-8");
+                        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        Map<String,String> images = new HashMap<>();
+
+        smr.addStringParam("date", date);
+        smr.addStringParam("time", time);
+        smr.addStringParam("carid", String.valueOf(carId));
+        smr.addStringParam("message",notes.getText().toString());
+        if (urlPhotos.size()!=0){
+            smr.addFile("image",urlPhotos.get(0));
+        }
+        smr.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        myQueue.add(smr);
     }
 }
 

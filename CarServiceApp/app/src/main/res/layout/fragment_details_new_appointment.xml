@@ -33,7 +33,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="fill_parent"
             android:layout_height="0dip"
-            android:layout_weight="0.8">
+            android:layout_weight="0.9">
 
             <Spinner
                 android:id="@+id/spinnerMyCars"
@@ -58,6 +58,31 @@
                 app:layout_constraintStart_toStartOf="@+id/spinnerMyCars"
                 app:layout_constraintTop_toTopOf="@+id/spinnerMyCars" />
 
+            <TextView
+                android:id="@+id/datePicked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fill_hard"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/buttonLoginColor"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="@id/spinnerMyCars"
+                app:layout_constraintStart_toStartOf="@id/spinnerMyCars"
+                app:layout_constraintTop_toBottomOf="@id/spinnerMyCars" />
+
+            <TextView
+                android:id="@+id/labelDatePicked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="2dp"
+                android:text="Date"
+                android:textAppearance="@style/inputLabelText"
+                app:layout_constraintStart_toStartOf="@+id/datePicked"
+                app:layout_constraintTop_toTopOf="@+id/datePicked" />
+
             <ScrollView
                 android:id="@+id/notesLayout"
                 android:layout_width="0dp"
@@ -70,7 +95,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/addPhotoAppointmentLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMyCars">
+                app:layout_constraintTop_toBottomOf="@+id/datePicked">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,8 +136,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/fill_hard"
-                        android:orientation="horizontal"
                         android:gravity="center"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="@id/note"
                         app:layout_constraintStart_toStartOf="@id/note"
                         app:layout_constraintTop_toBottomOf="@id/note">
