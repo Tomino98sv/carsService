@@ -60,9 +60,14 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -85,7 +90,7 @@ public class Details_New_Appointment extends Fragment {
 
     TextView datePick;
 
-    ArrayList<String> urlPhotos;
+    HashMap <Integer,String> urlPhotos;
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
 
@@ -100,7 +105,7 @@ public class Details_New_Appointment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View parent = inflater.inflate(R.layout.fragment_details_new_appointment, container, false);
 
-        urlPhotos = new ArrayList<>();
+        urlPhotos = new HashMap <>();
         mySharedPreferencies = new MySharedPreferencies(getContext());
         myQueue = Volley.newRequestQueue(getContext());
         progressDialog = new ProgressDialog(getContext());
@@ -212,7 +217,6 @@ public class Details_New_Appointment extends Fragment {
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
             cursor.close();
 
-            urlPhotos.add(imagePath);
             addToView(imagePath);
         }
     }
@@ -248,6 +252,7 @@ public class Details_New_Appointment extends Fragment {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmapPhoto = BitmapFactory.decodeFile(imgPath, options);
+        bitmapPhoto = ThumbnailUtils.extractThumbnail(bitmapPhoto,254,254);
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View layout =  inflater.inflate(R.layout.appoint_car_photo_item, null, false);
@@ -263,9 +268,11 @@ public class Details_New_Appointment extends Fragment {
             @Override
             public void onClick(View view) {
                 linearLayoutPics.removeView(getActivity().findViewById(id));
+                urlPhotos.remove(id);
+
             }
         });
-
+        urlPhotos.put(id,imgPath);
         linearLayoutPics.addView(container);
     }
     public void sendAppointmentRequest() {
@@ -278,9 +285,12 @@ public class Details_New_Appointment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             int idApp = response.getInt("insertid");
-                            for (int i=0;i<urlPhotos.size();i++){
-                                sendImageRequest(i,idApp);
+                            int position = 0;
+                            for (Map.Entry<Integer,String> entry : urlPhotos.entrySet()){
+                                sendImageRequest(position,idApp,entry.getValue());
+                                position++;
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -328,14 +338,13 @@ public class Details_New_Appointment extends Fragment {
 
         myQueue.add(createAppoint);
     }
-    public void sendImageRequest(final int position, final int idAppointment) {
+    public void sendImageRequest(final int position, final int idAppointment, final String pathImage) {
 
         String url = mySharedPreferencies.getIp()+"/insertappimage";
         SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressDialog.setMessage("Sending "+position+". image");
                         if (progressDialog.isShowing() && position == urlPhotos.size()-1){
                             progressDialog.cancel();
                             ((MainActivity)getActivity()).changeFragment(MyAppointments_fragment.class);
@@ -351,7 +360,7 @@ public class Details_New_Appointment extends Fragment {
         Map<String,String> images = new HashMap<>();
 
         smr.addStringParam("id", String.valueOf(idAppointment));
-        smr.addFile("image", urlPhotos.get(position));
+        smr.addFile("image", pathImage);
         smr.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 0,
