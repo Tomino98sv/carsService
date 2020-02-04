@@ -127,7 +127,7 @@ public class New_Appointment extends Fragment {
                     pickDate.setText(dayMonthYear);
                 }
 
-                resultDateReq = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
+                resultDateReq = new SimpleDateFormat("yyyy.MM.dd").format(new Date(calendarView.getDate()));
 
             }
         });
@@ -142,7 +142,7 @@ public class New_Appointment extends Fragment {
 
                 String dayString = day<10 ? "0"+day : day+"";
                 String monthString = month<10 ? "0"+month : month+"";
-                resultDateReq = dayString+"."+monthString+"."+year;
+                resultDateReq = year+"."+monthString+"."+dayString;
             }
         });
 

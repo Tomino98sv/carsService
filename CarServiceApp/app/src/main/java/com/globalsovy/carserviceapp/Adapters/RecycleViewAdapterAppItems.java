@@ -106,6 +106,7 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
             if (alreadyDownloaded.get(urlImages.get(i)) != null){
                 imageView.setImageBitmap(alreadyDownloaded.get(urlImages.get(i)));
             }else {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_close_black_24dp));
                 new SendHttpReqeustForImage(urlImages.get(i),imageView,activity).execute();
             }
         }

@@ -131,20 +131,25 @@
                         app:layout_constraintStart_toStartOf="@+id/note"
                         app:layout_constraintTop_toTopOf="@+id/note" />
 
-                    <LinearLayout
-                        android:id="@+id/appointmentImages"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/fill_hard"
-                        android:gravity="center"
-                        android:orientation="horizontal"
+                        android:fillViewport="true"
                         app:layout_constraintEnd_toEndOf="@id/note"
                         app:layout_constraintStart_toStartOf="@id/note"
                         app:layout_constraintTop_toBottomOf="@id/note">
 
+                        <LinearLayout
+                            android:id="@+id/appointmentImages"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/fill_hard"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            >
+                        </LinearLayout>
 
-                    </LinearLayout>
-
+                    </HorizontalScrollView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
