@@ -187,6 +187,13 @@ public class Details_New_Appointment extends Fragment {
 
             }
         });
+        if (((MainActivity)getActivity()).getCurrentIdCar() != 0){
+            for (int i=0;i<myCars.size();i++){
+                if (myCars.get(i).getId() == ((MainActivity)getActivity()).getCurrentIdCar()){
+                    myCarsSpinner.setSelection(i);
+                }
+            }
+        }
     }
 
     public void addPicsMethod() {

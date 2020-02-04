@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,6 +89,7 @@ public class Car_Details_fragment extends Fragment {
     Fragment fragment;
     List<CarImage> carPhotos;
     PageAdapterPhotos pageAdapterPhotos;
+    Button signCarForAppointment;
 
     @Nullable
     @Override
@@ -112,6 +114,7 @@ public class Car_Details_fragment extends Fragment {
         pickedColor = parent.findViewById(R.id.pickedColorOnVstCar);
         getPdfManual = parent.findViewById(R.id.pdfManual);
         volume = parent.findViewById(R.id.volumeVstCar);
+        signCarForAppointment = parent.findViewById(R.id.singCarForService);
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -145,6 +148,14 @@ public class Car_Details_fragment extends Fragment {
             ActivityCompat.requestPermissions(((MainActivity)getActivity()), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
                     200);
         }
+
+        signCarForAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).changeFragment(New_Appointment.class);
+            }
+        });
+
         return parent;
     }
     public void reqeustCarDetails(final int carId) {
