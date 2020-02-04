@@ -23,7 +23,9 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/Details_New_Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/Details_New_Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +36,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ZL42254KGX" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_28" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -54,21 +56,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/Details_New_Appointment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4364">
-              <caret line="107" column="17" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="17" />
+            <state relative-caret-position="960">
+              <caret line="293" column="35" lean-forward="true" selection-start-line="293" selection-start-column="35" selection-end-line="293" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9813#10645#0" expanded="true" />
                 <element signature="e#10644#10645#0" expanded="true" />
-                <element signature="e#11875#11876#0" expanded="true" />
+                <element signature="e#12188#12189#0" expanded="true" />
                 <element signature="e#13396#13918#0" expanded="true" />
                 <element signature="e#13917#13918#0" expanded="true" />
                 <element signature="e#13920#14138#0" expanded="true" />
                 <element signature="e#14137#14138#0" expanded="true" />
-                <marker date="1580840019789" expanded="true" signature="5826:5847" ph="..." />
+                <marker date="1580843262538" expanded="true" signature="5826:5847" ph="..." />
               </folding>
             </state>
           </provider>
@@ -137,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="99" column="1" selection-start-line="99" selection-start-column="1" selection-end-line="103" selection-end-column="46" />
+            <state relative-caret-position="518">
+              <caret line="148" column="42" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -166,15 +168,17 @@
           <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="856">
-              <caret line="236" column="21" selection-start-line="236" selection-start-column="21" selection-end-line="236" selection-end-column="21" />
+            <state relative-caret-position="732">
+              <caret line="143" column="45" selection-start-line="143" selection-start-column="45" selection-end-line="143" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3570#4423#0" expanded="true" />
                 <element signature="e#4422#4423#0" expanded="true" />
+                <element signature="e#4472#5107#0" expanded="true" />
+                <element signature="e#5106#5107#0" expanded="true" />
                 <element signature="method#formatDay#0;class#New_Appointment#0" />
                 <element signature="method#formatMonth#0;class#New_Appointment#0" />
               </folding>
@@ -255,11 +259,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/cancel_appointment_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/MyAppointments_fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/alertDialogs/CancelAppointmentDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_details_new_appointment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/appoint_car_photo_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/Details_New_Appointment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java" />
       </list>
     </option>
   </component>
@@ -277,7 +281,42 @@
       <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CarServiceApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="CarServiceApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="CarServiceApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="carserviceapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CarServiceApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="carserviceapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Adapters" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CarServiceApp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="carserviceapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Fragments" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,18 +433,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5005417" side_tool="true" weight="0.19189766" />
       <window_info id="Captures" order="1" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49945828" weight="0.4059081" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49945828" visible="true" weight="0.25799572" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Designer" order="5" />
       <window_info id="Resources Explorer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.7579957" weight="0.8342362" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.7579957" weight="0.19068256" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.22860238" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" weight="0.38244852" />
@@ -774,20 +812,6 @@
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="856">
-          <caret line="236" column="21" selection-start-line="236" selection-start-column="21" selection-end-line="236" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3570#4423#0" expanded="true" />
-            <element signature="e#4422#4423#0" expanded="true" />
-            <element signature="method#formatDay#0;class#New_Appointment#0" />
-            <element signature="method#formatMonth#0;class#New_Appointment#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -822,16 +846,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="99" column="1" selection-start-line="99" selection-start-column="1" selection-end-line="103" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/PageAdapterPhotos.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1694">
@@ -856,20 +870,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Adapters/RecycleViewAdapterAppItems.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="148" column="42" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/Details_New_Appointment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4364">
-          <caret line="107" column="17" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="17" />
+        <state relative-caret-position="960">
+          <caret line="293" column="35" lean-forward="true" selection-start-line="293" selection-start-column="35" selection-end-line="293" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9813#10645#0" expanded="true" />
             <element signature="e#10644#10645#0" expanded="true" />
-            <element signature="e#11875#11876#0" expanded="true" />
+            <element signature="e#12188#12189#0" expanded="true" />
             <element signature="e#13396#13918#0" expanded="true" />
             <element signature="e#13917#13918#0" expanded="true" />
             <element signature="e#13920#14138#0" expanded="true" />
             <element signature="e#14137#14138#0" expanded="true" />
-            <marker date="1580840019789" expanded="true" signature="5826:5847" ph="..." />
+            <marker date="1580843262538" expanded="true" signature="5826:5847" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/globalsovy/carserviceapp/Fragments/New_Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="732">
+          <caret line="143" column="45" selection-start-line="143" selection-start-column="45" selection-end-line="143" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3570#4423#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
+            <element signature="e#4472#5107#0" expanded="true" />
+            <element signature="e#5106#5107#0" expanded="true" />
+            <element signature="method#formatDay#0;class#New_Appointment#0" />
+            <element signature="method#formatMonth#0;class#New_Appointment#0" />
           </folding>
         </state>
       </provider>

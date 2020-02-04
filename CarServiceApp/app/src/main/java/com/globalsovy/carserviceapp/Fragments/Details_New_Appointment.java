@@ -276,7 +276,7 @@ public class Details_New_Appointment extends Fragment {
         linearLayoutPics.addView(container);
     }
     public void sendAppointmentRequest() {
-        String url = mySharedPreferencies.getIp()+"/createappointment";
+        final String url = mySharedPreferencies.getIp()+"/createappointment";
         progressDialog.setMessage("Sending...");
         progressDialog.show();
         JsonObjectRequest createAppoint = new JsonObjectRequest(Request.Method.POST, url,null,
@@ -285,10 +285,16 @@ public class Details_New_Appointment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             int idApp = response.getInt("insertid");
-                            int position = 0;
-                            for (Map.Entry<Integer,String> entry : urlPhotos.entrySet()){
-                                sendImageRequest(position,idApp,entry.getValue());
-                                position++;
+                            if (urlPhotos.size()!=0){
+                                int position = 0;
+                                for (Map.Entry<Integer,String> entry : urlPhotos.entrySet()){
+                                    sendImageRequest(position,idApp,entry.getValue());
+                                    position++;
+                                }
+                            }else {
+                                progressDialog.cancel();
+                                ((MainActivity)getActivity()).changeFragment(MyAppointments_fragment.class);
+
                             }
 
                         } catch (JSONException e) {

@@ -47,14 +47,17 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleViewAdapterAppItems.ViewHolder> {
 
     private ArrayList<Appointment> listOfAppointment;
-//    private HashMap<Integer,ViewHolder> items;
     Context context;
     MySharedPreferencies mySharedPreferencies;
     RequestQueue myQueue;
@@ -88,7 +91,6 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Appointment appointment = listOfAppointment.get(position);
-//        items.put(position,holder);
         holder.dateAndTime.setText(appointment.getDate()+" - "+appointment.getTime());
         holder.brandAndModel.setText(appointment.getBrand()+" "+appointment.getModel());
         holder.notes.setText(appointment.getMessage());
@@ -137,6 +139,22 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
 //                cancelAppRequest(appointment.getId(),position,appointment.getUrlImages());
             }
         });
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date today = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
+            Date appDate = simpleDateFormat.parse(appointment.getDate());
+            System.out.println("today "+today);
+            System.out.println("appDate "+appDate);
+            if (appDate.compareTo(today) < 0){ //appDate is after today
+                holder.cancelAppointment.setEnabled(false);
+                holder.cancelAppointment.setVisibility(View.GONE);
+                holder.expandedItem.setBackgroundColor(activity.getResources().getColor(R.color.buttonLoginColor));
+                holder.simpleItem.setBackgroundColor(activity.getResources().getColor(R.color.buttonLoginColor));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

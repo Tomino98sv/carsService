@@ -135,13 +135,13 @@ public class New_Appointment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                monthYear = formatMonth(month)+" "+year;
-                dayMonthYear = formatDay(day)+" "+formatMonth(month)+" "+year;
+                monthYear = formatMonth(month+1)+" "+year;
+                dayMonthYear = formatDay(day)+" "+formatMonth(month+1)+" "+year;
                 pickDate.setText(dayMonthYear);
                 calendarView.startAnimation(hide);
 
                 String dayString = day<10 ? "0"+day : day+"";
-                String monthString = month<10 ? "0"+month : month+"";
+                String monthString = (month+1)<10 ? "0"+(month+1) : (month+1)+"";
                 resultDateReq = year+"."+monthString+"."+dayString;
             }
         });
@@ -212,8 +212,6 @@ public class New_Appointment extends Fragment {
                 textViewnul.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String test = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
-                        System.out.println("TEST "+ test);
                         ((MainActivity)getActivity()).setNewAppointmentDate(resultDateReq);
                         ((MainActivity)getActivity()).setNewAppointmentTime(textViewnul.getText().toString());
                         ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
@@ -231,8 +229,6 @@ public class New_Appointment extends Fragment {
                 textViewhalf.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String test = new SimpleDateFormat("dd.MM.yyyy").format(new Date(calendarView.getDate()));
-                        System.out.println("TEST "+ test);
                         ((MainActivity)getActivity()).setNewAppointmentDate(resultDateReq);
                         ((MainActivity)getActivity()).setNewAppointmentTime(textViewhalf.getText().toString());
                         ((MainActivity)getActivity()).changeFragment(Details_New_Appointment.class);
