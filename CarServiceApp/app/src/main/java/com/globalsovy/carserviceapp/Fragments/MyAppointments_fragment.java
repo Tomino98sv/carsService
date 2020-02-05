@@ -59,6 +59,8 @@ public class MyAppointments_fragment extends Fragment {
 
     ProgressDialog progressDialog;
 
+    ArrayList<Boolean> completedRequest;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,6 +109,10 @@ public class MyAppointments_fragment extends Fragment {
         JsonArrayRequest getAppointments = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+                completedRequest = new ArrayList<>();
+                for (int i =0;i<response.length();i++){
+                    completedRequest.add(false);
+                }
                 appointments = new ArrayList<>();
                 for (int i=0;i<response.length();i++){
                     try {
@@ -120,7 +126,7 @@ public class MyAppointments_fragment extends Fragment {
                                 appointmentJSON.getString("model")
                         );
                         appointments.add(appointmentObject);
-                        getAppointmentImages(i,appointmentObject.getId(), response.length()-1);
+                        getAppointmentImages(i,appointmentObject.getId());
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
@@ -168,7 +174,7 @@ public class MyAppointments_fragment extends Fragment {
     }
 
 
-    public void getAppointmentImages(final int positionArray, final int idAppointment, final int last) {
+    public void getAppointmentImages(final int positionArray, final int idAppointment) {
         final String url = mySharedPreferencies.getIp()+"/getappimages";
 
         final StringRequest getImages = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -186,8 +192,11 @@ public class MyAppointments_fragment extends Fragment {
                 }
 
                 appointments.get(positionArray).setUrlImages(urls);
-                if (positionArray == last) {
-
+                completedRequest.set(positionArray,true);
+                if (!completedRequest.contains(false)) {
+                    if (progressDialog.isShowing()){
+                        progressDialog.cancel();
+                    }
                     adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -206,8 +215,8 @@ public class MyAppointments_fragment extends Fragment {
                     e.printStackTrace();
                     Toast.makeText(getContext(),"check your internet connection",Toast.LENGTH_LONG).show();
                 }
-
-                if (positionArray == last) {
+                completedRequest.set(positionArray,true);
+                if (!completedRequest.contains(false)) {
                     if (progressDialog.isShowing()){
                         progressDialog.cancel();
                     }
