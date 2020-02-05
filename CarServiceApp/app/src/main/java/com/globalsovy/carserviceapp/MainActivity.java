@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.globalsovy.carserviceapp.Fragments.Add_Photos;
 import com.globalsovy.carserviceapp.Fragments.Car_Details_fragment;
 import com.globalsovy.carserviceapp.Fragments.Details_New_Appointment;
+import com.globalsovy.carserviceapp.Fragments.Gallery_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyCars_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyProfile_fragment;
@@ -39,6 +40,7 @@ import com.globalsovy.carserviceapp.Fragments.NewCar_fragment;
 import com.globalsovy.carserviceapp.Fragments.New_Appointment;
 import com.globalsovy.carserviceapp.Fragments.Notifications_fragment;
 import com.globalsovy.carserviceapp.Fragments.PDF_fragment;
+import com.globalsovy.carserviceapp.POJO.Appointment;
 import com.globalsovy.carserviceapp.POJO.CarItem;
 import com.globalsovy.carserviceapp.alertDialogs.BackToLoginAlertDialog;
 import com.google.android.material.navigation.NavigationView;
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String newAppointmentDate="";
     String newAppointmentTime="";
     ArrayList<CarItem> myCars;
+    Appointment currentApp;
     HashMap<Integer, Bitmap> alreadyDownloaded = new HashMap<>();
     HashMap<String, Bitmap> alreadyDownloadedApp = new HashMap<>();
 
@@ -169,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragment(MyAppointments_fragment.class);
         }else if(fragment instanceof Details_New_Appointment){
             changeFragment(New_Appointment.class);
+        }else if(fragment instanceof Gallery_fragment){
+            changeFragment(MyAppointments_fragment.class);
         }else {
             BackToLoginAlertDialog dialog = new BackToLoginAlertDialog();
             dialog.showDialog(MainActivity.this,"Log Out","You will be routed back to login screen");
@@ -326,7 +331,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.alreadyDownloadedApp = alreadyDownloadedApp;
     }
 
-//    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public Appointment getCurrentApp() {
+        return currentApp;
+    }
+
+    public void setCurrentApp(Appointment currentApp) {
+        this.currentApp = currentApp;
+    }
+    //    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 //    String selectedDate = sdf.format(new Date(calendar.getDate()));
 
 }

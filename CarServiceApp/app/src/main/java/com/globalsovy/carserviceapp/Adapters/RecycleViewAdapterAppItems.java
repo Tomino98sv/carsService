@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.globalsovy.carserviceapp.Fragments.Gallery_fragment;
 import com.globalsovy.carserviceapp.Fragments.MyAppointments_fragment;
 import com.globalsovy.carserviceapp.MainActivity;
 import com.globalsovy.carserviceapp.MySharedPreferencies;
@@ -99,14 +100,20 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
         holder.picturesContainer.removeAllViews();
         for (int i=0; i<urlImages.size();i++){
             ImageView imageView = new ImageView(context);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MainActivity)activity).setCurrentApp(listOfAppointment.get(position));
+                    ((MainActivity)activity).changeFragment(Gallery_fragment.class);
+                }
+            });
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(150,150);
             params.setMargins(2,2,2,2);
             imageView.setLayoutParams(params);
             holder.picturesContainer.addView(imageView);
             if (alreadyDownloaded.get(urlImages.get(i)) != null){
-                imageView.setImageBitmap(alreadyDownloaded.get(urlImages.get(i)));
+                Bitmap thumbnail = ThumbnailUtils.extractThumbnail(alreadyDownloaded.get(urlImages.get(i)),128,128);
+                imageView.setImageBitmap(thumbnail);
             }else {
                 imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_close_black_24dp));
                 new SendHttpReqeustForImage(urlImages.get(i),imageView,activity).execute();
@@ -144,8 +151,6 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
         try {
             Date today = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
             Date appDate = simpleDateFormat.parse(appointment.getDate());
-            System.out.println("today "+today);
-            System.out.println("appDate "+appDate);
             if (appDate.compareTo(today) < 0){ //appDate is after today
                 holder.cancelAppointment.setEnabled(false);
                 holder.cancelAppointment.setVisibility(View.GONE);
@@ -159,7 +164,6 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
 
     @Override
     public int getItemCount() {
-        System.out.println("Get item Count recycle view "+listOfAppointment.size());
         return listOfAppointment.size();
     }
 
@@ -266,7 +270,7 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
 
         @Override
         protected Bitmap doInBackground(String... params) {
-            Bitmap ThumbImage=null;
+            Bitmap myBitmap=null;
             try {
                 //ipconfig;
                 URL url = new URL(urlString);
@@ -274,20 +278,14 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
                 connection.setDoInput(true);
                 connection.connect();
                 input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-
-                final int THUMBSIZE = 254;
-
-                ThumbImage = ThumbnailUtils.extractThumbnail(myBitmap,
-                        THUMBSIZE, THUMBSIZE);
-
+                myBitmap = BitmapFactory.decodeStream(input);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return ThumbImage;
+            return myBitmap;
 
         }
 
@@ -296,7 +294,9 @@ public class RecycleViewAdapterAppItems extends RecyclerView.Adapter<RecycleView
             if (result != null){
                 alreadyDownloaded.put(urlString,result);
                 ((MainActivity)activity).setAlreadyDownloadedApp(alreadyDownloaded);
-                carImage.setImageBitmap(result);
+                Bitmap thumbImage= ThumbnailUtils.extractThumbnail(result,
+                        128, 128);
+                carImage.setImageBitmap(thumbImage);
                 connection.disconnect();
                 this.cancel(true);
             }else {

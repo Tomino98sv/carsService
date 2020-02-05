@@ -1,12 +1,14 @@
 package com.globalsovy.carserviceapp.Fragments;
 
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,8 @@ public class MyAppointments_fragment extends Fragment {
     RecycleViewAdapterAppItems adapter;
     ArrayList<Appointment> appointments;
 
+    ProgressDialog progressDialog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +70,10 @@ public class MyAppointments_fragment extends Fragment {
         recyclerView = parent.findViewById(R.id.myAppointmentRecView);
         mySharedPreferencies = new MySharedPreferencies(getContext());
         myQueue = Volley.newRequestQueue(getContext());
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         ((MainActivity)getActivity()).setNavigationButtonToDefault();
 
@@ -112,8 +120,6 @@ public class MyAppointments_fragment extends Fragment {
                                 appointmentJSON.getString("model")
                         );
                         appointments.add(appointmentObject);
-                        System.out.println("i "+i);
-                        System.out.println("response.length "+(response.length()-1));
                         getAppointmentImages(i,appointmentObject.getId(), response.length()-1);
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -163,7 +169,7 @@ public class MyAppointments_fragment extends Fragment {
 
 
     public void getAppointmentImages(final int positionArray, final int idAppointment, final int last) {
-        String url = mySharedPreferencies.getIp()+"/getappimages";
+        final String url = mySharedPreferencies.getIp()+"/getappimages";
 
         final StringRequest getImages = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -178,8 +184,10 @@ public class MyAppointments_fragment extends Fragment {
                 for (int i = 0; i<array.length;i++){
                     urls.add(array[i]);
                 }
+
                 appointments.get(positionArray).setUrlImages(urls);
                 if (positionArray == last) {
+
                     adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -200,6 +208,9 @@ public class MyAppointments_fragment extends Fragment {
                 }
 
                 if (positionArray == last) {
+                    if (progressDialog.isShowing()){
+                        progressDialog.cancel();
+                    }
                     adapter = new RecycleViewAdapterAppItems(appointments,getContext(),getActivity());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

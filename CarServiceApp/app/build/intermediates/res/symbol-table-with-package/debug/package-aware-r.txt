@@ -1726,6 +1726,7 @@ layout fragment_add_photos
 layout fragment_appointments
 layout fragment_car__details
 layout fragment_details_new_appointment
+layout fragment_gallery
 layout fragment_my_cars
 layout fragment_my_profile
 layout fragment_my_profile_read
